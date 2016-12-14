@@ -1,0 +1,8 @@
+{
+	"karma" : {
+		"files": [
+			"tests/*.js"
+		],
+		"browsers": ["PhantomJS"]
+	}
+}
