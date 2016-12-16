@@ -18,22 +18,6 @@ var _prependChild = require('coffeekraken-sugar/js/dom/prependChild');
 
 var _prependChild2 = _interopRequireDefault(_prependChild);
 
-var _codemirror = require('codemirror');
-
-var _codemirror2 = _interopRequireDefault(_codemirror);
-
-var _codemirror3 = require('raw-loader!codemirror/lib/codemirror.css');
-
-var _codemirror4 = _interopRequireDefault(_codemirror3);
-
-var _clipboard = require('clipboard');
-
-var _clipboard2 = _interopRequireDefault(_clipboard);
-
-var _SAjax = require('coffeekraken-sugar/js/classes/SAjax');
-
-var _SAjax2 = _interopRequireDefault(_SAjax);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42,19 +26,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-require('codemirror/mode/htmlmixed/htmlmixed');
-require('./codemirror/autoFormatRange');
+var SInteractiveDemoComponent = function (_SWebComponent) {
+	_inherits(SInteractiveDemoComponent, _SWebComponent);
 
-var SReadMoreComponent = function (_SWebComponent) {
-	_inherits(SReadMoreComponent, _SWebComponent);
+	function SInteractiveDemoComponent() {
+		_classCallCheck(this, SInteractiveDemoComponent);
 
-	function SReadMoreComponent() {
-		_classCallCheck(this, SReadMoreComponent);
-
-		return _possibleConstructorReturn(this, (SReadMoreComponent.__proto__ || Object.getPrototypeOf(SReadMoreComponent)).apply(this, arguments));
+		return _possibleConstructorReturn(this, (SInteractiveDemoComponent.__proto__ || Object.getPrototypeOf(SInteractiveDemoComponent)).apply(this, arguments));
 	}
 
-	_createClass(SReadMoreComponent, [{
+	_createClass(SInteractiveDemoComponent, [{
 		key: 'componentWillMount',
 
 
@@ -63,7 +44,7 @@ var SReadMoreComponent = function (_SWebComponent) {
    * @definition 		SWebcomponent.componentWillMount
    */
 		value: function componentWillMount() {
-			_get(SReadMoreComponent.prototype.__proto__ || Object.getPrototypeOf(SReadMoreComponent.prototype), 'componentWillMount', this).call(this);
+			_get(SInteractiveDemoComponent.prototype.__proto__ || Object.getPrototypeOf(SInteractiveDemoComponent.prototype), 'componentWillMount', this).call(this);
 			this._updateTimeout = null;
 		}
 
@@ -76,7 +57,7 @@ var SReadMoreComponent = function (_SWebComponent) {
 		value: function componentMount() {
 			var _this2 = this;
 
-			_get(SReadMoreComponent.prototype.__proto__ || Object.getPrototypeOf(SReadMoreComponent.prototype), 'componentMount', this).call(this);
+			_get(SInteractiveDemoComponent.prototype.__proto__ || Object.getPrototypeOf(SInteractiveDemoComponent.prototype), 'componentMount', this).call(this);
 
 			// get the content
 			var content = this.innerHTML;
@@ -207,7 +188,7 @@ var SReadMoreComponent = function (_SWebComponent) {
    * @definition 		SWebComponent.css
    */
 		value: function css(componentName, componentNameDash) {
-			return '\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay: flex;\n\t\t\t\twidth:100%;\n\t\t\t\tflex-flow: row wrap;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > * {\n\t\t\t\tflex:1 0;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > iframe {\n\t\t\t\tborder : 1px solid #ddd;\n\t\t\t\tborder-bottom: 0;\n\t\t\t\tbox-sizing : border-box;\n\t\t\t\tflex:1 1 100%;\n\t\t\t}\n\t\t';
+			return '\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay: flex;\n\t\t\t\twidth:100%;\n\t\t\t\tflex-flow: row wrap;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > *:not(iframe) {\n\t\t\t\tflex:1 0;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > iframe {\n\t\t\t\tbox-sizing : border-box;\n\t\t\t\tflex:1 1 100%;\n\t\t\t}\n\t\t\t@media all and (max-width:600px) {\n\t\t\t\t' + componentNameDash + ' {\n\t\t\t\t\tflex-flow: column wrap;\n\t\t\t\t}\n\t\t\t}\n\t\t';
 		}
 
 		/**
@@ -236,7 +217,7 @@ var SReadMoreComponent = function (_SWebComponent) {
 		}
 	}]);
 
-	return SReadMoreComponent;
+	return SInteractiveDemoComponent;
 }(_SWebComponent3.default);
 
-exports.default = SReadMoreComponent;
+exports.default = SInteractiveDemoComponent;

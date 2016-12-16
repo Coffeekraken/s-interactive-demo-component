@@ -1,7 +1,6 @@
-const path = require('path');
 module.exports = {
 	entry: {
-		'demo/dist/demo.js' : './demo/src/demo.js'
+		'demo/dist/js/demo.js' : './demo/src/js/demo.js'
 	},
 	output: {
 		path: '.',
@@ -10,7 +9,7 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.js$/,
-			exclude: /node_modules/,
+			exclude: /(bower_components|node_modules)/,
 			loader: 'babel-loader'
 		}]
 	}

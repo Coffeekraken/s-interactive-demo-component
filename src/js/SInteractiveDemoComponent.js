@@ -1,14 +1,8 @@
 import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
 import __throttle from 'coffeekraken-sugar/js/utils/functions/throttle'
 import __prependChild from 'coffeekraken-sugar/js/dom/prependChild'
-import Codemirror from 'codemirror'
-import codemirrorCss from 'raw-loader!codemirror/lib/codemirror.css'
-import Clipboard from 'clipboard';
-import SAjax from 'coffeekraken-sugar/js/classes/SAjax'
-require('codemirror/mode/htmlmixed/htmlmixed');
-require('./codemirror/autoFormatRange');
 
-export default class SReadMoreComponent extends SWebComponent {
+export default class SInteractiveDemoComponent extends SWebComponent {
 
 	/**
 	 * Base css
@@ -21,14 +15,17 @@ export default class SReadMoreComponent extends SWebComponent {
 				width:100%;
 				flex-flow: row wrap;
 			}
-			${componentNameDash} > * {
+			${componentNameDash} > *:not(iframe) {
 				flex:1 0;
 			}
 			${componentNameDash} > iframe {
-				border : 1px solid #ddd;
-				border-bottom: 0;
 				box-sizing : border-box;
 				flex:1 1 100%;
+			}
+			@media all and (max-width:600px) {
+				${componentNameDash} {
+					flex-flow: column wrap;
+				}
 			}
 		`;
 	}

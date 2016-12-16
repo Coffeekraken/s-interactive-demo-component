@@ -8,4 +8,4 @@ var _SInteractiveDemoPartComponent2 = _interopRequireDefault(_SInteractiveDemoPa
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _SInteractiveDemoPartComponent2.default.define('s-code-editor', _SInteractiveDemoPartComponent2.default);
+exports.default = _SInteractiveDemoPartComponent2.default.define('s-codemirror', _SInteractiveDemoPartComponent2.default);

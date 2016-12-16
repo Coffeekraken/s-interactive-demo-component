@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<script src="dist/demo.js"></script>
+	<script src="dist/js/demo.js"></script>
+	<link href="dist/css/style.css" rel="stylesheet" />
 	<link href="material.css" rel="stylesheet" />
 </head>
 <body>
 	<s-interactive-demo scripts="dist/demo.js">
-		<s-code-editor language="css" id="style">
-			p {
-				color: red;
-			}
-		</s-code-editor>
-		<s-code-editor id="html">
-			<s-read-more height="200" style="width:500px">
+		<s-codemirror id="html">
+			<s-read-more more="Read more..." less="Reduce">
 				<p>
 					Nulla tincidunt convallis vehicula. Morbi molestie, arcu eleifend elementum faucibus, sapien diam faucibus sem, ac commodo metus dolor eget odio. Suspendisse et nulla lectus. Mauris facilisis, nulla in maximus lacinia, justo nisi dapibus nibh, quis volutpat neque nulla in ipsum. Pellentesque fermentum lectus eros, nec interdum nisi porttitor non. Suspendisse.
 				</p>
@@ -24,7 +20,41 @@
 					Nulla tincidunt convallis vehicula. Morbi molestie, arcu eleifend elementum faucibus, sapien diam faucibus sem, ac commodo metus dolor eget odio. Suspendisse et nulla lectus. Mauris facilisis, nulla in maximus lacinia, justo nisi dapibus nibh, quis volutpat neque nulla in ipsum. Pellentesque fermentum lectus eros, nec interdum nisi porttitor non. Suspendisse.
 				</p>
 			</s-read-more>
-		</s-code-editor>
+		</s-codemirror>
+		<s-codemirror mode="css" id="style">
+			s-read-more {
+				overflow:hidden;
+				width:500px;
+				max-height:200px;
+				position:relative;
+				display:block;
+				padding-bottom:20px;
+				transition: all .2s ease-in-out;
+			}
+			s-read-more:before {
+				content:'';
+				position:absolute;
+				bottom:0;
+				width:100%; height:100px;
+				background:linear-gradient(to top, white 30px, transparent);
+				transition: all .2s ease-in-out;
+			}
+			s-read-more:after {
+				display:block;
+				position:absolute;
+				bottom:0;
+				width:100%;
+				content:attr(more);
+				color:red;
+				cursor: pointer;
+			}
+			s-read-more[active]:before {
+				height:0;
+			}
+			s-read-more[active]:after {
+				content:attr(less);
+			}
+		</s-codemirror>
 	</s-interactive-demo>
 </body>
 </html>
