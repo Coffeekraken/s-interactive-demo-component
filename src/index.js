@@ -1,2 +1,2 @@
-import SInteractiveDemoComponent from './src/SInteractiveDemoComponent';
+import SInteractiveDemoComponent from './js/SInteractiveDemoComponent';
 export default SInteractiveDemoComponent.define('s-interactive-demo', SInteractiveDemoComponent);

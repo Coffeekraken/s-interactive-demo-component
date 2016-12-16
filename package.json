@@ -2,12 +2,14 @@
   "name": "interactive-demo",
   "version": "0.0.1",
   "description": "Prive a simple, powerful and nice way to display interactive html demo",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "watch": "nodemon -w demo/src -w src -e js -x \"npm run build\"",
-    "doc": "/data/web/npm/markdown-doc-ui/run",
     "test": "node_modules/coffeekraken-testing-stack/run",
-    "build": "webpack"
+    "dist": "babel src -d dist",
+	"dist.watch": "nodemon -w src -e js -x \"npm run dist\"",
+	"demo.build": "webpack",
+	"demo.watch": "nodemon -w demo/src -w src -e js -x \"npm run demo-build\"",
+    "demo": "npm run demo.build && open ./demo/index.html"
   },
   "keywords": [
     "html",
@@ -22,25 +24,24 @@
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "license": "MIT",
   "dependencies": {
-    "clipboard": "^1.5.15",
+    "clipboard": "^1.5.16",
     "codemirror": "^5.21.0",
     "coffeekraken-sugar": "git+https://git@github.com/Coffeekraken/sugar.git",
-    "raw-loader": "^0.5.1"
+	"raw-loader": "^0.5.1"
   },
   "devDependencies": {
-    "@webcomponents/shadycss": "git+https://github.com/webcomponents/shadycss.git",
-    "@webcomponents/shadydom": "git+https://github.com/webcomponents/shadydom.git",
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.8",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "babel-polyfill": "^6.16.0",
+    "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
-    "babel-preset-es2015-loose": "^8.0.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
     "coffeekraken-testing-stack": "git+https://github.com/Coffeekraken/testing-stack.git",
     "nodemon": "^1.11.0",
+    "open": "0.0.5",
     "webcomponents.js": "^0.7.23",
-    "webpack": "^1.13.3"
+    "webpack": "^1.14.0"
   }
 }
