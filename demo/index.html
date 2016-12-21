@@ -8,7 +8,7 @@
 </head>
 <body>
 	<s-interactive-demo scripts="dist/demo.js">
-		<s-codemirror id="html">
+		<s-codemirror id="html" update-on="change">
 			<s-read-more more="Read more..." less="Reduce">
 				<p>
 					Nulla tincidunt convallis vehicula. Morbi molestie, arcu eleifend elementum faucibus, sapien diam faucibus sem, ac commodo metus dolor eget odio. Suspendisse et nulla lectus. Mauris facilisis, nulla in maximus lacinia, justo nisi dapibus nibh, quis volutpat neque nulla in ipsum. Pellentesque fermentum lectus eros, nec interdum nisi porttitor non. Suspendisse.
@@ -21,7 +21,11 @@
 				</p>
 			</s-read-more>
 		</s-codemirror>
-		<s-codemirror mode="css" id="style">
+		<s-codemirror mode="scss" id="style">
+			@import 'node_modules/coffeekraken-sugar/index';
+			@include s-classes();
+			@include s-corner-badge-component-bare();
+
 			s-read-more {
 				overflow:hidden;
 				width:500px;

@@ -112,7 +112,18 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 
 		// listen for update from parts
 		this.addEventListener('update', (e) => {
-			this._iframeBody.querySelector(`#${e.target.id}`).innerHTML = e.detail;
+			let code = e.detail.data;
+			// handle how to inject code
+			switch(e.detail.language) {
+				case 'css':
+					code = `<style>${code}</style>`;
+				break;
+				case 'js':
+				case 'javascript':
+					code = `<script>${code}</script>`;
+				break;
+			}
+			this._iframeBody.querySelector(`#${e.target.id}`).innerHTML = code;
 			this._updatePreviewHeight();
 		});
 	}

@@ -54,18 +54,32 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _coffeekrakenSCodemirrorComponent = __webpack_require__(98);
+	var _index3 = __webpack_require__(176);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	var _coffeekrakenSCodemirrorComponent = __webpack_require__(179);
 
 	var _coffeekrakenSCodemirrorComponent2 = _interopRequireDefault(_coffeekrakenSCodemirrorComponent);
 
-	var _SReadMoreComponent = __webpack_require__(114);
+	var _SReadMoreComponent = __webpack_require__(195);
 
 	var _SReadMoreComponent2 = _interopRequireDefault(_SReadMoreComponent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_SWebComponent2.default.setDefaultProps({
-		theme: 'material'
+		theme: 'material',
+		updateOn: 'run',
+		compile: function compile(code, api) {
+			return new Promise(function (resolve, reject) {
+				if (_index2.default[api.mode]) {
+					resolve(_index2.default[api.mode](code));
+				} else {
+					resolve(code);
+				}
+			});
+		}
 	}, 's-codemirror');
 
 /***/ },
@@ -2883,10 +2897,10 @@
 			}
 
 			/**
-	   * Define the new web component
-	   * @param 			{String} 			name 		The name of the component
-	   * @param 			{SWebComponent} 	component 	The component class
-	   */
+	  * Define the new web component
+	  * @param 			{String} 			name 		The name of the component
+	  * @param 			{SWebComponent} 	component 	The component class
+	  */
 			_class2.define = function define(name, component) {
 				var ext = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
@@ -2926,10 +2940,10 @@
 			};
 
 			/**
-	   * Inject css into html
-	   * @param 		{String} 		componentName 		The component name
-	   * @param 		{String} 		componentNameDash 	The dash formated component name
-	   */
+	  * Inject css into html
+	  * @param 		{String} 		componentName 		The component name
+	  * @param 		{String} 		componentNameDash 	The dash formated component name
+	  */
 
 
 			_class2._injectCss = function _injectCss(componentClass, componentName, componentNameDash) {
@@ -2961,10 +2975,10 @@
 			};
 
 			/**
-	   * Store all the props of the component
-	   * Props are actual computed props with attributes
-	   * @type 		{Object}
-	   */
+	  * Store all the props of the component
+	  * Props are actual computed props with attributes
+	  * @type 		{Object}
+	  */
 
 
 			_class2.setDefaultProps = function setDefaultProps(props) {
@@ -2985,32 +2999,32 @@
 			};
 
 			/**
-	   * Get the default props for this particular instance
-	   * @return 		{Object} 			The default props
-	   */
+	  * Get the default props for this particular instance
+	  * @return 		{Object} 			The default props
+	  */
 
 
 			/**
-	   * Component css
-	   */
+	  * Component css
+	  */
 			_class2.css = function css(componentName, componentNameDash) {
 				return '';
 			};
 
 			/**
-	   * Method called before the component will be added in the dom.
-	   * You will not have access to the siblings, etc here.
-	   * This is the place to init your component, just like a constructor
-	   *
-	   * @example
-	   * componentWillMount() {
-	   * 		// call parent method
-	   * 		super.componentWillMount();
-	   * 		// do something here...
-	   * }
-	   *
-	   * @author 		Olivier Bossel <olivier.bossel@gmail.com>
-	   */
+	  * Method called before the component will be added in the dom.
+	  * You will not have access to the siblings, etc here.
+	  * This is the place to init your component, just like a constructor
+	  *
+	  * @example
+	  * componentWillMount() {
+	  * 		// call parent method
+	  * 		super.componentWillMount();
+	  * 		// do something here...
+	  * }
+	  *
+	  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	  */
 			_class2.prototype.componentWillMount = function componentWillMount() {
 				var _this2 = this;
 
@@ -3063,19 +3077,19 @@
 			};
 
 			/**
-	   * Method called right after that the component has been added in the dom,
-	   * and before the initial render
-	   * This is the first place where you will have access to the dom.
-	   *
-	   * @example
-	   * componentMount() {
-	   * 		// call parent method
-	   * 		super.componentMount();
-	   * 		// do something here...
-	   * }
-	   *
-	   * @author 		Olivier Bossel <olivier.bossel@gmail.com>
-	   */
+	  * Method called right after that the component has been added in the dom,
+	  * and before the initial render
+	  * This is the first place where you will have access to the dom.
+	  *
+	  * @example
+	  * componentMount() {
+	  * 		// call parent method
+	  * 		super.componentMount();
+	  * 		// do something here...
+	  * }
+	  *
+	  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	  */
 
 
 			_class2.prototype.componentMount = function componentMount() {
@@ -3087,17 +3101,17 @@
 			};
 
 			/**
-	   * Method called after the initial component render
-	   *
-	   * @example
-	   * componentDidMount() {
-	   * 		// call parent method
-	   * 		super.componentDidMount();
-	   * 		// do something here...
-	   * }
-	   *
-	   * @author 		Olivier Bossel <olivier.bossel@gmail.com>
-	   */
+	  * Method called after the initial component render
+	  *
+	  * @example
+	  * componentDidMount() {
+	  * 		// call parent method
+	  * 		super.componentDidMount();
+	  * 		// do something here...
+	  * }
+	  *
+	  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	  */
 
 
 			_class2.prototype.componentDidMount = function componentDidMount() {
@@ -3107,21 +3121,21 @@
 			};
 
 			/**
-	   * Method called right before the render when some props have been updated.
-	   * This method is not called before the initial render
-	   *
-	   * @param 		{Object} 		nextProps 			An object that represent the props that have been updated
-	   * @param 		{Array} 		nextPropsArray 		An array representation of the nextProps object [{name:...,value:...}]
-	   *
-	   * @example
-	   * componentWillUpdate() {
-	   * 		// call parent method
-	   * 		super.componentWillUpdate();
-	   * 		// do something here...
-	   * }
-	   *
-	   * @author 		Olivier Bossel <olivier.bossel@gmail.com>
-	   */
+	  * Method called right before the render when some props have been updated.
+	  * This method is not called before the initial render
+	  *
+	  * @param 		{Object} 		nextProps 			An object that represent the props that have been updated
+	  * @param 		{Array} 		nextPropsArray 		An array representation of the nextProps object [{name:...,value:...}]
+	  *
+	  * @example
+	  * componentWillUpdate() {
+	  * 		// call parent method
+	  * 		super.componentWillUpdate();
+	  * 		// do something here...
+	  * }
+	  *
+	  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	  */
 
 
 			_class2.prototype.componentWillUpdate = function componentWillUpdate(nextProps) {
@@ -3131,18 +3145,18 @@
 			};
 
 			/**
-	   * Apply all the updated that you need in the dom for the component to reflect the props
-	   *
-	   * @example
-	   * render() {
-	   * 		// call the parent method
-	   * 		super.render();
-	   * 		// apply some classes, properties, styles, etc... in the dom
-	   * 		// in order to reflect the props object state
-	   * }
-	   *
-	   * @author 		Olivier Bossel <olivier.bossel@gmail.com>
-	   */
+	  * Apply all the updated that you need in the dom for the component to reflect the props
+	  *
+	  * @example
+	  * render() {
+	  * 		// call the parent method
+	  * 		super.render();
+	  * 		// apply some classes, properties, styles, etc... in the dom
+	  * 		// in order to reflect the props object state
+	  * }
+	  *
+	  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	  */
 
 
 			_class2.prototype.render = function render() {
@@ -3178,8 +3192,8 @@
 			};
 
 			/**
-	   * When the component is created
-	   */
+	  * When the component is created
+	  */
 
 
 			_class2.prototype.createdCallback = function createdCallback() {
@@ -3188,8 +3202,8 @@
 			};
 
 			/**
-	   * When the element is attached
-	   */
+	  * When the element is attached
+	  */
 
 
 			_class2.prototype.attachedCallback = function attachedCallback() {
@@ -3224,9 +3238,9 @@
 			};
 
 			/**
-	   * When mount dependencies
-	   * @return 			{Promise} 				A promise that will be resolved when the dependencies are resolved
-	   */
+	  * When mount dependencies
+	  * @return 			{Promise} 				A promise that will be resolved when the dependencies are resolved
+	  */
 
 
 			_class2.prototype._whenMountDependenciesAreOk = function _whenMountDependenciesAreOk() {
@@ -3246,10 +3260,10 @@
 			};
 
 			/**
-	   * Init props proxy.
-	   * This will create a getter/setter accessor on the item itself
-	   * that get and update his corresponding props.{name} property
-	   */
+	  * Init props proxy.
+	  * This will create a getter/setter accessor on the item itself
+	  * that get and update his corresponding props.{name} property
+	  */
 
 
 			_class2.prototype._initPropsProxy = function _initPropsProxy() {
@@ -3273,8 +3287,8 @@
 			};
 
 			/**
-	   * On mouse over
-	   */
+	  * On mouse over
+	  */
 
 
 			_class2.prototype._onMouseoverComponentMount = function _onMouseoverComponentMount() {
@@ -3328,52 +3342,42 @@
 			};
 
 			/**
-	   * When any of the component attribute changes
-	   */
+	  * When any of the component attribute changes
+	  */
 
 
 			_class2.prototype.attributeChangedCallback = function attributeChangedCallback(attribute, oldVal, newVal) {
+
 				// cast the new val
 				newVal = (0, _autoCast2.default)(newVal);
 
+				// keep an original attribute name
 				var _attribute = attribute;
 
 				// process the attribute to camelCase
 				attribute = (0, _camelize2.default)(attribute);
 
+				// handle the case when newVal is undefined (added attribute whithout any value)
+				if (newVal === undefined && this.hasAttribute(_attribute)) {
+					newVal = true;
+				}
+
 				// do nothing if the value is already the same
 				if (this.props[attribute] === newVal) return;
-
-				// when the prop is false
-				// and the element has not this attribute
-				// we assume that the prop will stay to false
-				if (this.props[attribute] === false && !this.hasAttribute(_attribute)) {
-					return;
-				}
-
-				// if there's no new value but that the element has
-				// the attribute on itself, we assume the newVal
-				// is equal to true
-				if (!newVal && newVal !== 0
-				// && ! this.props[attribute]
-				&& newVal !== 'false' && newVal !== 'null' && this.hasAttribute(_attribute)) {
-					this.setProp(attribute, true);
-					return;
-				}
 
 				// set the new prop
 				this.setProp(attribute, newVal);
 			};
 
 			/**
-	   * Dispatch an event from the tag with namespaced event name
-	   * This will dispatch actually two events :
-	   * 1. {tagName}.{name} : example : s-datepicker.change
-	   * 2. {name} 		   : example : change
-	   *
-	   * @param		{String} 		name 		The event name
-	   * @param 		{Mixed} 		data 		Some data to attach to the event
-	   */
+	  * Dispatch an event from the tag with namespaced event name
+	  * This will dispatch actually two events :
+	  * 1. {tagName}.{name} : example : s-datepicker.change
+	  * 2. {name} 		   : example : change
+	  *
+	  * @param		{String} 		name 		The event name
+	  * @param 		{Mixed} 		data 		Some data to attach to the event
+	  */
 
 
 			_class2.prototype.dispatchComponentEvent = function dispatchComponentEvent(name) {
@@ -3384,8 +3388,8 @@
 			};
 
 			/**
-	   * Set properties
-	   */
+	  * Set properties
+	  */
 
 
 			_class2.prototype.setProps = function setProps() {
@@ -3399,8 +3403,8 @@
 			};
 
 			/**
-	   * Set a property
-	   */
+	  * Set a property
+	  */
 
 
 			_class2.prototype.setProp = function setProp(prop, value) {
@@ -3473,9 +3477,9 @@
 			};
 
 			/**
-	   * Check if component is mounted
-	   * @return 			{Boolean} 			true if mounted, false if not
-	   */
+	  * Check if component is mounted
+	  * @return 			{Boolean} 			true if mounted, false if not
+	  */
 
 
 			_class2.prototype.isComponentMounted = function isComponentMounted() {
@@ -3483,9 +3487,9 @@
 			};
 
 			/**
-	   * Handle physical props by setting or not the prop
-	   * on the dom element as attribute
-	   */
+	  * Handle physical props by setting or not the prop
+	  * on the dom element as attribute
+	  */
 
 
 			_class2.prototype._handlePhysicalProps = function _handlePhysicalProps(prop, value) {
@@ -3506,8 +3510,8 @@
 			};
 
 			/**
-	   * Compute props by mixing settings with attributes presents on the component
-	   */
+	  * Compute props by mixing settings with attributes presents on the component
+	  */
 
 
 			_class2.prototype._computeProps = function _computeProps() {
@@ -3532,9 +3536,9 @@
 			};
 
 			/**
-	   * Mutate the dom using an optimize requestAnimationFrame technique
-	   * @param 		{Function} 		cb 			The callback to exexute
-	   */
+	  * Mutate the dom using an optimize requestAnimationFrame technique
+	  * @param 		{Function} 		cb 			The callback to exexute
+	  */
 
 
 			_class2.prototype.mutate = function mutate(cb) {
@@ -3542,14 +3546,14 @@
 			};
 
 			/**
-	   * componentClassName
-	   * Set a class that will be construct with the componentNameDash,
-	   * an optional element and modifier
-	   * @param 	{String} 	[element=null] 		The element name
-	   * @param 	{String} 	[modifier=null] 	The modifier name
-	   * @param 	{String} 	[state=null] 		The state name
-	   * @return 	{String} 						The generated class
-	   */
+	  * componentClassName
+	  * Set a class that will be construct with the componentNameDash,
+	  * an optional element and modifier
+	  * @param 	{String} 	[element=null] 		The element name
+	  * @param 	{String} 	[modifier=null] 	The modifier name
+	  * @param 	{String} 	[state=null] 		The state name
+	  * @return 	{String} 						The generated class
+	  */
 
 
 			_class2.prototype.componentClassName = function componentClassName() {
@@ -3585,12 +3589,12 @@
 			};
 
 			/**
-	   * Get a component selector class built with the passed element, modifier and state parameters
-	   * @param 	{String} 	[element=null] 		The element name
-	   * @param 	{String} 	[modifier=null] 	The modifier name
-	   * @param 	{String} 	[state=null] 		The state name
-	   * @return 	{String} 						The generated class
-	   */
+	  * Get a component selector class built with the passed element, modifier and state parameters
+	  * @param 	{String} 	[element=null] 		The element name
+	  * @param 	{String} 	[modifier=null] 	The modifier name
+	  * @param 	{String} 	[state=null] 		The state name
+	  * @return 	{String} 						The generated class
+	  */
 
 
 			_class2.prototype.componentSelector = function componentSelector() {
@@ -3604,14 +3608,14 @@
 			};
 
 			/**
-	   * hasComponentClass
-	   * Check if the passed element has the component class generated by the element and modifier argument
-	   * @param 	{HTMLElement} 	elm 				The element to check
-	   * @param 	{String} 		[element=null] 		The element name
-	   * @param 	{String} 		[modifier=null] 	The modifier name
-	   * @param 	{String} 		[state=null] 		The state name
-	   * @return 	{Boolean} 							The check result
-	   */
+	  * hasComponentClass
+	  * Check if the passed element has the component class generated by the element and modifier argument
+	  * @param 	{HTMLElement} 	elm 				The element to check
+	  * @param 	{String} 		[element=null] 		The element name
+	  * @param 	{String} 		[modifier=null] 	The modifier name
+	  * @param 	{String} 		[state=null] 		The state name
+	  * @return 	{Boolean} 							The check result
+	  */
 
 
 			_class2.prototype.hasComponentClass = function hasComponentClass(elm) {
@@ -3634,13 +3638,13 @@
 			};
 
 			/**
-	   * Add a class on the passed element that will be construct with the componentNameDash,
-	   * an optional element, modifier and state
-	   * @param 	{String} 	[element=null] 		The element name
-	   * @param 	{String} 	[modifier=null] 	The modifier name
-	   * @param 	{String} 	[state=null] 		The state name
-	   * @return 	{SComponent}} 			The component itself
-	   */
+	  * Add a class on the passed element that will be construct with the componentNameDash,
+	  * an optional element, modifier and state
+	  * @param 	{String} 	[element=null] 		The element name
+	  * @param 	{String} 	[modifier=null] 	The modifier name
+	  * @param 	{String} 	[state=null] 		The state name
+	  * @return 	{SComponent}} 			The component itself
+	  */
 
 
 			_class2.prototype.addComponentClass = function addComponentClass(elm) {
@@ -3674,13 +3678,13 @@
 			};
 
 			/**
-	   * Remove a class on the passed element that will be construct with the componentNameDash,
-	   * an optional element, modifier and state
-	   * @param 	{String} 	[element=null] 		The element name
-	   * @param 	{String} 	[modifier=null] 	The modifier name
-	   * @param 	{String} 	[state=null] 		The state name
-	   * @return 	{SComponent}} 					The component itself
-	   */
+	  * Remove a class on the passed element that will be construct with the componentNameDash,
+	  * an optional element, modifier and state
+	  * @param 	{String} 	[element=null] 		The element name
+	  * @param 	{String} 	[modifier=null] 	The modifier name
+	  * @param 	{String} 	[state=null] 		The state name
+	  * @return 	{SComponent}} 					The component itself
+	  */
 
 
 			_class2.prototype.removeComponentClass = function removeComponentClass(elm) {
@@ -3735,17 +3739,17 @@
 				}
 
 				/**
-	    * Return an array of props to set on the dom
-	    */
+	   * Return an array of props to set on the dom
+	   */
 
 			}, {
 				key: 'physicalProps',
 
 
 				/**
-	    * Get physical props for this particular instance
-	    * @return 		{Object} 			The physical props array
-	    */
+	   * Get physical props for this particular instance
+	   * @return 		{Object} 			The physical props array
+	   */
 				get: function get() {
 					var props = window.sugar._webComponentsStack[this._componentName].physicalProps;
 					var comp = window.sugar._webComponentsStack[this._componentName];
@@ -3763,17 +3767,17 @@
 				}
 
 				/**
-	    * Return an array of required props to init the component
-	    */
+	   * Return an array of required props to init the component
+	   */
 
 			}, {
 				key: 'requiredProps',
 
 
 				/**
-	    * Get the required props array for this particular instance
-	    * @return 		{Array} 			An array of required props
-	    */
+	   * Get the required props array for this particular instance
+	   * @return 		{Array} 			An array of required props
+	   */
 				get: function get() {
 					var props = window.sugar._webComponentsStack[this._componentName].requiredProps;
 					var comp = window.sugar._webComponentsStack[this._componentName];
@@ -3804,17 +3808,17 @@
 				}
 
 				/**
-	    * Return an array of props to set on the dom
-	    */
+	   * Return an array of props to set on the dom
+	   */
 
 			}, {
 				key: 'mountDependencies',
 
 
 				/**
-	    * Get physical props for this particular instance
-	    * @return 		{Object} 			The physical props array
-	    */
+	   * Get physical props for this particular instance
+	   * @return 		{Object} 			The physical props array
+	   */
 				get: function get() {
 					var _this11 = this;
 
@@ -3841,20 +3845,20 @@
 
 
 				/**
-	    * Return the default props for the component.
-	    * Need to take care of the passed props parameter and mix it at the
-	    * end of your default props
-	    *
-	    * @example
-	    * getDefaultProps(props = {}) {
-	    * 		return super.getDefaultProps({
-	    * 			myCoolProp : null,
-	    * 			...props
-	    * 		});
-	    * }
-	    *
-	    * @author 		Olivier Bossel <olivier.bossel@gmail.com>
-	    */
+	   * Return the default props for the component.
+	   * Need to take care of the passed props parameter and mix it at the
+	   * end of your default props
+	   *
+	   * @example
+	   * getDefaultProps(props = {}) {
+	   * 		return super.getDefaultProps({
+	   * 			myCoolProp : null,
+	   * 			...props
+	   * 		});
+	   * }
+	   *
+	   * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	   */
 				get: function get() {
 					return {
 						mountWhen: null
@@ -7830,11 +7834,4051 @@
 /* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _sass = __webpack_require__(96);
+
+	var _sass2 = _interopRequireDefault(_sass);
+
+	var _setup = __webpack_require__(124);
+
+	var _setup2 = _interopRequireDefault(_setup);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var api = {
+		setup: _setup2.default,
+		sass: _sass2.default,
+		scss: _sass2.default
+	};
+	exports.default = api;
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = sass;
+
+	var _SAjax = __webpack_require__(97);
+
+	var _SAjax2 = _interopRequireDefault(_SAjax);
+
+	var _settings = __webpack_require__(123);
+
+	var _settings2 = _interopRequireDefault(_settings);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function sass(code) {
+		var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+
+		return new Promise(function (resolve, reject) {
+			var ajx = new _SAjax2.default({
+				url: 'http://127.0.0.1:' + _settings2.default.port + '/compile/sass',
+				method: 'POST',
+				data: JSON.stringify({
+					data: code
+				}),
+				contentType: 'application/json'
+			});
+			resolve(ajx.send());
+		});
+	}
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _SObject2 = __webpack_require__(98);
+
+	var _SObject3 = _interopRequireDefault(_SObject2);
+
+	var _simpleAjax = __webpack_require__(103);
+
+	var _simpleAjax2 = _interopRequireDefault(_simpleAjax);
+
+	var _Observable = __webpack_require__(106);
+
+	var _strToHtml = __webpack_require__(120);
+
+	var _strToHtml2 = _interopRequireDefault(_strToHtml);
+
+	var _htmlToStr = __webpack_require__(121);
+
+	var _htmlToStr2 = _interopRequireDefault(_htmlToStr);
+
+	var _SAjaxRequest = __webpack_require__(122);
+
+	var _SAjaxRequest2 = _interopRequireDefault(_SAjaxRequest);
+
+	var _autoCast = __webpack_require__(101);
+
+	var _autoCast2 = _interopRequireDefault(_autoCast);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @class 		SAjax 	{SObject}
+	 * Class that allows to simply handle ajax requests with ease.
+	 * This class give some useful features like :
+	 * - Promise support
+	 * - Observable support
+	 * - Recursive requests
+	 * @example 	js
+	 * const ajx = new SAjax({
+	 * 		url : 'api/...',
+	 * 		method : 'GET',
+	 * 		data : {
+	 * 			myVar : 'myVal'
+	 * 		}
+	 * }, {
+	 * 		sendCount : 10,
+	 * 		sendInterval : 2000,
+	 * 		beforeSend : (request, sendCount) => {
+	 * 			request.data.page = sendCount+1;
+	 * 			return request;
+	 * 		}
+	 * });
+	 *
+	 * // optionally listen for data through observable
+	 * ajx.observable.subscribe((response) => {
+	 * 		// do something with the response here...
+	 * }, (error) => {
+	 * 		// something went wrong
+	 * }, () => {
+	 * 		// all the requests have been sent
+	 * });
+	 *
+	 * // send and listen for data
+	 * ajx.send().then((response) => {
+	 * 		// do something with response here...
+	 * }, (error) => {
+	 * 		// something went wrong...
+	 * });
+	 * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	 */
+	var SAjax = function (_SObject) {
+		_inherits(SAjax, _SObject);
+
+		/**
+	  * @constructor
+	  * @param 	{SAjaxRequest} 		request 		The request object used to make ajax call
+	  * @param 	{Object} 			[settings={}] 	Some settings around the request
+	 	 */
+
+
+		/**
+	  * Store how many requests have been sent
+	  * @type 	{Integer}
+	  */
+
+
+		/**
+	  * The SimpleAjax instance used to make requests under the hood
+	  * @type 	{SimpleAjax}[https://github.com/MauriceButler/simple-ajax]
+	  */
+
+
+		/**
+	  * Store the observable instance on which you can subscribe for responses
+	  * @type 	{Observable}
+	  */
+		function SAjax(request) {
+			var settings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+			_classCallCheck(this, SAjax);
+
+			// if the request is not an SAjaxRequest, create it
+			var _this = _possibleConstructorReturn(this, _SObject.call(this));
+
+			// init parent
+
+
+			_this.observable = null;
+			_this._requestSettings = {};
+			_this._simpleAjax = null;
+			_this._observer = null;
+			_this._requestsCount = 0;
+			_this._settings = {
+
+				/**
+	    * Set the interval time between each requests if the sendCount setting is specified
+	    * @setting
+	    * @type 		{Number}
+	    * @default 	1000
+	    */
+				sendInterval: 1000,
+
+				/**
+	    * Set how many times the request has to be sent
+	    * @setting
+	    * @type 		{Integer}
+	    * @default 	null
+	    */
+				sendCount: null,
+
+				/**
+	    * A function that will be called before each requests to have a change to update some request params
+	    * Must return the new request params
+	    * Will recieve the actual request params and the request count as parameter
+	    * @setting
+	    * @type 		{Function}
+	    * @default 	null
+	    */
+				beforeSend: null,
+
+				/**
+	    * A cache instance that will be used
+	    * @setting
+	    * @type 		{SCache}
+	    * @default 	null
+	    */
+				cache: null
+			};
+			if (!(request instanceof _SAjaxRequest2.default)) {
+				_this._requestSettings = new _SAjaxRequest2.default(request);
+			} else {
+				_this._requestSettings = request;
+			}
+
+			// extend settings
+			Object.assign(_this._settings, settings);
+
+			// create the observable property
+			_this.observable = new _Observable.Observable(function (observer) {
+				// store the observer into the instance
+				_this._observer = observer;
+			});
+			return _this;
+		}
+
+		/**
+	  * Create the request
+	  */
+
+
+		/**
+	  * Store the settings around the request
+	  * @type 	{Object}
+	  */
+
+
+		/**
+	  * Store the Observable observer to be able to call his methods outside
+	  * @type 	{Object}
+	  */
+
+
+		/**
+	  * Store the request settings to use
+	  * @type 	{SAjaxRequest}
+	  */
+
+
+		SAjax.prototype._createRequest = function _createRequest() {
+			var _this2 = this;
+
+			// process request settings
+			if (this._settings.beforeSend) {
+				this._requestSetting = this._settings.beforeSend(this._requestSettings, this._requestsCount);
+			}
+
+			// check type and datas
+			// to set datas as query string if is a GET request
+			if (this._requestSettings.method.toLowerCase() === 'get' && this._requestSettings.data && typeof this._requestSettings.data === 'string') {
+				// append the data to the URL
+				var start = '?';
+				if (this._requestSettings.url.indexOf('?') !== -1) {
+					start = '&';
+				}
+				this._requestSettings.url += '' + start + this._requestSettings.data;
+			}
+
+			// create the new simple ajax instance
+			var simpleAjax = new _simpleAjax2.default(_extends({}, this._requestSettings, {
+				url: this._requestSettings.url.split(/#|%23/)[0]
+			}));
+			simpleAjax._requestSettings = Object.assign({}, this._requestSettings);
+
+			// listen request states
+			simpleAjax.on('success', function (e) {
+				// grab response
+				var response = e.target.response;
+
+				// get the content type
+				var contentType = simpleAjax.request.getResponseHeader('content-type');
+
+				// switch on content type
+				switch (true) {
+					case contentType.indexOf('text/html') === 0:
+						// check if the url has an hash
+						// and that the request dataType is html
+						var urlParts = simpleAjax._requestSettings.url.toString().split(/#|%23/);
+						if (urlParts.length >= 2 && document !== undefined && document.querySelector !== undefined) {
+							var html = (0, _strToHtml2.default)(response);
+							if (html.id === urlParts[1]) {
+								response = (0, _htmlToStr2.default)(html);
+							} else {
+								var part = html.querySelector('#' + urlParts[1]);
+								if (part) {
+									response = (0, _htmlToStr2.default)(part);
+								}
+							}
+						}
+						break;
+					case contentType.indexOf('application/json') === 0:
+						response = JSON.parse(response);
+						break;
+				}
+
+				// check if need to store response in cache
+				if (_this2._settings.cache) {
+					console.log('set', simpleAjax._requestSettings.url, response);
+					_this2._settings.cache.set(simpleAjax._requestSettings.url, response);
+				}
+
+				// push the result into the observer
+				if (_this2._observer) _this2._observer.next(response);
+				// notify Promise
+				if (_this2._resolve) _this2._resolve(response);
+			});
+			simpleAjax.on('error', function (e) {
+				// error
+				if (_this2._observer) _this2._observer.error(e.target.response);
+				// notify promise
+				if (_this2._reject) _this2._reject(e.target.response);
+			});
+			simpleAjax.on('complete', function (e) {
+				// check the settings to see if we need to do it again
+				// after a certain timeout
+				if (_this2._settings.sendInterval) {
+					// handle sendCount
+					if (_this2._settings.sendCount && _this2._requestsCount >= _this2._settings.sendCount) {
+						// notify subscriber
+						if (_this2._observer) {
+							_this2._observer.complete();
+						}
+						// stop here
+						return;
+					} else if (_this2._settings.sendCount) {
+						// wait the requested timeout and send a new request
+						setTimeout(function () {
+							_this2.send();
+						}, _this2._settings.sendInterval);
+					}
+				}
+			});
+
+			// save into instance
+			this._simpleAjax = simpleAjax;
+		};
+
+		/**
+	  * Send the request and return a promise
+	  * @return 	{Promise} 	The promise through which you will be notified when data are here
+	  */
+
+
+		SAjax.prototype.send = function send() {
+			var _this3 = this;
+
+			// create the new request
+			this._createRequest();
+
+			// update request count
+			this._requestsCount++;
+
+			// return a promise
+			return new Promise(function (resolve, reject) {
+
+				// check if a cache exist and if we have the content
+				if (_this3._settings.cache) {
+					var response = _this3._settings.cache.get(_this3._requestSettings.url);
+					if (response) {
+						resolve(response);
+						return;
+					}
+				}
+
+				// set the resolve and reject callback in the instance
+				_this3._resolve = resolve;
+				_this3._reject = reject;
+
+				// send the request
+				_this3._simpleAjax.send();
+			});
+		};
+
+		return SAjax;
+	}(_SObject3.default);
+
+	exports.default = SAjax;
+
+/***/ },
+/* 98 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	__webpack_require__(99);
+
+	/**
+	 * @class 		SObject
+	 * This is the main class that will be the base one for all the others.
+	 * One class to rule them all...
+	 *
+	 * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+	 */
+
+	var SObject =
+	/**
+	 * @constructor
+	 */
+	function SObject() {
+	  _classCallCheck(this, SObject);
+	};
+
+	exports.default = SObject;
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _sTemplateIntegrator = __webpack_require__(100);
+
+	var _sTemplateIntegrator2 = _interopRequireDefault(_sTemplateIntegrator);
+
+	var _fastdom = __webpack_require__(102);
+
+	var _fastdom2 = _interopRequireDefault(_fastdom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function handleInputAttributes(eOrElm) {
+		var field = eOrElm.target ? eOrElm.target : eOrElm;
+		if (!field || !field.tagName) return;
+		switch (field.tagName) {
+			case 'INPUT':
+			case 'TEXTAREA':
+			case 'SELECT':
+				_fastdom2.default.mutate(function () {
+					if (field.type && (field.type === 'checkbox' || field.type === 'radio')) return;
+					if (field.value && !field.hasAttribute('has-value')) {
+						field.setAttribute('has-value', true);
+						field.removeAttribute('empty');
+					} else if (!field.value && field.hasAttribute('has-value')) {
+						field.removeAttribute('has-value');
+						if (!field.hasAttribute('empty')) {
+							field.setAttribute('empty', true);
+						}
+					}
+					if (field.value && !field.hasAttribute('dirty')) {
+						field.setAttribute('dirty', true);
+					}
+				});
+				break;
+		}
+	}
+
+	function handleFormReset(e) {
+		// loop on each form elements
+		[].forEach.call(e.target.elements, function (field) {
+			// reset the field attributes
+			handleInputAttributes(field);
+			// remove dirty attribute
+			_fastdom2.default.mutate(function () {
+				field.removeAttribute('dirty');
+			});
+		});
+	}
+
+	document.addEventListener('change', handleInputAttributes);
+	document.addEventListener('keyup', handleInputAttributes);
+	document.addEventListener('reset', handleFormReset);
+
+	_sTemplateIntegrator2.default.registerComponentIntegration([HTMLInputElement, HTMLSelectElement], function (input) {
+		_sTemplateIntegrator2.default.ignore(input, {
+			"has-value": true,
+			empty: true,
+			dirty: true
+		});
+	});
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _autoCast = __webpack_require__(101);
+
+	var _autoCast2 = _interopRequireDefault(_autoCast);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _integrations = new Map();
+
+	var STemplateIntegrator = function () {
+		function STemplateIntegrator() {
+			_classCallCheck(this, STemplateIntegrator);
+		}
+
+		STemplateIntegrator.prototype.keepAttribute = function keepAttribute() {
+			return this;
+		};
+
+		STemplateIntegrator.prototype.exclude = function exclude() {
+			return this;
+		};
+
+		/**
+	  * Register a component integration function
+	  * @param 	{Function} 		integrationFn 		The function used to set the integration attributes, etc into the component elements
+	  */
+
+
+		STemplateIntegrator.prototype.registerComponentIntegration = function registerComponentIntegration(componentClass, fn) {
+			var _this = this;
+
+			if (componentClass instanceof Array) {
+				componentClass.forEach(function (comp) {
+					_this.registerComponentIntegration(comp, fn);
+				});
+				return;
+			}
+			// get the component class map entry
+			var arrayIntegrations = _integrations.get(componentClass) || [];
+			if (arrayIntegrations.indexOf(fn) === -1) {
+				arrayIntegrations.push(fn);
+			}
+			// set into map again
+			_integrations.set(componentClass, arrayIntegrations);
+		};
+
+		STemplateIntegrator.prototype.getIntegrationFrom = function getIntegrationFrom(elm) {
+			var integration = elm._sTemplateIntegration || {
+				ignore: {
+					"s-template-integration": true,
+					"s-template-refresh": true
+				},
+				refresh: false
+			};
+			return integration;
+		};
+
+		STemplateIntegrator.prototype.getComponentIntegrationFunctionsFrom = function getComponentIntegrationFunctionsFrom(elm) {
+			var functionsArray = [];
+			// loop on all the component keys in the integration map
+			_integrations.forEach(function (value, key) {
+				if (elm instanceof key) {
+					functionsArray = functionsArray.concat(value);
+				}
+			});
+			return functionsArray;
+		};
+
+		STemplateIntegrator.prototype.setIntegrationTo = function setIntegrationTo(elm, integration) {
+			elm._sTemplateIntegration = integration;
+			// elm.setAttribute('s-template-integration', JSON.stringify(integration));
+			return this;
+		};
+
+		STemplateIntegrator.prototype.ignore = function ignore(elm) {
+			var what = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+
+			if (!elm) return this;
+
+			// get integration settings
+			var integration = this.getIntegrationFrom(elm);
+
+			// autocast what
+			if (what) what = (0, _autoCast2.default)(what);
+
+			// we ignore the tag itself
+			if (integration.ignore === true) {
+				return this;
+			}
+
+			// if has no what parameter
+			// mean that we want to ignore the tag itself
+			if (!what || what === true) {
+				integration.ignore = true;
+				return this.setIntegrationTo(elm, integration);
+			}
+			// if we don't have any ignore for now
+			// set the new object
+			if (what && (typeof what === "undefined" ? "undefined" : _typeof(what)) === 'object') {
+				if (integration.ignore && _typeof(integration.ignore) === 'object') {
+					what = Object.assign(integration.ignore, what);
+				}
+				return this.setIntegrationTo(elm, integration);
+			}
+			// return the this class
+			return this;
+		};
+
+		/**
+	  * Set an element to refresh completely when the this handle it
+	  * @param 	{HTMLElement} 	elm 	The element to refresh
+	  */
+
+
+		STemplateIntegrator.prototype.refresh = function refresh(elm) {
+			if (!elm) return this;
+			elm.setAttribute('s-template-refresh', true);
+			return this;
+		};
+
+		return STemplateIntegrator;
+	}();
+
+	exports.default = new STemplateIntegrator();
+
+/***/ },
+/* 101 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.default = autoCast;
+	/**
+	 * Auto cast the string into the correct variable type
+	 */
+	function autoCast(string) {
+		// boolean values
+		if (string === 'false' || string === 'true' || string === 'undefined' || string === 'null' || !isNaN(string)) {
+			return eval(string);
+		}
+		// array
+		if (typeof string === 'string' && string.substr(0, 1) === '[') {
+			var val = eval(string);
+			if (val instanceof Array) return val;
+		}
+		// parse json
+		if (typeof string === 'string' && string.substr(0, 1) === '{') {
+			return eval('(' + string + ')');
+		}
+		// window. || document.
+		if (typeof string === 'string' && (string.indexOf('window.') === 0 || string.indexOf('document.') === 0)) {
+			var _val = eval(string);
+			if (_val) return _val;
+		}
+		// return the string if nothing can be casted
+		return string;
+	}
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;!(function(win) {
+
+	/**
+	 * FastDom
+	 *
+	 * Eliminates layout thrashing
+	 * by batching DOM read/write
+	 * interactions.
+	 *
+	 * @author Wilson Page <wilsonpage@me.com>
+	 * @author Kornel Lesinski <kornel.lesinski@ft.com>
+	 */
+
+	'use strict';
+
+	/**
+	 * Mini logger
+	 *
+	 * @return {Function}
+	 */
+	var debug = 0 ? console.log.bind(console, '[fastdom]') : function() {};
+
+	/**
+	 * Normalized rAF
+	 *
+	 * @type {Function}
+	 */
+	var raf = win.requestAnimationFrame
+	  || win.webkitRequestAnimationFrame
+	  || win.mozRequestAnimationFrame
+	  || win.msRequestAnimationFrame
+	  || function(cb) { return setTimeout(cb, 16); };
+
+	/**
+	 * Initialize a `FastDom`.
+	 *
+	 * @constructor
+	 */
+	function FastDom() {
+	  var self = this;
+	  self.reads = [];
+	  self.writes = [];
+	  self.raf = raf.bind(win); // test hook
+	  debug('initialized', self);
+	}
+
+	FastDom.prototype = {
+	  constructor: FastDom,
+
+	  /**
+	   * Adds a job to the read batch and
+	   * schedules a new frame if need be.
+	   *
+	   * @param  {Function} fn
+	   * @public
+	   */
+	  measure: function(fn, ctx) {
+	    debug('measure');
+	    var task = !ctx ? fn : fn.bind(ctx);
+	    this.reads.push(task);
+	    scheduleFlush(this);
+	    return task;
+	  },
+
+	  /**
+	   * Adds a job to the
+	   * write batch and schedules
+	   * a new frame if need be.
+	   *
+	   * @param  {Function} fn
+	   * @public
+	   */
+	  mutate: function(fn, ctx) {
+	    debug('mutate');
+	    var task = !ctx ? fn : fn.bind(ctx);
+	    this.writes.push(task);
+	    scheduleFlush(this);
+	    return task;
+	  },
+
+	  /**
+	   * Clears a scheduled 'read' or 'write' task.
+	   *
+	   * @param {Object} task
+	   * @return {Boolean} success
+	   * @public
+	   */
+	  clear: function(task) {
+	    debug('clear', task);
+	    return remove(this.reads, task) || remove(this.writes, task);
+	  },
+
+	  /**
+	   * Extend this FastDom with some
+	   * custom functionality.
+	   *
+	   * Because fastdom must *always* be a
+	   * singleton, we're actually extending
+	   * the fastdom instance. This means tasks
+	   * scheduled by an extension still enter
+	   * fastdom's global task queue.
+	   *
+	   * The 'super' instance can be accessed
+	   * from `this.fastdom`.
+	   *
+	   * @example
+	   *
+	   * var myFastdom = fastdom.extend({
+	   *   initialize: function() {
+	   *     // runs on creation
+	   *   },
+	   *
+	   *   // override a method
+	   *   measure: function(fn) {
+	   *     // do extra stuff ...
+	   *
+	   *     // then call the original
+	   *     return this.fastdom.measure(fn);
+	   *   },
+	   *
+	   *   ...
+	   * });
+	   *
+	   * @param  {Object} props  properties to mixin
+	   * @return {FastDom}
+	   */
+	  extend: function(props) {
+	    debug('extend', props);
+	    if (typeof props != 'object') throw new Error('expected object');
+
+	    var child = Object.create(this);
+	    mixin(child, props);
+	    child.fastdom = this;
+
+	    // run optional creation hook
+	    if (child.initialize) child.initialize();
+
+	    return child;
+	  },
+
+	  // override this with a function
+	  // to prevent Errors in console
+	  // when tasks throw
+	  catch: null
+	};
+
+	/**
+	 * Schedules a new read/write
+	 * batch if one isn't pending.
+	 *
+	 * @private
+	 */
+	function scheduleFlush(fastdom) {
+	  if (!fastdom.scheduled) {
+	    fastdom.scheduled = true;
+	    fastdom.raf(flush.bind(null, fastdom));
+	    debug('flush scheduled');
+	  }
+	}
+
+	/**
+	 * Runs queued `read` and `write` tasks.
+	 *
+	 * Errors are caught and thrown by default.
+	 * If a `.catch` function has been defined
+	 * it is called instead.
+	 *
+	 * @private
+	 */
+	function flush(fastdom) {
+	  debug('flush');
+
+	  var writes = fastdom.writes;
+	  var reads = fastdom.reads;
+	  var error;
+
+	  try {
+	    debug('flushing reads', reads.length);
+	    runTasks(reads);
+	    debug('flushing writes', writes.length);
+	    runTasks(writes);
+	  } catch (e) { error = e; }
+
+	  fastdom.scheduled = false;
+
+	  // If the batch errored we may still have tasks queued
+	  if (reads.length || writes.length) scheduleFlush(fastdom);
+
+	  if (error) {
+	    debug('task errored', error.message);
+	    if (fastdom.catch) fastdom.catch(error);
+	    else throw error;
+	  }
+	}
+
+	/**
+	 * We run this inside a try catch
+	 * so that if any jobs error, we
+	 * are able to recover and continue
+	 * to flush the batch until it's empty.
+	 *
+	 * @private
+	 */
+	function runTasks(tasks) {
+	  debug('run tasks');
+	  var task; while (task = tasks.shift()) task();
+	}
+
+	/**
+	 * Remove an item from an Array.
+	 *
+	 * @param  {Array} array
+	 * @param  {*} item
+	 * @return {Boolean}
+	 */
+	function remove(array, item) {
+	  var index = array.indexOf(item);
+	  return !!~index && !!array.splice(index, 1);
+	}
+
+	/**
+	 * Mixin own properties of source
+	 * object into the target.
+	 *
+	 * @param  {Object} target
+	 * @param  {Object} source
+	 */
+	function mixin(target, source) {
+	  for (var key in source) {
+	    if (source.hasOwnProperty(key)) target[key] = source[key];
+	  }
+	}
+
+	// There should never be more than
+	// one instance of `FastDom` in an app
+	var exports = win.fastdom = (win.fastdom || new FastDom()); // jshint ignore:line
+
+	// Expose to CJS & AMD
+	if (("function")[0] == 'f') !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return exports; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	else if ((typeof module)[0] == 'o') module.exports = exports;
+
+	})( typeof window !== 'undefined' ? window : this);
+
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var EventEmitter = __webpack_require__(104).EventEmitter,
+	    queryString = __webpack_require__(105);
+
+	function tryParseJson(data){
+	    try{
+	        return JSON.parse(data);
+	    }catch(error){
+	        return error;
+	    }
+	}
+
+	function timeout(){
+	   this.request.abort();
+	   this.emit('timeout');
+	}
+
+	function Ajax(settings){
+	    var queryStringData,
+	        ajax = this;
+
+	    if(typeof settings === 'string'){
+	        settings = {
+	            url: settings
+	        };
+	    }
+
+	    if(typeof settings !== 'object'){
+	        settings = {};
+	    }
+
+	    ajax.settings = settings;
+	    ajax.request = new XMLHttpRequest();
+	    ajax.settings.method = ajax.settings.method || 'get';
+
+	    if(ajax.settings.cors && !'withCredentials' in ajax.request){
+	        if (typeof XDomainRequest !== 'undefined') {
+	            // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+	            ajax.request = new XDomainRequest();
+	        } else {
+	            // Otherwise, CORS is not supported by the browser.
+	            ajax.emit('error', new Error('Cors is not supported by this browser'));
+	        }
+	    }
+
+	    if(ajax.settings.cache === false){
+	        ajax.settings.data = ajax.settings.data || {};
+	        ajax.settings.data._ = new Date().getTime();
+	    }
+
+	    if(ajax.settings.method.toLowerCase() === 'get' && typeof ajax.settings.data === 'object'){
+	        var urlParts = ajax.settings.url.split('?');
+
+	        queryStringData = queryString.parse(urlParts[1]);
+
+	        for(var key in ajax.settings.data){
+	            queryStringData[key] = ajax.settings.data[key];
+	        }
+
+	        var parsedQueryStringData = queryString.stringify(queryStringData);
+
+	        ajax.settings.url = urlParts[0] + (parsedQueryStringData ? '?' + parsedQueryStringData : '');
+	        ajax.settings.data = null;
+	    }
+
+	    ajax.request.addEventListener('progress', function(event){
+	        ajax.emit('progress', event);
+	    }, false);
+
+	    ajax.request.addEventListener('load', function(event){
+	        var data = event.target.responseText;
+
+	        if(ajax.settings.dataType && ajax.settings.dataType.toLowerCase() === 'json'){
+	            if(data === ''){
+	                data = undefined;
+	            }else{
+	                data = tryParseJson(data);
+	                if(data instanceof Error){
+	                    ajax.emit('error', event, data);
+	                    return;
+	                }
+	            }
+	        }
+
+	        if(event.target.status >= 400){
+	            ajax.emit('error', event, data);
+	        } else {
+	            ajax.emit('success', event, data);
+	        }
+
+	    }, false);
+
+	    ajax.request.addEventListener('error', function(event){
+	        ajax.emit('error', event);
+	    }, false);
+
+	    ajax.request.addEventListener('abort', function(event){
+	        ajax.emit('error', event, new Error('Connection Aborted'));
+	        ajax.emit('abort', event);
+	    }, false);
+
+	    ajax.request.addEventListener('loadend', function(event){
+	        clearTimeout(ajax._requestTimeout);
+	        ajax.emit('complete', event);
+	    }, false);
+
+	    ajax.request.open(ajax.settings.method || 'get', ajax.settings.url, true);
+
+	    if(ajax.settings.cors && 'withCredentials' in ajax.request) {
+	        ajax.request.withCredentials = !!settings.withCredentials;
+	    }
+
+	    // Set default headers
+	    if(ajax.settings.contentType !== false){
+	        ajax.request.setRequestHeader('Content-Type', ajax.settings.contentType || 'application/json; charset=utf-8');
+	    }
+	    if(ajax.settings.requestedWith !== false) {
+	        ajax.request.setRequestHeader('X-Requested-With', ajax.settings.requestedWith || 'XMLHttpRequest');
+	    }
+	    if(ajax.settings.auth){
+	        ajax.request.setRequestHeader('Authorization', ajax.settings.auth);
+	    }
+
+	    // Set custom headers
+	    for(var headerKey in ajax.settings.headers){
+	        ajax.request.setRequestHeader(headerKey, ajax.settings.headers[headerKey]);
+	    }
+
+	    if(ajax.settings.processData !== false && ajax.settings.dataType === 'json'){
+	        ajax.settings.data = JSON.stringify(ajax.settings.data);
+	    }
+	}
+
+	Ajax.prototype = Object.create(EventEmitter.prototype);
+
+	Ajax.prototype.send = function(){
+	    var ajax = this;
+
+	    ajax._requestTimeout = setTimeout(
+	        function(){
+	            timeout.apply(ajax, []);
+	        },
+	        ajax.settings.timeout || 120000
+	    );
+
+	    ajax.request.send(ajax.settings.data && ajax.settings.data);
+	};
+
+	module.exports = Ajax;
+
+
+/***/ },
+/* 104 */
+/***/ function(module, exports) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	function EventEmitter() {
+	  this._events = this._events || {};
+	  this._maxListeners = this._maxListeners || undefined;
+	}
+	module.exports = EventEmitter;
+
+	// Backwards-compat with node 0.10.x
+	EventEmitter.EventEmitter = EventEmitter;
+
+	EventEmitter.prototype._events = undefined;
+	EventEmitter.prototype._maxListeners = undefined;
+
+	// By default EventEmitters will print a warning if more than 10 listeners are
+	// added to it. This is a useful default which helps finding memory leaks.
+	EventEmitter.defaultMaxListeners = 10;
+
+	// Obviously not all Emitters should be limited to 10. This function allows
+	// that to be increased. Set to zero for unlimited.
+	EventEmitter.prototype.setMaxListeners = function(n) {
+	  if (!isNumber(n) || n < 0 || isNaN(n))
+	    throw TypeError('n must be a positive number');
+	  this._maxListeners = n;
+	  return this;
+	};
+
+	EventEmitter.prototype.emit = function(type) {
+	  var er, handler, len, args, i, listeners;
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // If there is no 'error' event listener then throw.
+	  if (type === 'error') {
+	    if (!this._events.error ||
+	        (isObject(this._events.error) && !this._events.error.length)) {
+	      er = arguments[1];
+	      if (er instanceof Error) {
+	        throw er; // Unhandled 'error' event
+	      } else {
+	        // At least give some kind of context to the user
+	        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+	        err.context = er;
+	        throw err;
+	      }
+	    }
+	  }
+
+	  handler = this._events[type];
+
+	  if (isUndefined(handler))
+	    return false;
+
+	  if (isFunction(handler)) {
+	    switch (arguments.length) {
+	      // fast cases
+	      case 1:
+	        handler.call(this);
+	        break;
+	      case 2:
+	        handler.call(this, arguments[1]);
+	        break;
+	      case 3:
+	        handler.call(this, arguments[1], arguments[2]);
+	        break;
+	      // slower
+	      default:
+	        args = Array.prototype.slice.call(arguments, 1);
+	        handler.apply(this, args);
+	    }
+	  } else if (isObject(handler)) {
+	    args = Array.prototype.slice.call(arguments, 1);
+	    listeners = handler.slice();
+	    len = listeners.length;
+	    for (i = 0; i < len; i++)
+	      listeners[i].apply(this, args);
+	  }
+
+	  return true;
+	};
+
+	EventEmitter.prototype.addListener = function(type, listener) {
+	  var m;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // To avoid recursion in the case that type === "newListener"! Before
+	  // adding it to the listeners, first emit "newListener".
+	  if (this._events.newListener)
+	    this.emit('newListener', type,
+	              isFunction(listener.listener) ?
+	              listener.listener : listener);
+
+	  if (!this._events[type])
+	    // Optimize the case of one listener. Don't need the extra array object.
+	    this._events[type] = listener;
+	  else if (isObject(this._events[type]))
+	    // If we've already got an array, just append.
+	    this._events[type].push(listener);
+	  else
+	    // Adding the second element, need to change to array.
+	    this._events[type] = [this._events[type], listener];
+
+	  // Check for listener leak
+	  if (isObject(this._events[type]) && !this._events[type].warned) {
+	    if (!isUndefined(this._maxListeners)) {
+	      m = this._maxListeners;
+	    } else {
+	      m = EventEmitter.defaultMaxListeners;
+	    }
+
+	    if (m && m > 0 && this._events[type].length > m) {
+	      this._events[type].warned = true;
+	      console.error('(node) warning: possible EventEmitter memory ' +
+	                    'leak detected. %d listeners added. ' +
+	                    'Use emitter.setMaxListeners() to increase limit.',
+	                    this._events[type].length);
+	      if (typeof console.trace === 'function') {
+	        // not supported in IE 10
+	        console.trace();
+	      }
+	    }
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+	EventEmitter.prototype.once = function(type, listener) {
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  var fired = false;
+
+	  function g() {
+	    this.removeListener(type, g);
+
+	    if (!fired) {
+	      fired = true;
+	      listener.apply(this, arguments);
+	    }
+	  }
+
+	  g.listener = listener;
+	  this.on(type, g);
+
+	  return this;
+	};
+
+	// emits a 'removeListener' event iff the listener was removed
+	EventEmitter.prototype.removeListener = function(type, listener) {
+	  var list, position, length, i;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events || !this._events[type])
+	    return this;
+
+	  list = this._events[type];
+	  length = list.length;
+	  position = -1;
+
+	  if (list === listener ||
+	      (isFunction(list.listener) && list.listener === listener)) {
+	    delete this._events[type];
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+
+	  } else if (isObject(list)) {
+	    for (i = length; i-- > 0;) {
+	      if (list[i] === listener ||
+	          (list[i].listener && list[i].listener === listener)) {
+	        position = i;
+	        break;
+	      }
+	    }
+
+	    if (position < 0)
+	      return this;
+
+	    if (list.length === 1) {
+	      list.length = 0;
+	      delete this._events[type];
+	    } else {
+	      list.splice(position, 1);
+	    }
+
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.removeAllListeners = function(type) {
+	  var key, listeners;
+
+	  if (!this._events)
+	    return this;
+
+	  // not listening for removeListener, no need to emit
+	  if (!this._events.removeListener) {
+	    if (arguments.length === 0)
+	      this._events = {};
+	    else if (this._events[type])
+	      delete this._events[type];
+	    return this;
+	  }
+
+	  // emit removeListener for all listeners on all events
+	  if (arguments.length === 0) {
+	    for (key in this._events) {
+	      if (key === 'removeListener') continue;
+	      this.removeAllListeners(key);
+	    }
+	    this.removeAllListeners('removeListener');
+	    this._events = {};
+	    return this;
+	  }
+
+	  listeners = this._events[type];
+
+	  if (isFunction(listeners)) {
+	    this.removeListener(type, listeners);
+	  } else if (listeners) {
+	    // LIFO order
+	    while (listeners.length)
+	      this.removeListener(type, listeners[listeners.length - 1]);
+	  }
+	  delete this._events[type];
+
+	  return this;
+	};
+
+	EventEmitter.prototype.listeners = function(type) {
+	  var ret;
+	  if (!this._events || !this._events[type])
+	    ret = [];
+	  else if (isFunction(this._events[type]))
+	    ret = [this._events[type]];
+	  else
+	    ret = this._events[type].slice();
+	  return ret;
+	};
+
+	EventEmitter.prototype.listenerCount = function(type) {
+	  if (this._events) {
+	    var evlistener = this._events[type];
+
+	    if (isFunction(evlistener))
+	      return 1;
+	    else if (evlistener)
+	      return evlistener.length;
+	  }
+	  return 0;
+	};
+
+	EventEmitter.listenerCount = function(emitter, type) {
+	  return emitter.listenerCount(type);
+	};
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+		query-string
+		Parse and stringify URL query strings
+		https://github.com/sindresorhus/query-string
+		by Sindre Sorhus
+		MIT License
+	*/
+	(function () {
+		'use strict';
+		var queryString = {};
+
+		queryString.parse = function (str) {
+			if (typeof str !== 'string') {
+				return {};
+			}
+
+			str = str.trim().replace(/^(\?|#)/, '');
+
+			if (!str) {
+				return {};
+			}
+
+			return str.trim().split('&').reduce(function (ret, param) {
+				var parts = param.replace(/\+/g, ' ').split('=');
+				var key = parts[0];
+				var val = parts[1];
+
+				key = decodeURIComponent(key);
+				// missing `=` should be `null`:
+				// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+				val = val === undefined ? null : decodeURIComponent(val);
+
+				if (!ret.hasOwnProperty(key)) {
+					ret[key] = val;
+				} else if (Array.isArray(ret[key])) {
+					ret[key].push(val);
+				} else {
+					ret[key] = [ret[key], val];
+				}
+
+				return ret;
+			}, {});
+		};
+
+		queryString.stringify = function (obj) {
+			return obj ? Object.keys(obj).map(function (key) {
+				var val = obj[key];
+
+				if (Array.isArray(val)) {
+					return val.map(function (val2) {
+						return encodeURIComponent(key) + '=' + encodeURIComponent(val2);
+					}).join('&');
+				}
+
+				return encodeURIComponent(key) + '=' + encodeURIComponent(val);
+			}).join('&') : '';
+		};
+
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return queryString; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof module !== 'undefined' && module.exports) {
+			module.exports = queryString;
+		} else {
+			self.queryString = queryString;
+		}
+	})();
+
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var root_1 = __webpack_require__(107);
+	var toSubscriber_1 = __webpack_require__(108);
+	var observable_1 = __webpack_require__(119);
+	/**
+	 * A representation of any set of values over any amount of time. This the most basic building block
+	 * of RxJS.
+	 *
+	 * @class Observable<T>
+	 */
+	var Observable = (function () {
+	    /**
+	     * @constructor
+	     * @param {Function} subscribe the function that is  called when the Observable is
+	     * initially subscribed to. This function is given a Subscriber, to which new values
+	     * can be `next`ed, or an `error` method can be called to raise an error, or
+	     * `complete` can be called to notify of a successful completion.
+	     */
+	    function Observable(subscribe) {
+	        this._isScalar = false;
+	        if (subscribe) {
+	            this._subscribe = subscribe;
+	        }
+	    }
+	    /**
+	     * Creates a new Observable, with this Observable as the source, and the passed
+	     * operator defined as the new observable's operator.
+	     * @method lift
+	     * @param {Operator} operator the operator defining the operation to take on the observable
+	     * @return {Observable} a new observable with the Operator applied
+	     */
+	    Observable.prototype.lift = function (operator) {
+	        var observable = new Observable();
+	        observable.source = this;
+	        observable.operator = operator;
+	        return observable;
+	    };
+	    Observable.prototype.subscribe = function (observerOrNext, error, complete) {
+	        var operator = this.operator;
+	        var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+	        if (operator) {
+	            operator.call(sink, this.source);
+	        }
+	        else {
+	            sink.add(this._subscribe(sink));
+	        }
+	        if (sink.syncErrorThrowable) {
+	            sink.syncErrorThrowable = false;
+	            if (sink.syncErrorThrown) {
+	                throw sink.syncErrorValue;
+	            }
+	        }
+	        return sink;
+	    };
+	    /**
+	     * @method forEach
+	     * @param {Function} next a handler for each value emitted by the observable
+	     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
+	     * @return {Promise} a promise that either resolves on observable completion or
+	     *  rejects with the handled error
+	     */
+	    Observable.prototype.forEach = function (next, PromiseCtor) {
+	        var _this = this;
+	        if (!PromiseCtor) {
+	            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+	                PromiseCtor = root_1.root.Rx.config.Promise;
+	            }
+	            else if (root_1.root.Promise) {
+	                PromiseCtor = root_1.root.Promise;
+	            }
+	        }
+	        if (!PromiseCtor) {
+	            throw new Error('no Promise impl found');
+	        }
+	        return new PromiseCtor(function (resolve, reject) {
+	            var subscription = _this.subscribe(function (value) {
+	                if (subscription) {
+	                    // if there is a subscription, then we can surmise
+	                    // the next handling is asynchronous. Any errors thrown
+	                    // need to be rejected explicitly and unsubscribe must be
+	                    // called manually
+	                    try {
+	                        next(value);
+	                    }
+	                    catch (err) {
+	                        reject(err);
+	                        subscription.unsubscribe();
+	                    }
+	                }
+	                else {
+	                    // if there is NO subscription, then we're getting a nexted
+	                    // value synchronously during subscription. We can just call it.
+	                    // If it errors, Observable's `subscribe` will ensure the
+	                    // unsubscription logic is called, then synchronously rethrow the error.
+	                    // After that, Promise will trap the error and send it
+	                    // down the rejection path.
+	                    next(value);
+	                }
+	            }, reject, resolve);
+	        });
+	    };
+	    Observable.prototype._subscribe = function (subscriber) {
+	        return this.source.subscribe(subscriber);
+	    };
+	    /**
+	     * An interop point defined by the es7-observable spec https://github.com/zenparsing/es-observable
+	     * @method Symbol.observable
+	     * @return {Observable} this instance of the observable
+	     */
+	    Observable.prototype[observable_1.$$observable] = function () {
+	        return this;
+	    };
+	    // HACK: Since TypeScript inherits static properties too, we have to
+	    // fight against TypeScript here so Subject can have a different static create signature
+	    /**
+	     * Creates a new cold Observable by calling the Observable constructor
+	     * @static true
+	     * @owner Observable
+	     * @method create
+	     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
+	     * @return {Observable} a new cold observable
+	     */
+	    Observable.create = function (subscribe) {
+	        return new Observable(subscribe);
+	    };
+	    return Observable;
+	}());
+	exports.Observable = Observable;
+	//# sourceMappingURL=Observable.js.map
+
+/***/ },
+/* 107 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
+	/**
+	 * window: browser in DOM main thread
+	 * self: browser in WebWorker
+	 * global: Node.js/other
+	 */
+	exports.root = (typeof window == 'object' && window.window === window && window
+	    || typeof self == 'object' && self.self === self && self
+	    || typeof global == 'object' && global.global === global && global);
+	if (!exports.root) {
+	    throw new Error('RxJS could not find any global context (window, self, global)');
+	}
+	//# sourceMappingURL=root.js.map
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var Subscriber_1 = __webpack_require__(109);
+	var rxSubscriber_1 = __webpack_require__(118);
+	var Observer_1 = __webpack_require__(117);
+	function toSubscriber(nextOrObserver, error, complete) {
+	    if (nextOrObserver) {
+	        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+	            return nextOrObserver;
+	        }
+	        if (nextOrObserver[rxSubscriber_1.$$rxSubscriber]) {
+	            return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
+	        }
+	    }
+	    if (!nextOrObserver && !error && !complete) {
+	        return new Subscriber_1.Subscriber(Observer_1.empty);
+	    }
+	    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+	}
+	exports.toSubscriber = toSubscriber;
+	//# sourceMappingURL=toSubscriber.js.map
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var isFunction_1 = __webpack_require__(110);
+	var Subscription_1 = __webpack_require__(111);
+	var Observer_1 = __webpack_require__(117);
+	var rxSubscriber_1 = __webpack_require__(118);
+	/**
+	 * Implements the {@link Observer} interface and extends the
+	 * {@link Subscription} class. While the {@link Observer} is the public API for
+	 * consuming the values of an {@link Observable}, all Observers get converted to
+	 * a Subscriber, in order to provide Subscription-like capabilities such as
+	 * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
+	 * implementing operators, but it is rarely used as a public API.
+	 *
+	 * @class Subscriber<T>
+	 */
+	var Subscriber = (function (_super) {
+	    __extends(Subscriber, _super);
+	    /**
+	     * @param {Observer|function(value: T): void} [destinationOrNext] A partially
+	     * defined Observer or a `next` callback function.
+	     * @param {function(e: ?any): void} [error] The `error` callback of an
+	     * Observer.
+	     * @param {function(): void} [complete] The `complete` callback of an
+	     * Observer.
+	     */
+	    function Subscriber(destinationOrNext, error, complete) {
+	        _super.call(this);
+	        this.syncErrorValue = null;
+	        this.syncErrorThrown = false;
+	        this.syncErrorThrowable = false;
+	        this.isStopped = false;
+	        switch (arguments.length) {
+	            case 0:
+	                this.destination = Observer_1.empty;
+	                break;
+	            case 1:
+	                if (!destinationOrNext) {
+	                    this.destination = Observer_1.empty;
+	                    break;
+	                }
+	                if (typeof destinationOrNext === 'object') {
+	                    if (destinationOrNext instanceof Subscriber) {
+	                        this.destination = destinationOrNext;
+	                        this.destination.add(this);
+	                    }
+	                    else {
+	                        this.syncErrorThrowable = true;
+	                        this.destination = new SafeSubscriber(this, destinationOrNext);
+	                    }
+	                    break;
+	                }
+	            default:
+	                this.syncErrorThrowable = true;
+	                this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
+	                break;
+	        }
+	    }
+	    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function () { return this; };
+	    /**
+	     * A static factory for a Subscriber, given a (potentially partial) definition
+	     * of an Observer.
+	     * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
+	     * @param {function(e: ?any): void} [error] The `error` callback of an
+	     * Observer.
+	     * @param {function(): void} [complete] The `complete` callback of an
+	     * Observer.
+	     * @return {Subscriber<T>} A Subscriber wrapping the (partially defined)
+	     * Observer represented by the given arguments.
+	     */
+	    Subscriber.create = function (next, error, complete) {
+	        var subscriber = new Subscriber(next, error, complete);
+	        subscriber.syncErrorThrowable = false;
+	        return subscriber;
+	    };
+	    /**
+	     * The {@link Observer} callback to receive notifications of type `next` from
+	     * the Observable, with a value. The Observable may call this method 0 or more
+	     * times.
+	     * @param {T} [value] The `next` value.
+	     * @return {void}
+	     */
+	    Subscriber.prototype.next = function (value) {
+	        if (!this.isStopped) {
+	            this._next(value);
+	        }
+	    };
+	    /**
+	     * The {@link Observer} callback to receive notifications of type `error` from
+	     * the Observable, with an attached {@link Error}. Notifies the Observer that
+	     * the Observable has experienced an error condition.
+	     * @param {any} [err] The `error` exception.
+	     * @return {void}
+	     */
+	    Subscriber.prototype.error = function (err) {
+	        if (!this.isStopped) {
+	            this.isStopped = true;
+	            this._error(err);
+	        }
+	    };
+	    /**
+	     * The {@link Observer} callback to receive a valueless notification of type
+	     * `complete` from the Observable. Notifies the Observer that the Observable
+	     * has finished sending push-based notifications.
+	     * @return {void}
+	     */
+	    Subscriber.prototype.complete = function () {
+	        if (!this.isStopped) {
+	            this.isStopped = true;
+	            this._complete();
+	        }
+	    };
+	    Subscriber.prototype.unsubscribe = function () {
+	        if (this.closed) {
+	            return;
+	        }
+	        this.isStopped = true;
+	        _super.prototype.unsubscribe.call(this);
+	    };
+	    Subscriber.prototype._next = function (value) {
+	        this.destination.next(value);
+	    };
+	    Subscriber.prototype._error = function (err) {
+	        this.destination.error(err);
+	        this.unsubscribe();
+	    };
+	    Subscriber.prototype._complete = function () {
+	        this.destination.complete();
+	        this.unsubscribe();
+	    };
+	    return Subscriber;
+	}(Subscription_1.Subscription));
+	exports.Subscriber = Subscriber;
+	/**
+	 * We need this JSDoc comment for affecting ESDoc.
+	 * @ignore
+	 * @extends {Ignored}
+	 */
+	var SafeSubscriber = (function (_super) {
+	    __extends(SafeSubscriber, _super);
+	    function SafeSubscriber(_parent, observerOrNext, error, complete) {
+	        _super.call(this);
+	        this._parent = _parent;
+	        var next;
+	        var context = this;
+	        if (isFunction_1.isFunction(observerOrNext)) {
+	            next = observerOrNext;
+	        }
+	        else if (observerOrNext) {
+	            context = observerOrNext;
+	            next = observerOrNext.next;
+	            error = observerOrNext.error;
+	            complete = observerOrNext.complete;
+	            if (isFunction_1.isFunction(context.unsubscribe)) {
+	                this.add(context.unsubscribe.bind(context));
+	            }
+	            context.unsubscribe = this.unsubscribe.bind(this);
+	        }
+	        this._context = context;
+	        this._next = next;
+	        this._error = error;
+	        this._complete = complete;
+	    }
+	    SafeSubscriber.prototype.next = function (value) {
+	        if (!this.isStopped && this._next) {
+	            var _parent = this._parent;
+	            if (!_parent.syncErrorThrowable) {
+	                this.__tryOrUnsub(this._next, value);
+	            }
+	            else if (this.__tryOrSetError(_parent, this._next, value)) {
+	                this.unsubscribe();
+	            }
+	        }
+	    };
+	    SafeSubscriber.prototype.error = function (err) {
+	        if (!this.isStopped) {
+	            var _parent = this._parent;
+	            if (this._error) {
+	                if (!_parent.syncErrorThrowable) {
+	                    this.__tryOrUnsub(this._error, err);
+	                    this.unsubscribe();
+	                }
+	                else {
+	                    this.__tryOrSetError(_parent, this._error, err);
+	                    this.unsubscribe();
+	                }
+	            }
+	            else if (!_parent.syncErrorThrowable) {
+	                this.unsubscribe();
+	                throw err;
+	            }
+	            else {
+	                _parent.syncErrorValue = err;
+	                _parent.syncErrorThrown = true;
+	                this.unsubscribe();
+	            }
+	        }
+	    };
+	    SafeSubscriber.prototype.complete = function () {
+	        if (!this.isStopped) {
+	            var _parent = this._parent;
+	            if (this._complete) {
+	                if (!_parent.syncErrorThrowable) {
+	                    this.__tryOrUnsub(this._complete);
+	                    this.unsubscribe();
+	                }
+	                else {
+	                    this.__tryOrSetError(_parent, this._complete);
+	                    this.unsubscribe();
+	                }
+	            }
+	            else {
+	                this.unsubscribe();
+	            }
+	        }
+	    };
+	    SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
+	        try {
+	            fn.call(this._context, value);
+	        }
+	        catch (err) {
+	            this.unsubscribe();
+	            throw err;
+	        }
+	    };
+	    SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
+	        try {
+	            fn.call(this._context, value);
+	        }
+	        catch (err) {
+	            parent.syncErrorValue = err;
+	            parent.syncErrorThrown = true;
+	            return true;
+	        }
+	        return false;
+	    };
+	    SafeSubscriber.prototype._unsubscribe = function () {
+	        var _parent = this._parent;
+	        this._context = null;
+	        this._parent = null;
+	        _parent.unsubscribe();
+	    };
+	    return SafeSubscriber;
+	}(Subscriber));
+	//# sourceMappingURL=Subscriber.js.map
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+	"use strict";
+	function isFunction(x) {
+	    return typeof x === 'function';
+	}
+	exports.isFunction = isFunction;
+	//# sourceMappingURL=isFunction.js.map
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var isArray_1 = __webpack_require__(112);
+	var isObject_1 = __webpack_require__(113);
+	var isFunction_1 = __webpack_require__(110);
+	var tryCatch_1 = __webpack_require__(114);
+	var errorObject_1 = __webpack_require__(115);
+	var UnsubscriptionError_1 = __webpack_require__(116);
+	/**
+	 * Represents a disposable resource, such as the execution of an Observable. A
+	 * Subscription has one important method, `unsubscribe`, that takes no argument
+	 * and just disposes the resource held by the subscription.
+	 *
+	 * Additionally, subscriptions may be grouped together through the `add()`
+	 * method, which will attach a child Subscription to the current Subscription.
+	 * When a Subscription is unsubscribed, all its children (and its grandchildren)
+	 * will be unsubscribed as well.
+	 *
+	 * @class Subscription
+	 */
+	var Subscription = (function () {
+	    /**
+	     * @param {function(): void} [unsubscribe] A function describing how to
+	     * perform the disposal of resources when the `unsubscribe` method is called.
+	     */
+	    function Subscription(unsubscribe) {
+	        /**
+	         * A flag to indicate whether this Subscription has already been unsubscribed.
+	         * @type {boolean}
+	         */
+	        this.closed = false;
+	        if (unsubscribe) {
+	            this._unsubscribe = unsubscribe;
+	        }
+	    }
+	    /**
+	     * Disposes the resources held by the subscription. May, for instance, cancel
+	     * an ongoing Observable execution or cancel any other type of work that
+	     * started when the Subscription was created.
+	     * @return {void}
+	     */
+	    Subscription.prototype.unsubscribe = function () {
+	        var hasErrors = false;
+	        var errors;
+	        if (this.closed) {
+	            return;
+	        }
+	        this.closed = true;
+	        var _a = this, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
+	        this._subscriptions = null;
+	        if (isFunction_1.isFunction(_unsubscribe)) {
+	            var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
+	            if (trial === errorObject_1.errorObject) {
+	                hasErrors = true;
+	                (errors = errors || []).push(errorObject_1.errorObject.e);
+	            }
+	        }
+	        if (isArray_1.isArray(_subscriptions)) {
+	            var index = -1;
+	            var len = _subscriptions.length;
+	            while (++index < len) {
+	                var sub = _subscriptions[index];
+	                if (isObject_1.isObject(sub)) {
+	                    var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
+	                    if (trial === errorObject_1.errorObject) {
+	                        hasErrors = true;
+	                        errors = errors || [];
+	                        var err = errorObject_1.errorObject.e;
+	                        if (err instanceof UnsubscriptionError_1.UnsubscriptionError) {
+	                            errors = errors.concat(err.errors);
+	                        }
+	                        else {
+	                            errors.push(err);
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	        if (hasErrors) {
+	            throw new UnsubscriptionError_1.UnsubscriptionError(errors);
+	        }
+	    };
+	    /**
+	     * Adds a tear down to be called during the unsubscribe() of this
+	     * Subscription.
+	     *
+	     * If the tear down being added is a subscription that is already
+	     * unsubscribed, is the same reference `add` is being called on, or is
+	     * `Subscription.EMPTY`, it will not be added.
+	     *
+	     * If this subscription is already in an `closed` state, the passed
+	     * tear down logic will be executed immediately.
+	     *
+	     * @param {TeardownLogic} teardown The additional logic to execute on
+	     * teardown.
+	     * @return {Subscription} Returns the Subscription used or created to be
+	     * added to the inner subscriptions list. This Subscription can be used with
+	     * `remove()` to remove the passed teardown logic from the inner subscriptions
+	     * list.
+	     */
+	    Subscription.prototype.add = function (teardown) {
+	        if (!teardown || (teardown === Subscription.EMPTY)) {
+	            return Subscription.EMPTY;
+	        }
+	        if (teardown === this) {
+	            return this;
+	        }
+	        var sub = teardown;
+	        switch (typeof teardown) {
+	            case 'function':
+	                sub = new Subscription(teardown);
+	            case 'object':
+	                if (sub.closed || typeof sub.unsubscribe !== 'function') {
+	                    break;
+	                }
+	                else if (this.closed) {
+	                    sub.unsubscribe();
+	                }
+	                else {
+	                    (this._subscriptions || (this._subscriptions = [])).push(sub);
+	                }
+	                break;
+	            default:
+	                throw new Error('unrecognized teardown ' + teardown + ' added to Subscription.');
+	        }
+	        return sub;
+	    };
+	    /**
+	     * Removes a Subscription from the internal list of subscriptions that will
+	     * unsubscribe during the unsubscribe process of this Subscription.
+	     * @param {Subscription} subscription The subscription to remove.
+	     * @return {void}
+	     */
+	    Subscription.prototype.remove = function (subscription) {
+	        // HACK: This might be redundant because of the logic in `add()`
+	        if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
+	            return;
+	        }
+	        var subscriptions = this._subscriptions;
+	        if (subscriptions) {
+	            var subscriptionIndex = subscriptions.indexOf(subscription);
+	            if (subscriptionIndex !== -1) {
+	                subscriptions.splice(subscriptionIndex, 1);
+	            }
+	        }
+	    };
+	    Subscription.EMPTY = (function (empty) {
+	        empty.closed = true;
+	        return empty;
+	    }(new Subscription()));
+	    return Subscription;
+	}());
+	exports.Subscription = Subscription;
+	//# sourceMappingURL=Subscription.js.map
+
+/***/ },
+/* 112 */
+/***/ function(module, exports) {
+
+	"use strict";
+	exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+	//# sourceMappingURL=isArray.js.map
+
+/***/ },
+/* 113 */
+/***/ function(module, exports) {
+
+	"use strict";
+	function isObject(x) {
+	    return x != null && typeof x === 'object';
+	}
+	exports.isObject = isObject;
+	//# sourceMappingURL=isObject.js.map
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var errorObject_1 = __webpack_require__(115);
+	var tryCatchTarget;
+	function tryCatcher() {
+	    try {
+	        return tryCatchTarget.apply(this, arguments);
+	    }
+	    catch (e) {
+	        errorObject_1.errorObject.e = e;
+	        return errorObject_1.errorObject;
+	    }
+	}
+	function tryCatch(fn) {
+	    tryCatchTarget = fn;
+	    return tryCatcher;
+	}
+	exports.tryCatch = tryCatch;
+	;
+	//# sourceMappingURL=tryCatch.js.map
+
+/***/ },
+/* 115 */
+/***/ function(module, exports) {
+
+	"use strict";
+	// typeof any so that it we don't have to cast when comparing a result to the error object
+	exports.errorObject = { e: {} };
+	//# sourceMappingURL=errorObject.js.map
+
+/***/ },
+/* 116 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * An error thrown when one or more errors have occurred during the
+	 * `unsubscribe` of a {@link Subscription}.
+	 */
+	var UnsubscriptionError = (function (_super) {
+	    __extends(UnsubscriptionError, _super);
+	    function UnsubscriptionError(errors) {
+	        _super.call(this);
+	        this.errors = errors;
+	        var err = Error.call(this, errors ?
+	            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
+	        this.name = err.name = 'UnsubscriptionError';
+	        this.stack = err.stack;
+	        this.message = err.message;
+	    }
+	    return UnsubscriptionError;
+	}(Error));
+	exports.UnsubscriptionError = UnsubscriptionError;
+	//# sourceMappingURL=UnsubscriptionError.js.map
+
+/***/ },
+/* 117 */
+/***/ function(module, exports) {
+
+	"use strict";
+	exports.empty = {
+	    closed: true,
+	    next: function (value) { },
+	    error: function (err) { throw err; },
+	    complete: function () { }
+	};
+	//# sourceMappingURL=Observer.js.map
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var root_1 = __webpack_require__(107);
+	var Symbol = root_1.root.Symbol;
+	exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
+	    Symbol.for('rxSubscriber') : '@@rxSubscriber';
+	//# sourceMappingURL=rxSubscriber.js.map
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var root_1 = __webpack_require__(107);
+	function getSymbolObservable(context) {
+	    var $$observable;
+	    var Symbol = context.Symbol;
+	    if (typeof Symbol === 'function') {
+	        if (Symbol.observable) {
+	            $$observable = Symbol.observable;
+	        }
+	        else {
+	            $$observable = Symbol('observable');
+	            Symbol.observable = $$observable;
+	        }
+	    }
+	    else {
+	        $$observable = '@@observable';
+	    }
+	    return $$observable;
+	}
+	exports.getSymbolObservable = getSymbolObservable;
+	exports.$$observable = getSymbolObservable(root_1.root);
+	//# sourceMappingURL=observable.js.map
+
+/***/ },
+/* 120 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.default = strToHtml;
+	function strToHtml(string) {
+		if (document !== undefined && document.createElement !== undefined) {
+			var cont = document.createElement('div');
+			cont.innerHTML = string;
+			if (cont.children.length === 1) {
+				return cont.children[0];
+			} else {
+				return cont;
+			}
+		}
+		return string;
+	}
+
+/***/ },
+/* 121 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.default = htmlToStr;
+	function htmlToStr(html) {
+		var deep = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+		if (document !== undefined && document.createElement !== undefined) {
+			var cont = document.createElement('div');
+			cont.appendChild(html.cloneNode(deep));
+			return cont.innerHTML;
+		}
+		return html;
+	}
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/**
+	 * @class 		SAjaxRequest
+	 * Class that represent an ajax request that will be passed to an SAjax instance
+	 *
+	 * @example 	js
+	 * const request = new SAjaxRequest({
+	 *  	url : '/api/...',
+	 *  	method : 'GET',
+	 *  	data : {
+	 *  		myVar : 'myVal'
+	 *  	}
+	 * });
+	 *
+	 * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+	 */
+	var SAjaxRequest = function () {
+
+		/**
+	  * @constructor
+	  * @param 	{Object} 	params 		The request params
+	  */
+
+
+		/**
+	  * Set the Authorization header
+	  * @type 		{String}
+	  * @default 	null
+	  */
+
+
+		/**
+	  * Set the content type header to send with the request
+	  * @type 		{String}
+	  * @default 	null
+	  */
+
+
+		/**
+	  * The data that will be sent with the request in JSON format
+	  * @type 		{Object}
+	  * @default 	null
+	  */
+
+
+		/**
+	  * Use the CORS or not (only for IE)
+	  * @type 		{Boolean}
+	  * @default 	true
+	  */
+
+
+		/**
+	  * The url to call
+	  * @type 	{String}
+	  */
+		function SAjaxRequest(params) {
+			_classCallCheck(this, SAjaxRequest);
+
+			this.url = null;
+			this.method = 'GET';
+			this.cors = true;
+			this.cache = true;
+			this.data = null;
+			this.dataType = 'text';
+			this.contentType = null;
+			this.requestedWith = 'XMLHttpRequest';
+			this.auth = null;
+			this.headers = null;
+
+			// check parameters
+			if (!this._checkParams(params)) return;
+			// set the parameters
+			Object.assign(this, params);
+		}
+
+		/**
+	  * Check the parameters passed to the request
+	  * @param 	(Object) 	params 	 	The request params
+	  * @return 	{Boolean} 				True if params are ok, false if
+	  */
+
+
+		/**
+	  * Set additional headers to send with the request
+	  * @type 		{Object}
+	  * @default 	null
+	  */
+
+
+		/**
+	  * Set the X-Requested-With header
+	  * @type 		{String}
+	  * @default 	XMLHttpRequest
+	  */
+
+
+		/**
+	  * The data type expected from the response
+	  * Accepted dataType are : text | json | html
+	  * @type 		{String}
+	  * @default 	text
+	  */
+
+
+		/**
+	  * Use the cache or not
+	  * @type 		{Boolean}
+	  * @default 	true
+	  */
+
+
+		/**
+	  * The request method to use like GET, POST, DELETE or PUT
+	  * @type 		{String}
+	  * @default 	GET
+	  */
+
+
+		SAjaxRequest.prototype._checkParams = function _checkParams(params) {
+			// loop on each params
+			for (var key in params) {
+				if (!this.hasOwnProperty(key)) {
+					throw 'The SAjaxRequest does not support the passed "' + key + '" parameter...';
+					return false;
+				}
+			}
+			// all ok
+			return true;
+		};
+
+		return SAjaxRequest;
+	}();
+
+	exports.default = SAjaxRequest;
+
+/***/ },
+/* 123 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var settings = {
+		port: 3002
+	};
+	exports.default = settings;
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = setup;
+
+	var _settings = __webpack_require__(123);
+
+	var _settings2 = _interopRequireDefault(_settings);
+
+	var _extend = __webpack_require__(125);
+
+	var _extend2 = _interopRequireDefault(_extend);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function setup() {
+		var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		(0, _extend2.default)(_settings2.default, settings);
+	}
+
+/***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(126);
+
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var copyObject = __webpack_require__(127),
+	    createAssigner = __webpack_require__(146),
+	    keysIn = __webpack_require__(159);
+
+	/**
+	 * This method is like `_.assign` except that it iterates over own and
+	 * inherited source properties.
+	 *
+	 * **Note:** This method mutates `object`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @alias extend
+	 * @category Object
+	 * @param {Object} object The destination object.
+	 * @param {...Object} [sources] The source objects.
+	 * @returns {Object} Returns `object`.
+	 * @see _.assign
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * function Bar() {
+	 *   this.c = 3;
+	 * }
+	 *
+	 * Foo.prototype.b = 2;
+	 * Bar.prototype.d = 4;
+	 *
+	 * _.assignIn({ 'a': 0 }, new Foo, new Bar);
+	 * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
+	 */
+	var assignIn = createAssigner(function(object, source) {
+	  copyObject(source, keysIn(source), object);
+	});
+
+	module.exports = assignIn;
+
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var assignValue = __webpack_require__(128),
+	    baseAssignValue = __webpack_require__(129);
+
+	/**
+	 * Copies properties of `source` to `object`.
+	 *
+	 * @private
+	 * @param {Object} source The object to copy properties from.
+	 * @param {Array} props The property identifiers to copy.
+	 * @param {Object} [object={}] The object to copy properties to.
+	 * @param {Function} [customizer] The function to customize copied values.
+	 * @returns {Object} Returns `object`.
+	 */
+	function copyObject(source, props, object, customizer) {
+	  var isNew = !object;
+	  object || (object = {});
+
+	  var index = -1,
+	      length = props.length;
+
+	  while (++index < length) {
+	    var key = props[index];
+
+	    var newValue = customizer
+	      ? customizer(object[key], source[key], key, object, source)
+	      : undefined;
+
+	    if (newValue === undefined) {
+	      newValue = source[key];
+	    }
+	    if (isNew) {
+	      baseAssignValue(object, key, newValue);
+	    } else {
+	      assignValue(object, key, newValue);
+	    }
+	  }
+	  return object;
+	}
+
+	module.exports = copyObject;
+
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseAssignValue = __webpack_require__(129),
+	    eq = __webpack_require__(145);
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Assigns `value` to `key` of `object` if the existing value is not equivalent
+	 * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+	 * for equality comparisons.
+	 *
+	 * @private
+	 * @param {Object} object The object to modify.
+	 * @param {string} key The key of the property to assign.
+	 * @param {*} value The value to assign.
+	 */
+	function assignValue(object, key, value) {
+	  var objValue = object[key];
+	  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
+	      (value === undefined && !(key in object))) {
+	    baseAssignValue(object, key, value);
+	  }
+	}
+
+	module.exports = assignValue;
+
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var defineProperty = __webpack_require__(130);
+
+	/**
+	 * The base implementation of `assignValue` and `assignMergeValue` without
+	 * value checks.
+	 *
+	 * @private
+	 * @param {Object} object The object to modify.
+	 * @param {string} key The key of the property to assign.
+	 * @param {*} value The value to assign.
+	 */
+	function baseAssignValue(object, key, value) {
+	  if (key == '__proto__' && defineProperty) {
+	    defineProperty(object, key, {
+	      'configurable': true,
+	      'enumerable': true,
+	      'value': value,
+	      'writable': true
+	    });
+	  } else {
+	    object[key] = value;
+	  }
+	}
+
+	module.exports = baseAssignValue;
+
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(131);
+
+	var defineProperty = (function() {
+	  try {
+	    var func = getNative(Object, 'defineProperty');
+	    func({}, '', {});
+	    return func;
+	  } catch (e) {}
+	}());
+
+	module.exports = defineProperty;
+
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseIsNative = __webpack_require__(132),
+	    getValue = __webpack_require__(144);
+
+	/**
+	 * Gets the native function at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {string} key The key of the method to get.
+	 * @returns {*} Returns the function if it's native, else `undefined`.
+	 */
+	function getNative(object, key) {
+	  var value = getValue(object, key);
+	  return baseIsNative(value) ? value : undefined;
+	}
+
+	module.exports = getNative;
+
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isFunction = __webpack_require__(133),
+	    isMasked = __webpack_require__(141),
+	    isObject = __webpack_require__(140),
+	    toSource = __webpack_require__(143);
+
+	/**
+	 * Used to match `RegExp`
+	 * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+	 */
+	var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+	/** Used to detect host constructors (Safari). */
+	var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+	/** Used for built-in method references. */
+	var funcProto = Function.prototype,
+	    objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = funcProto.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Used to detect if a method is native. */
+	var reIsNative = RegExp('^' +
+	  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/**
+	 * The base implementation of `_.isNative` without bad shim checks.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function,
+	 *  else `false`.
+	 */
+	function baseIsNative(value) {
+	  if (!isObject(value) || isMasked(value)) {
+	    return false;
+	  }
+	  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+	  return pattern.test(toSource(value));
+	}
+
+	module.exports = baseIsNative;
+
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseGetTag = __webpack_require__(134),
+	    isObject = __webpack_require__(140);
+
+	/** `Object#toString` result references. */
+	var asyncTag = '[object AsyncFunction]',
+	    funcTag = '[object Function]',
+	    genTag = '[object GeneratorFunction]',
+	    proxyTag = '[object Proxy]';
+
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  if (!isObject(value)) {
+	    return false;
+	  }
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+	  var tag = baseGetTag(value);
+	  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+	}
+
+	module.exports = isFunction;
+
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Symbol = __webpack_require__(135),
+	    getRawTag = __webpack_require__(138),
+	    objectToString = __webpack_require__(139);
+
+	/** `Object#toString` result references. */
+	var nullTag = '[object Null]',
+	    undefinedTag = '[object Undefined]';
+
+	/** Built-in value references. */
+	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+	/**
+	 * The base implementation of `getTag` without fallbacks for buggy environments.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {string} Returns the `toStringTag`.
+	 */
+	function baseGetTag(value) {
+	  if (value == null) {
+	    return value === undefined ? undefinedTag : nullTag;
+	  }
+	  value = Object(value);
+	  return (symToStringTag && symToStringTag in value)
+	    ? getRawTag(value)
+	    : objectToString(value);
+	}
+
+	module.exports = baseGetTag;
+
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var root = __webpack_require__(136);
+
+	/** Built-in value references. */
+	var Symbol = root.Symbol;
+
+	module.exports = Symbol;
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var freeGlobal = __webpack_require__(137);
+
+	/** Detect free variable `self`. */
+	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+	/** Used as a reference to the global object. */
+	var root = freeGlobal || freeSelf || Function('return this')();
+
+	module.exports = root;
+
+
+/***/ },
+/* 137 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+	module.exports = freeGlobal;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Symbol = __webpack_require__(135);
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var nativeObjectToString = objectProto.toString;
+
+	/** Built-in value references. */
+	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+	/**
+	 * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {string} Returns the raw `toStringTag`.
+	 */
+	function getRawTag(value) {
+	  var isOwn = hasOwnProperty.call(value, symToStringTag),
+	      tag = value[symToStringTag];
+
+	  try {
+	    value[symToStringTag] = undefined;
+	    var unmasked = true;
+	  } catch (e) {}
+
+	  var result = nativeObjectToString.call(value);
+	  if (unmasked) {
+	    if (isOwn) {
+	      value[symToStringTag] = tag;
+	    } else {
+	      delete value[symToStringTag];
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = getRawTag;
+
+
+/***/ },
+/* 139 */
+/***/ function(module, exports) {
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var nativeObjectToString = objectProto.toString;
+
+	/**
+	 * Converts `value` to a string using `Object.prototype.toString`.
+	 *
+	 * @private
+	 * @param {*} value The value to convert.
+	 * @returns {string} Returns the converted string.
+	 */
+	function objectToString(value) {
+	  return nativeObjectToString.call(value);
+	}
+
+	module.exports = objectToString;
+
+
+/***/ },
+/* 140 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is the
+	 * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+	 * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(_.noop);
+	 * // => true
+	 *
+	 * _.isObject(null);
+	 * // => false
+	 */
+	function isObject(value) {
+	  var type = typeof value;
+	  return value != null && (type == 'object' || type == 'function');
+	}
+
+	module.exports = isObject;
+
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var coreJsData = __webpack_require__(142);
+
+	/** Used to detect methods masquerading as native. */
+	var maskSrcKey = (function() {
+	  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+	  return uid ? ('Symbol(src)_1.' + uid) : '';
+	}());
+
+	/**
+	 * Checks if `func` has its source masked.
+	 *
+	 * @private
+	 * @param {Function} func The function to check.
+	 * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+	 */
+	function isMasked(func) {
+	  return !!maskSrcKey && (maskSrcKey in func);
+	}
+
+	module.exports = isMasked;
+
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var root = __webpack_require__(136);
+
+	/** Used to detect overreaching core-js shims. */
+	var coreJsData = root['__core-js_shared__'];
+
+	module.exports = coreJsData;
+
+
+/***/ },
+/* 143 */
+/***/ function(module, exports) {
+
+	/** Used for built-in method references. */
+	var funcProto = Function.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = funcProto.toString;
+
+	/**
+	 * Converts `func` to its source code.
+	 *
+	 * @private
+	 * @param {Function} func The function to convert.
+	 * @returns {string} Returns the source code.
+	 */
+	function toSource(func) {
+	  if (func != null) {
+	    try {
+	      return funcToString.call(func);
+	    } catch (e) {}
+	    try {
+	      return (func + '');
+	    } catch (e) {}
+	  }
+	  return '';
+	}
+
+	module.exports = toSource;
+
+
+/***/ },
+/* 144 */
+/***/ function(module, exports) {
+
+	/**
+	 * Gets the value at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} [object] The object to query.
+	 * @param {string} key The key of the property to get.
+	 * @returns {*} Returns the property value.
+	 */
+	function getValue(object, key) {
+	  return object == null ? undefined : object[key];
+	}
+
+	module.exports = getValue;
+
+
+/***/ },
+/* 145 */
+/***/ function(module, exports) {
+
+	/**
+	 * Performs a
+	 * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+	 * comparison between two values to determine if they are equivalent.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to compare.
+	 * @param {*} other The other value to compare.
+	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+	 * @example
+	 *
+	 * var object = { 'a': 1 };
+	 * var other = { 'a': 1 };
+	 *
+	 * _.eq(object, object);
+	 * // => true
+	 *
+	 * _.eq(object, other);
+	 * // => false
+	 *
+	 * _.eq('a', 'a');
+	 * // => true
+	 *
+	 * _.eq('a', Object('a'));
+	 * // => false
+	 *
+	 * _.eq(NaN, NaN);
+	 * // => true
+	 */
+	function eq(value, other) {
+	  return value === other || (value !== value && other !== other);
+	}
+
+	module.exports = eq;
+
+
+/***/ },
+/* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseRest = __webpack_require__(147),
+	    isIterateeCall = __webpack_require__(155);
+
+	/**
+	 * Creates a function like `_.assign`.
+	 *
+	 * @private
+	 * @param {Function} assigner The function to assign values.
+	 * @returns {Function} Returns the new assigner function.
+	 */
+	function createAssigner(assigner) {
+	  return baseRest(function(object, sources) {
+	    var index = -1,
+	        length = sources.length,
+	        customizer = length > 1 ? sources[length - 1] : undefined,
+	        guard = length > 2 ? sources[2] : undefined;
+
+	    customizer = (assigner.length > 3 && typeof customizer == 'function')
+	      ? (length--, customizer)
+	      : undefined;
+
+	    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+	      customizer = length < 3 ? undefined : customizer;
+	      length = 1;
+	    }
+	    object = Object(object);
+	    while (++index < length) {
+	      var source = sources[index];
+	      if (source) {
+	        assigner(object, source, index, customizer);
+	      }
+	    }
+	    return object;
+	  });
+	}
+
+	module.exports = createAssigner;
+
+
+/***/ },
+/* 147 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var identity = __webpack_require__(148),
+	    overRest = __webpack_require__(149),
+	    setToString = __webpack_require__(151);
+
+	/**
+	 * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+	 *
+	 * @private
+	 * @param {Function} func The function to apply a rest parameter to.
+	 * @param {number} [start=func.length-1] The start position of the rest parameter.
+	 * @returns {Function} Returns the new function.
+	 */
+	function baseRest(func, start) {
+	  return setToString(overRest(func, start, identity), func + '');
+	}
+
+	module.exports = baseRest;
+
+
+/***/ },
+/* 148 */
+/***/ function(module, exports) {
+
+	/**
+	 * This method returns the first argument it receives.
+	 *
+	 * @static
+	 * @since 0.1.0
+	 * @memberOf _
+	 * @category Util
+	 * @param {*} value Any value.
+	 * @returns {*} Returns `value`.
+	 * @example
+	 *
+	 * var object = { 'a': 1 };
+	 *
+	 * console.log(_.identity(object) === object);
+	 * // => true
+	 */
+	function identity(value) {
+	  return value;
+	}
+
+	module.exports = identity;
+
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var apply = __webpack_require__(150);
+
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max;
+
+	/**
+	 * A specialized version of `baseRest` which transforms the rest array.
+	 *
+	 * @private
+	 * @param {Function} func The function to apply a rest parameter to.
+	 * @param {number} [start=func.length-1] The start position of the rest parameter.
+	 * @param {Function} transform The rest array transform.
+	 * @returns {Function} Returns the new function.
+	 */
+	function overRest(func, start, transform) {
+	  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+	  return function() {
+	    var args = arguments,
+	        index = -1,
+	        length = nativeMax(args.length - start, 0),
+	        array = Array(length);
+
+	    while (++index < length) {
+	      array[index] = args[start + index];
+	    }
+	    index = -1;
+	    var otherArgs = Array(start + 1);
+	    while (++index < start) {
+	      otherArgs[index] = args[index];
+	    }
+	    otherArgs[start] = transform(array);
+	    return apply(func, this, otherArgs);
+	  };
+	}
+
+	module.exports = overRest;
+
+
+/***/ },
+/* 150 */
+/***/ function(module, exports) {
+
+	/**
+	 * A faster alternative to `Function#apply`, this function invokes `func`
+	 * with the `this` binding of `thisArg` and the arguments of `args`.
+	 *
+	 * @private
+	 * @param {Function} func The function to invoke.
+	 * @param {*} thisArg The `this` binding of `func`.
+	 * @param {Array} args The arguments to invoke `func` with.
+	 * @returns {*} Returns the result of `func`.
+	 */
+	function apply(func, thisArg, args) {
+	  switch (args.length) {
+	    case 0: return func.call(thisArg);
+	    case 1: return func.call(thisArg, args[0]);
+	    case 2: return func.call(thisArg, args[0], args[1]);
+	    case 3: return func.call(thisArg, args[0], args[1], args[2]);
+	  }
+	  return func.apply(thisArg, args);
+	}
+
+	module.exports = apply;
+
+
+/***/ },
+/* 151 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseSetToString = __webpack_require__(152),
+	    shortOut = __webpack_require__(154);
+
+	/**
+	 * Sets the `toString` method of `func` to return `string`.
+	 *
+	 * @private
+	 * @param {Function} func The function to modify.
+	 * @param {Function} string The `toString` result.
+	 * @returns {Function} Returns `func`.
+	 */
+	var setToString = shortOut(baseSetToString);
+
+	module.exports = setToString;
+
+
+/***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var constant = __webpack_require__(153),
+	    defineProperty = __webpack_require__(130),
+	    identity = __webpack_require__(148);
+
+	/**
+	 * The base implementation of `setToString` without support for hot loop shorting.
+	 *
+	 * @private
+	 * @param {Function} func The function to modify.
+	 * @param {Function} string The `toString` result.
+	 * @returns {Function} Returns `func`.
+	 */
+	var baseSetToString = !defineProperty ? identity : function(func, string) {
+	  return defineProperty(func, 'toString', {
+	    'configurable': true,
+	    'enumerable': false,
+	    'value': constant(string),
+	    'writable': true
+	  });
+	};
+
+	module.exports = baseSetToString;
+
+
+/***/ },
+/* 153 */
+/***/ function(module, exports) {
+
+	/**
+	 * Creates a function that returns `value`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 2.4.0
+	 * @category Util
+	 * @param {*} value The value to return from the new function.
+	 * @returns {Function} Returns the new constant function.
+	 * @example
+	 *
+	 * var objects = _.times(2, _.constant({ 'a': 1 }));
+	 *
+	 * console.log(objects);
+	 * // => [{ 'a': 1 }, { 'a': 1 }]
+	 *
+	 * console.log(objects[0] === objects[1]);
+	 * // => true
+	 */
+	function constant(value) {
+	  return function() {
+	    return value;
+	  };
+	}
+
+	module.exports = constant;
+
+
+/***/ },
+/* 154 */
+/***/ function(module, exports) {
+
+	/** Used to detect hot functions by number of calls within a span of milliseconds. */
+	var HOT_COUNT = 800,
+	    HOT_SPAN = 16;
+
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeNow = Date.now;
+
+	/**
+	 * Creates a function that'll short out and invoke `identity` instead
+	 * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
+	 * milliseconds.
+	 *
+	 * @private
+	 * @param {Function} func The function to restrict.
+	 * @returns {Function} Returns the new shortable function.
+	 */
+	function shortOut(func) {
+	  var count = 0,
+	      lastCalled = 0;
+
+	  return function() {
+	    var stamp = nativeNow(),
+	        remaining = HOT_SPAN - (stamp - lastCalled);
+
+	    lastCalled = stamp;
+	    if (remaining > 0) {
+	      if (++count >= HOT_COUNT) {
+	        return arguments[0];
+	      }
+	    } else {
+	      count = 0;
+	    }
+	    return func.apply(undefined, arguments);
+	  };
+	}
+
+	module.exports = shortOut;
+
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var eq = __webpack_require__(145),
+	    isArrayLike = __webpack_require__(156),
+	    isIndex = __webpack_require__(158),
+	    isObject = __webpack_require__(140);
+
+	/**
+	 * Checks if the given arguments are from an iteratee call.
+	 *
+	 * @private
+	 * @param {*} value The potential iteratee value argument.
+	 * @param {*} index The potential iteratee index or key argument.
+	 * @param {*} object The potential iteratee object argument.
+	 * @returns {boolean} Returns `true` if the arguments are from an iteratee call,
+	 *  else `false`.
+	 */
+	function isIterateeCall(value, index, object) {
+	  if (!isObject(object)) {
+	    return false;
+	  }
+	  var type = typeof index;
+	  if (type == 'number'
+	        ? (isArrayLike(object) && isIndex(index, object.length))
+	        : (type == 'string' && index in object)
+	      ) {
+	    return eq(object[index], value);
+	  }
+	  return false;
+	}
+
+	module.exports = isIterateeCall;
+
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isFunction = __webpack_require__(133),
+	    isLength = __webpack_require__(157);
+
+	/**
+	 * Checks if `value` is array-like. A value is considered array-like if it's
+	 * not a function and has a `value.length` that's an integer greater than or
+	 * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+	 * @example
+	 *
+	 * _.isArrayLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArrayLike(document.body.children);
+	 * // => true
+	 *
+	 * _.isArrayLike('abc');
+	 * // => true
+	 *
+	 * _.isArrayLike(_.noop);
+	 * // => false
+	 */
+	function isArrayLike(value) {
+	  return value != null && isLength(value.length) && !isFunction(value);
+	}
+
+	module.exports = isArrayLike;
+
+
+/***/ },
+/* 157 */
+/***/ function(module, exports) {
+
+	/** Used as references for various `Number` constants. */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This method is loosely based on
+	 * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 * @example
+	 *
+	 * _.isLength(3);
+	 * // => true
+	 *
+	 * _.isLength(Number.MIN_VALUE);
+	 * // => false
+	 *
+	 * _.isLength(Infinity);
+	 * // => false
+	 *
+	 * _.isLength('3');
+	 * // => false
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' &&
+	    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	module.exports = isLength;
+
+
+/***/ },
+/* 158 */
+/***/ function(module, exports) {
+
+	/** Used as references for various `Number` constants. */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+
+	/** Used to detect unsigned integer values. */
+	var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	  return !!length &&
+	    (typeof value == 'number' || reIsUint.test(value)) &&
+	    (value > -1 && value % 1 == 0 && value < length);
+	}
+
+	module.exports = isIndex;
+
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var arrayLikeKeys = __webpack_require__(160),
+	    baseKeysIn = __webpack_require__(173),
+	    isArrayLike = __webpack_require__(156);
+
+	/**
+	 * Creates an array of the own and inherited enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 3.0.0
+	 * @category Object
+	 * @param {Object} object The object to query.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keysIn(new Foo);
+	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+	 */
+	function keysIn(object) {
+	  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
+	}
+
+	module.exports = keysIn;
+
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseTimes = __webpack_require__(161),
+	    isArguments = __webpack_require__(162),
+	    isArray = __webpack_require__(165),
+	    isBuffer = __webpack_require__(166),
+	    isIndex = __webpack_require__(158),
+	    isTypedArray = __webpack_require__(169);
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Creates an array of the enumerable property names of the array-like `value`.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @param {boolean} inherited Specify returning inherited property names.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function arrayLikeKeys(value, inherited) {
+	  var isArr = isArray(value),
+	      isArg = !isArr && isArguments(value),
+	      isBuff = !isArr && !isArg && isBuffer(value),
+	      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
+	      skipIndexes = isArr || isArg || isBuff || isType,
+	      result = skipIndexes ? baseTimes(value.length, String) : [],
+	      length = result.length;
+
+	  for (var key in value) {
+	    if ((inherited || hasOwnProperty.call(value, key)) &&
+	        !(skipIndexes && (
+	           // Safari 9 has enumerable `arguments.length` in strict mode.
+	           key == 'length' ||
+	           // Node.js 0.10 has enumerable non-index properties on buffers.
+	           (isBuff && (key == 'offset' || key == 'parent')) ||
+	           // PhantomJS 2 has enumerable non-index properties on typed arrays.
+	           (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
+	           // Skip index properties.
+	           isIndex(key, length)
+	        ))) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = arrayLikeKeys;
+
+
+/***/ },
+/* 161 */
+/***/ function(module, exports) {
+
+	/**
+	 * The base implementation of `_.times` without support for iteratee shorthands
+	 * or max array length checks.
+	 *
+	 * @private
+	 * @param {number} n The number of times to invoke `iteratee`.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @returns {Array} Returns the array of results.
+	 */
+	function baseTimes(n, iteratee) {
+	  var index = -1,
+	      result = Array(n);
+
+	  while (++index < n) {
+	    result[index] = iteratee(index);
+	  }
+	  return result;
+	}
+
+	module.exports = baseTimes;
+
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseIsArguments = __webpack_require__(163),
+	    isObjectLike = __webpack_require__(164);
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Built-in value references. */
+	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+	/**
+	 * Checks if `value` is likely an `arguments` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+	 *  else `false`.
+	 * @example
+	 *
+	 * _.isArguments(function() { return arguments; }());
+	 * // => true
+	 *
+	 * _.isArguments([1, 2, 3]);
+	 * // => false
+	 */
+	var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+	  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+	    !propertyIsEnumerable.call(value, 'callee');
+	};
+
+	module.exports = isArguments;
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseGetTag = __webpack_require__(134),
+	    isObjectLike = __webpack_require__(164);
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]';
+
+	/**
+	 * The base implementation of `_.isArguments`.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+	 */
+	function baseIsArguments(value) {
+	  return isObjectLike(value) && baseGetTag(value) == argsTag;
+	}
+
+	module.exports = baseIsArguments;
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return value != null && typeof value == 'object';
+	}
+
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 165 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is classified as an `Array` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+	 * @example
+	 *
+	 * _.isArray([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArray(document.body.children);
+	 * // => false
+	 *
+	 * _.isArray('abc');
+	 * // => false
+	 *
+	 * _.isArray(_.noop);
+	 * // => false
+	 */
+	var isArray = Array.isArray;
+
+	module.exports = isArray;
+
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(136),
+	    stubFalse = __webpack_require__(168);
+
+	/** Detect free variable `exports`. */
+	var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+	/** Detect free variable `module`. */
+	var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+	/** Detect the popular CommonJS extension `module.exports`. */
+	var moduleExports = freeModule && freeModule.exports === freeExports;
+
+	/** Built-in value references. */
+	var Buffer = moduleExports ? root.Buffer : undefined;
+
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
+
+	/**
+	 * Checks if `value` is a buffer.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.3.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+	 * @example
+	 *
+	 * _.isBuffer(new Buffer(2));
+	 * // => true
+	 *
+	 * _.isBuffer(new Uint8Array(2));
+	 * // => false
+	 */
+	var isBuffer = nativeIsBuffer || stubFalse;
+
+	module.exports = isBuffer;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(167)(module)))
+
+/***/ },
+/* 167 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
+
+/***/ },
+/* 168 */
+/***/ function(module, exports) {
+
+	/**
+	 * This method returns `false`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.13.0
+	 * @category Util
+	 * @returns {boolean} Returns `false`.
+	 * @example
+	 *
+	 * _.times(2, _.stubFalse);
+	 * // => [false, false]
+	 */
+	function stubFalse() {
+	  return false;
+	}
+
+	module.exports = stubFalse;
+
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseIsTypedArray = __webpack_require__(170),
+	    baseUnary = __webpack_require__(171),
+	    nodeUtil = __webpack_require__(172);
+
+	/* Node.js helper references. */
+	var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+
+	/**
+	 * Checks if `value` is classified as a typed array.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 3.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+	 * @example
+	 *
+	 * _.isTypedArray(new Uint8Array);
+	 * // => true
+	 *
+	 * _.isTypedArray([]);
+	 * // => false
+	 */
+	var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+
+	module.exports = isTypedArray;
+
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseGetTag = __webpack_require__(134),
+	    isLength = __webpack_require__(157),
+	    isObjectLike = __webpack_require__(164);
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]',
+	    arrayTag = '[object Array]',
+	    boolTag = '[object Boolean]',
+	    dateTag = '[object Date]',
+	    errorTag = '[object Error]',
+	    funcTag = '[object Function]',
+	    mapTag = '[object Map]',
+	    numberTag = '[object Number]',
+	    objectTag = '[object Object]',
+	    regexpTag = '[object RegExp]',
+	    setTag = '[object Set]',
+	    stringTag = '[object String]',
+	    weakMapTag = '[object WeakMap]';
+
+	var arrayBufferTag = '[object ArrayBuffer]',
+	    dataViewTag = '[object DataView]',
+	    float32Tag = '[object Float32Array]',
+	    float64Tag = '[object Float64Array]',
+	    int8Tag = '[object Int8Array]',
+	    int16Tag = '[object Int16Array]',
+	    int32Tag = '[object Int32Array]',
+	    uint8Tag = '[object Uint8Array]',
+	    uint8ClampedTag = '[object Uint8ClampedArray]',
+	    uint16Tag = '[object Uint16Array]',
+	    uint32Tag = '[object Uint32Array]';
+
+	/** Used to identify `toStringTag` values of typed arrays. */
+	var typedArrayTags = {};
+	typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+	typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+	typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+	typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+	typedArrayTags[uint32Tag] = true;
+	typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+	typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+	typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
+	typedArrayTags[errorTag] = typedArrayTags[funcTag] =
+	typedArrayTags[mapTag] = typedArrayTags[numberTag] =
+	typedArrayTags[objectTag] = typedArrayTags[regexpTag] =
+	typedArrayTags[setTag] = typedArrayTags[stringTag] =
+	typedArrayTags[weakMapTag] = false;
+
+	/**
+	 * The base implementation of `_.isTypedArray` without Node.js optimizations.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+	 */
+	function baseIsTypedArray(value) {
+	  return isObjectLike(value) &&
+	    isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+	}
+
+	module.exports = baseIsTypedArray;
+
+
+/***/ },
+/* 171 */
+/***/ function(module, exports) {
+
+	/**
+	 * The base implementation of `_.unary` without support for storing metadata.
+	 *
+	 * @private
+	 * @param {Function} func The function to cap arguments for.
+	 * @returns {Function} Returns the new capped function.
+	 */
+	function baseUnary(func) {
+	  return function(value) {
+	    return func(value);
+	  };
+	}
+
+	module.exports = baseUnary;
+
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(137);
+
+	/** Detect free variable `exports`. */
+	var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+	/** Detect free variable `module`. */
+	var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+	/** Detect the popular CommonJS extension `module.exports`. */
+	var moduleExports = freeModule && freeModule.exports === freeExports;
+
+	/** Detect free variable `process` from Node.js. */
+	var freeProcess = moduleExports && freeGlobal.process;
+
+	/** Used to access faster Node.js helpers. */
+	var nodeUtil = (function() {
+	  try {
+	    return freeProcess && freeProcess.binding && freeProcess.binding('util');
+	  } catch (e) {}
+	}());
+
+	module.exports = nodeUtil;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(167)(module)))
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(140),
+	    isPrototype = __webpack_require__(174),
+	    nativeKeysIn = __webpack_require__(175);
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function baseKeysIn(object) {
+	  if (!isObject(object)) {
+	    return nativeKeysIn(object);
+	  }
+	  var isProto = isPrototype(object),
+	      result = [];
+
+	  for (var key in object) {
+	    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = baseKeysIn;
+
+
+/***/ },
+/* 174 */
+/***/ function(module, exports) {
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Checks if `value` is likely a prototype object.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+	 */
+	function isPrototype(value) {
+	  var Ctor = value && value.constructor,
+	      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+	  return value === proto;
+	}
+
+	module.exports = isPrototype;
+
+
+/***/ },
+/* 175 */
+/***/ function(module, exports) {
+
+	/**
+	 * This function is like
+	 * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+	 * except that it includes inherited enumerable properties.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function nativeKeysIn(object) {
+	  var result = [];
+	  if (object != null) {
+	    for (var key in Object(object)) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = nativeKeysIn;
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _SInteractiveDemoComponent = __webpack_require__(96);
+	var _SInteractiveDemoComponent = __webpack_require__(177);
 
 	var _SInteractiveDemoComponent2 = _interopRequireDefault(_SInteractiveDemoComponent);
 
@@ -7845,7 +11889,7 @@
 	exports.default = _SInteractiveDemoComponent2.default.define('s-interactive-demo', _SInteractiveDemoComponent2.default);
 
 /***/ },
-/* 96 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -7888,7 +11932,7 @@
 
 	var _throttle2 = _interopRequireDefault(_throttle);
 
-	var _prependChild = __webpack_require__(97);
+	var _prependChild = __webpack_require__(178);
 
 	var _prependChild2 = _interopRequireDefault(_prependChild);
 
@@ -7991,7 +12035,18 @@
 
 				// listen for update from parts
 				this.addEventListener('update', function (e) {
-					_this2._iframeBody.querySelector('#' + e.target.id).innerHTML = e.detail;
+					var code = e.detail.data;
+					// handle how to inject code
+					switch (e.detail.language) {
+						case 'css':
+							code = '<style>' + code + '</style>';
+							break;
+						case 'js':
+						case 'javascript':
+							code = '<script>' + code + '</script>';
+							break;
+					}
+					_this2._iframeBody.querySelector('#' + e.target.id).innerHTML = code;
 					_this2._updatePreviewHeight();
 				});
 			}
@@ -8109,7 +12164,7 @@
 	exports.default = SInteractiveDemoComponent;
 
 /***/ },
-/* 97 */
+/* 178 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -8137,14 +12192,14 @@
 	}
 
 /***/ },
-/* 98 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _SCodemirrorComponent = __webpack_require__(99);
+	var _SCodemirrorComponent = __webpack_require__(180);
 
 	var _SCodemirrorComponent2 = _interopRequireDefault(_SCodemirrorComponent);
 
@@ -8153,7 +12208,7 @@
 	exports.default = _SCodemirrorComponent2.default.define('s-codemirror', _SCodemirrorComponent2.default);
 
 /***/ },
-/* 99 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	Object.defineProperty(exports, "__esModule", {
@@ -8174,11 +12229,11 @@
 
 	var _throttle2 = _interopRequireDefault(_throttle);
 
-	var _codemirror = __webpack_require__(100);
+	var _codemirror = __webpack_require__(181);
 
 	var _codemirror2 = _interopRequireDefault(_codemirror);
 
-	var _clipboard = __webpack_require__(101);
+	var _clipboard = __webpack_require__(182);
 
 	var _clipboard2 = _interopRequireDefault(_clipboard);
 
@@ -8190,8 +12245,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(109);
-	__webpack_require__(113);
+	__webpack_require__(190);
+	__webpack_require__(194);
 
 	var SInteractiveDemoPartComponent = function (_SWebComponent) {
 		_inherits(SInteractiveDemoPartComponent, _SWebComponent);
@@ -8213,6 +12268,11 @@
 			value: function componentWillMount() {
 				_get(SInteractiveDemoPartComponent.prototype.__proto__ || Object.getPrototypeOf(SInteractiveDemoPartComponent.prototype), 'componentWillMount', this).call(this);
 				this._updateTimeout = null;
+				this._refs = {};
+				// handle language alias
+				if (!this.props.mode) {
+					this.props.mode = this.props.language;
+				}
 			}
 
 			/**
@@ -8228,14 +12288,32 @@
 
 				// get the content
 				var content = this.innerHTML;
+				this.innerHTML = '';
+				this._refs.name = document.createElement('span');
+				this._refs.name.className = this._componentNameDash + '__name cm-s-' + this.props.theme;
+				this._refs.actions = document.createElement('div');
+				this._refs.actions.className = this._componentNameDash + '__actions';
+				this._refs.run = document.createElement('button');
+				this._refs.run.className = this._componentNameDash + '__run';
+				this._refs.run.innerHTML = 'Run';
+				this._refs.copy = document.createElement('button');
+				this._refs.copy.className = this._componentNameDash + '__copy';
+				this._refs.copy.innerHTML = 'Copy to clipboard';
 
-				// inject the html needed
-				this.innerHTML = '\n\t\t\t<span class="' + this._componentNameDash + '__id cm-s-' + this.props.theme + '"></span>\n\t\t\t<button class="' + this._componentNameDash + '__copy">Copy to clipboard</button>\n\t\t';
+				// init accept
+				this._initAccept();
 
-				this._idElm = this.querySelector('.' + this._componentNameDash + '__id');
-				this._copyElm = this.querySelector('.' + this._componentNameDash + '__copy');
+				// append elements to actions
+				this._refs.actions.appendChild(this._refs.copy);
+				if (this.props.updateOn === 'run') {
+					this._refs.actions.appendChild(this._refs.run);
+				}
+				// append elements to the item itself
+				this.appendChild(this._refs.name);
+				this.appendChild(this._refs.actions);
 
-				this._idElm.innerHTML = this.props.id;
+				// set the name
+				this._refs.name.innerHTML = this.props.title || this.props.id;
 
 				// init clipboard
 				this._initClipboard();
@@ -8253,12 +12331,105 @@
 				// auto format
 				this._autoFormatCode();
 
-				// listen editor change
-				this._codemirror.on('change', function (cm, change) {
-					clearTimeout(_this2._updateTimeout);
-					_this2._updateTimeout = setTimeout(_this2._notifyUpdate.bind(_this2), 300);
+				// handle update
+				switch (this.props.updateOn) {
+					case 'run':
+						// init run
+						this._initRun();
+						break;
+					case 'change':
+					default:
+						// listen editor change
+						this._codemirror.on('change', function (cm, change) {
+							clearTimeout(_this2._updateTimeout);
+							_this2._updateTimeout = setTimeout(_this2._processCode.bind(_this2), 300);
+						});
+						break;
+				}
+				// first update
+				this._processCode();
+			}
+
+			/**
+	   * Component will receive prop
+	   * @definition 		SWebComponent.componentWillReceiveProp
+	   */
+
+		}, {
+			key: 'componentWillReceiveProp',
+			value: function componentWillReceiveProp(name, newVal, oldVal) {
+				switch (name) {
+					case 'mode':
+						this._codemirror.setOption('mode', newVal);
+						this._autoFormatCode();
+						if (this._refs.modes) {
+							this._refs.modes.value = newVal;
+						}
+						this.setProp('language', newVal);
+						break;
+					case 'language':
+						this.setProp('mode', newVal);
+						break;
+					default:
+						// try to set to codemirror the new prop
+						try {
+							console.log(name, newVal);
+							this._codemirror.setOption(name, newVal);
+						} catch (e) {}
+						break;
+				}
+			}
+
+			/**
+	   * Init run
+	   */
+
+		}, {
+			key: '_initRun',
+			value: function _initRun() {
+				var _this3 = this;
+
+				this._refs.run.addEventListener('click', function (e) {
+					// notify udpate
+					_this3._processCode();
 				});
-				this._notifyUpdate();
+			}
+
+			/**
+	   * Init accept
+	   */
+
+		}, {
+			key: '_initAccept',
+			value: function _initAccept() {
+				var _this4 = this;
+
+				if (!this.props.accept) return;
+				// split accept
+				var modes = this.props.accept;
+				if (typeof modes === 'string') {
+					modes = modes.split(',').map(function (mode) {
+						return mode.trim();
+					});
+				}
+				// create the select
+				this._refs.modes = document.createElement('select');
+				this._refs.modes.className = this._componentNameDash + '__modes';
+				// add options
+				modes.forEach(function (mode) {
+					var option = document.createElement('option');
+					option.value = mode;
+					option.innerHTML = mode;
+					// append to select
+					_this4._refs.modes.appendChild(option);
+				});
+				// append select to actions
+				this._refs.actions.appendChild(this._refs.modes);
+				// listen for change
+				this._refs.modes.addEventListener('change', function (e) {
+					// set the mode
+					_this4.setProp('mode', e.target.value);
+				});
 			}
 
 			/**
@@ -8268,15 +12439,17 @@
 		}, {
 			key: '_initClipboard',
 			value: function _initClipboard() {
-				var _this3 = this;
+				var _this5 = this;
 
-				this._clipboard = new _clipboard2.default(this._copyElm, {
+				this._clipboard = new _clipboard2.default(this._refs.copy, {
 					text: function text(trigger) {
-						_this3._copyElm.innerHTML = 'Copied!';
+						_this5._refs.copy.classList.add('success');
+						_this5._refs.copy.innerHTML = 'Copied!';
 						setTimeout(function () {
-							_this3._copyElm.innerHTML = 'Copy to clipboard';
+							_this5._refs.copy.classList.remove('success');
+							_this5._refs.copy.innerHTML = 'Copy to clipboard';
 						}, 1000);
-						return _this3._codemirror.getValue();
+						return _this5._codemirror.getValue();
 					}
 				});
 			}
@@ -8293,27 +12466,101 @@
 			}
 
 			/**
+	   * Process code
+	   * @return  	{Promise}		A promise with the processes code
+	   */
+
+		}, {
+			key: '_processCode',
+			value: function _processCode() {
+				var _this6 = this;
+
+				var promise = new Promise(function (resolve, reject) {
+					// check if need to compile
+					if (_this6.props.compile) {
+						// handle run button
+						_this6._refs.run.innerHTML = 'Compiling...';
+						_this6._refs.run.disabled = true;
+						// compile
+						var fn = _this6.props.compile.bind(_this6);
+						resolve(fn(_this6.value, _this6));
+					} else {
+						resolve(_this6.value);
+					}
+				});
+				promise.then(function (code) {
+					// handle run button
+					_this6._refs.run.disabled = false;
+					if (_this6.props.compile) {
+						_this6._refs.run.innerHTML = 'Compiled!';
+					}
+					_this6._notifyUpdate(code);
+					_this6._refs.run.classList.add('success');
+					setTimeout(function () {
+						_this6._refs.run.innerHTML = 'Run';
+						_this6._refs.run.classList.remove('success');
+					}, 500);
+				}, function (error) {
+					_this6._refs.run.innerHTML = 'Error while compiling...';
+					console.error('Compiling error', error);
+					_this6._refs.run.classList.add('error');
+					setTimeout(function () {
+						_this6._refs.run.innerHTML = 'Run';
+						_this6._refs.run.disabled = false;
+						_this6._refs.run.classList.remove('error');
+					}, 1000);
+				});
+				// return promise
+				return promise;
+			}
+
+			/**
 	   * Notify that an update has been made in the editor
 	   */
 
 		}, {
 			key: '_notifyUpdate',
-			value: function _notifyUpdate() {
-				var code = this._codemirror.getValue();
-				// switch on mode to provide the correct code
-				switch (this.props.mode) {
-					case 'css':
-						code = '<style>' + code + '</style>';
-						break;
-					case 'js':
-					case 'javascript':
-						code = '<script>' + code + '</script>';
-						break;
-				}
+			value: function _notifyUpdate(code) {
 				// dispatch an event
-				this.dispatchComponentEvent('update', code);
+				this.dispatchComponentEvent('update', {
+					language: typeof code === 'string' ? this.props.language : code.language,
+					data: typeof code === 'string' ? code : code.data
+				});
 				// on update callback
-				this.props.onUpdate && this.props.onUpdate(code);
+				this.props.onUpdate && this.props.onUpdate({
+					language: typeof code === 'string' ? this.props.language : code.language,
+					data: typeof code === 'string' ? code : code.data
+				});
+			}
+
+			/**
+	   * Get the mode
+	   */
+
+		}, {
+			key: 'mode',
+			get: function get() {
+				return this.props.mode;
+			}
+
+			/**
+	   * Get the language
+	   */
+
+		}, {
+			key: 'language',
+			get: function get() {
+				return this.props.language;
+			}
+
+			/**
+	   * Get editor value
+	   */
+
+		}, {
+			key: 'value',
+			get: function get() {
+				return this._codemirror.getValue();
 			}
 		}], [{
 			key: 'css',
@@ -8324,7 +12571,7 @@
 	   * @definition 		SWebComponent.css
 	   */
 			value: function css(componentName, componentNameDash) {
-				return '\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t.CodeMirror{font-family:monospace;height:300px;color:#000}.CodeMirror-lines{padding:4px 0}.CodeMirror pre{padding:0 4px}.CodeMirror-gutter-filler,.CodeMirror-scrollbar-filler{background-color:#fff}.CodeMirror-gutters{border-right:1px solid #ddd;background-color:#f7f7f7;white-space:nowrap}.CodeMirror-linenumber{padding:0 3px 0 5px;min-width:20px;text-align:right;color:#999;white-space:nowrap}.CodeMirror-guttermarker{color:#000}.CodeMirror-guttermarker-subtle{color:#999}.CodeMirror-cursor{border-left:1px solid #000;border-right:none;width:0}.CodeMirror div.CodeMirror-secondarycursor{border-left:1px solid silver}.cm-fat-cursor .CodeMirror-cursor{width:auto;border:0!important;background:#7e7}.cm-fat-cursor div.CodeMirror-cursors{z-index:1}.cm-animate-fat-cursor{width:auto;border:0;-webkit-animation:blink 1.06s steps(1) infinite;-moz-animation:blink 1.06s steps(1) infinite;animation:blink 1.06s steps(1) infinite;background-color:#7e7}@-moz-keyframes blink{50%{background-color:transparent}}@-webkit-keyframes blink{50%{background-color:transparent}}@keyframes blink{50%{background-color:transparent}}.cm-tab{display:inline-block;text-decoration:inherit}.CodeMirror-rulers{position:absolute;left:0;right:0;top:-50px;bottom:-20px;overflow:hidden}.CodeMirror-ruler{border-left:1px solid #ccc;top:0;bottom:0;position:absolute}.cm-s-default .cm-header{color:#00f}.cm-s-default .cm-quote{color:#090}.cm-negative{color:#d44}.cm-positive{color:#292}.cm-header,.cm-strong{font-weight:700}.cm-em{font-style:italic}.cm-link{text-decoration:underline}.cm-strikethrough{text-decoration:line-through}.cm-s-default .cm-keyword{color:#708}.cm-s-default .cm-atom{color:#219}.cm-s-default .cm-number{color:#164}.cm-s-default .cm-def{color:#00f}.cm-s-default .cm-variable-2{color:#05a}.cm-s-default .cm-variable-3{color:#085}.cm-s-default .cm-comment{color:#a50}.cm-s-default .cm-string{color:#a11}.cm-s-default .cm-string-2{color:#f50}.cm-s-default .cm-meta,.cm-s-default .cm-qualifier{color:#555}.cm-s-default .cm-builtin{color:#30a}.cm-s-default .cm-bracket{color:#997}.cm-s-default .cm-tag{color:#170}.cm-s-default .cm-attribute{color:#00c}.cm-s-default .cm-hr{color:#999}.cm-s-default .cm-link{color:#00c}.cm-invalidchar,.cm-s-default .cm-error{color:red}.CodeMirror-composing{border-bottom:2px solid}div.CodeMirror span.CodeMirror-matchingbracket{color:#0f0}div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}.CodeMirror-matchingtag{background:rgba(255,150,0,.3)}.CodeMirror-activeline-background{background:#e8f2ff}.CodeMirror{position:relative;overflow:hidden;background:#fff}.CodeMirror-scroll{overflow:scroll!important;margin-bottom:-30px;margin-right:-30px;padding-bottom:30px;height:100%;outline:0;position:relative}.CodeMirror-sizer{position:relative;border-right:30px solid transparent}.CodeMirror-gutter-filler,.CodeMirror-hscrollbar,.CodeMirror-scrollbar-filler,.CodeMirror-vscrollbar{position:absolute;z-index:6;display:none}.CodeMirror-vscrollbar{right:0;top:0;overflow-x:hidden;overflow-y:scroll}.CodeMirror-hscrollbar{bottom:0;left:0;overflow-y:hidden;overflow-x:scroll}.CodeMirror-scrollbar-filler{right:0;bottom:0}.CodeMirror-gutter-filler{left:0;bottom:0}.CodeMirror-gutters{position:absolute;left:0;top:0;min-height:100%;z-index:3}.CodeMirror-gutter{white-space:normal;height:100%;display:inline-block;vertical-align:top;margin-bottom:-30px}.CodeMirror-gutter-wrapper{position:absolute;z-index:4;background:0 0!important;border:none!important;-webkit-user-select:none;-moz-user-select:none;user-select:none}.CodeMirror-gutter-background{position:absolute;top:0;bottom:0;z-index:4}.CodeMirror-gutter-elt{position:absolute;cursor:default;z-index:4}.CodeMirror-lines{cursor:text;min-height:1px}.CodeMirror pre{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;border-width:0;background:0 0;font-family:inherit;font-size:inherit;margin:0;white-space:pre;word-wrap:normal;line-height:inherit;color:inherit;z-index:2;position:relative;overflow:visible;-webkit-tap-highlight-color:transparent;-webkit-font-variant-ligatures:none;font-variant-ligatures:none}.CodeMirror-wrap pre{word-wrap:break-word;white-space:pre-wrap;word-break:normal}.CodeMirror-linebackground{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0}.CodeMirror-linewidget{position:relative;z-index:2;overflow:auto}.CodeMirror-code{outline:0}.CodeMirror-gutter,.CodeMirror-gutters,.CodeMirror-linenumber,.CodeMirror-scroll,.CodeMirror-sizer{-moz-box-sizing:content-box;box-sizing:content-box}.CodeMirror-measure{position:absolute;width:100%;height:0;overflow:hidden;visibility:hidden}.CodeMirror-cursor{position:absolute;pointer-events:none}.CodeMirror-measure pre{position:static}div.CodeMirror-cursors{visibility:hidden;position:relative;z-index:3}.CodeMirror-focused div.CodeMirror-cursors,div.CodeMirror-dragcursors{visibility:visible}.CodeMirror-selected{background:#d9d9d9}.CodeMirror-focused .CodeMirror-selected,.CodeMirror-line::selection,.CodeMirror-line>span::selection,.CodeMirror-line>span>span::selection{background:#d7d4f0}.CodeMirror-crosshair{cursor:crosshair}.CodeMirror-line::-moz-selection,.CodeMirror-line>span::-moz-selection,.CodeMirror-line>span>span::-moz-selection{background:#d7d4f0}.cm-searching{background:#ffa;background:rgba(255,255,0,.4)}.cm-force-border{padding-right:.1px}@media print{.CodeMirror div.CodeMirror-cursors{visibility:hidden}}.cm-tab-wrap-hack:after{content:\'\'}span.CodeMirror-selectedtext{background:0 0}\n\t\t\t' + componentNameDash + ' .CodeMirror{\n\t\t\t\theight:100%;\n\t\t\t}\n\t\t\t' + componentNameDash + ':after {\n\t\t\t\tborder-top:1px solid rgba(255,255,255,.5);\n\t\t\t}\n\t\t\t' + componentNameDash + ' + ' + componentNameDash + ':after {\n\t\t\t\tdisplay: block;\n\t\t\t\tcontent:\'\';\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tborder-left:1px solid rgba(255,255,255,.5);\n\t\t\t\tz-index:10;\n\t\t\t\tmix-blend-mode:overlay;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t' + componentNameDash + ' .CodeMirror-lines {\n\t\t\t\tpadding: 40px 10px 10px 0;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__copy {\n\t\t\t\tbackground-image:url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'#37A0CE\' d=\'M15.143 13.244l.837-2.244 2.698 5.641-5.678 2.502.805-2.23s-8.055-3.538-7.708-10.913c2.715 5.938 9.046 7.244 9.046 7.244zm8.857-7.244v18h-18v-6h-6v-18h18v6h6zm-2 2h-12.112c-.562-.578-1.08-1.243-1.521-2h7.633v-4h-14v14h4v-3.124c.6.961 1.287 1.823 2 2.576v6.548h14v-14z\'/></svg>");\n\t\t\t\tbackground-color:transparent;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tbackground-size:12px;\n\t\t\t\tbackground-position:0 50%;\n\t\t\t\tpadding:5px 10px 5px 20px;\n\t\t\t\tcolor: #37A0CE;\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:10px; right:10px;\n\t\t\t\tz-index:90;\n\t\t\t\tborder:none;\n\t\t\t\tdisplay:none;\n\t\t\t\tcursor:pointer;\n\t\t\t\tfont-size:12px;\n\t\t\t\tfont-family:monospace;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__id {\n\t\t\t\tbox-sizing:border-box;\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%;\n\t\t\t\tz-index:10;\n\t\t\t\tdisplay:block;\n\t\t\t\tfont-size:16px;\n\t\t\t\tfont-family:monospace;\n\t\t\t\tpadding:10px 20px 10px 20px;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__id.cm-s-default {\n\t\t\t\tbackground-color: #f7f7f7;\n\t\t\t\tborder-bottom: 1px solid #ddd;\n\t\t\t}\n\t\t\t' + componentNameDash + ':hover .' + componentNameDash + '__copy {\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t';
+				return '\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay:block;\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t.CodeMirror{font-family:monospace;height:300px;color:#000}.CodeMirror-lines{padding:4px 0}.CodeMirror pre{padding:0 4px}.CodeMirror-gutter-filler,.CodeMirror-scrollbar-filler{background-color:#fff}.CodeMirror-gutters{border-right:1px solid #ddd;background-color:#f7f7f7;white-space:nowrap}.CodeMirror-linenumber{padding:0 3px 0 5px;min-width:20px;text-align:right;color:#999;white-space:nowrap}.CodeMirror-guttermarker{color:#000}.CodeMirror-guttermarker-subtle{color:#999}.CodeMirror-cursor{border-left:1px solid #000;border-right:none;width:0}.CodeMirror div.CodeMirror-secondarycursor{border-left:1px solid silver}.cm-fat-cursor .CodeMirror-cursor{width:auto;border:0!important;background:#7e7}.cm-fat-cursor div.CodeMirror-cursors{z-index:1}.cm-animate-fat-cursor{width:auto;border:0;-webkit-animation:blink 1.06s steps(1) infinite;-moz-animation:blink 1.06s steps(1) infinite;animation:blink 1.06s steps(1) infinite;background-color:#7e7}@-moz-keyframes blink{50%{background-color:transparent}}@-webkit-keyframes blink{50%{background-color:transparent}}@keyframes blink{50%{background-color:transparent}}.cm-tab{display:inline-block;text-decoration:inherit}.CodeMirror-rulers{position:absolute;left:0;right:0;top:-50px;bottom:-20px;overflow:hidden}.CodeMirror-ruler{border-left:1px solid #ccc;top:0;bottom:0;position:absolute}.cm-s-default .cm-header{color:#00f}.cm-s-default .cm-quote{color:#090}.cm-negative{color:#d44}.cm-positive{color:#292}.cm-header,.cm-strong{font-weight:700}.cm-em{font-style:italic}.cm-link{text-decoration:underline}.cm-strikethrough{text-decoration:line-through}.cm-s-default .cm-keyword{color:#708}.cm-s-default .cm-atom{color:#219}.cm-s-default .cm-number{color:#164}.cm-s-default .cm-def{color:#00f}.cm-s-default .cm-variable-2{color:#05a}.cm-s-default .cm-variable-3{color:#085}.cm-s-default .cm-comment{color:#a50}.cm-s-default .cm-string{color:#a11}.cm-s-default .cm-string-2{color:#f50}.cm-s-default .cm-meta,.cm-s-default .cm-qualifier{color:#555}.cm-s-default .cm-builtin{color:#30a}.cm-s-default .cm-bracket{color:#997}.cm-s-default .cm-tag{color:#170}.cm-s-default .cm-attribute{color:#00c}.cm-s-default .cm-hr{color:#999}.cm-s-default .cm-link{color:#00c}.cm-invalidchar,.cm-s-default .cm-error{color:red}.CodeMirror-composing{border-bottom:2px solid}div.CodeMirror span.CodeMirror-matchingbracket{color:#0f0}div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}.CodeMirror-matchingtag{background:rgba(255,150,0,.3)}.CodeMirror-activeline-background{background:#e8f2ff}.CodeMirror{position:relative;overflow:hidden;background:#fff}.CodeMirror-scroll{overflow:scroll!important;margin-bottom:-30px;margin-right:-30px;padding-bottom:30px;height:100%;outline:0;position:relative}.CodeMirror-sizer{position:relative;border-right:30px solid transparent}.CodeMirror-gutter-filler,.CodeMirror-hscrollbar,.CodeMirror-scrollbar-filler,.CodeMirror-vscrollbar{position:absolute;z-index:6;display:none}.CodeMirror-vscrollbar{right:0;top:0;overflow-x:hidden;overflow-y:scroll}.CodeMirror-hscrollbar{bottom:0;left:0;overflow-y:hidden;overflow-x:scroll}.CodeMirror-scrollbar-filler{right:0;bottom:0}.CodeMirror-gutter-filler{left:0;bottom:0}.CodeMirror-gutters{position:absolute;left:0;top:0;min-height:100%;z-index:3}.CodeMirror-gutter{white-space:normal;height:100%;display:inline-block;vertical-align:top;margin-bottom:-30px}.CodeMirror-gutter-wrapper{position:absolute;z-index:4;background:0 0!important;border:none!important;-webkit-user-select:none;-moz-user-select:none;user-select:none}.CodeMirror-gutter-background{position:absolute;top:0;bottom:0;z-index:4}.CodeMirror-gutter-elt{position:absolute;cursor:default;z-index:4}.CodeMirror-lines{cursor:text;min-height:1px}.CodeMirror pre{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;border-width:0;background:0 0;font-family:inherit;font-size:inherit;margin:0;white-space:pre;word-wrap:normal;line-height:inherit;color:inherit;z-index:2;position:relative;overflow:visible;-webkit-tap-highlight-color:transparent;-webkit-font-variant-ligatures:none;font-variant-ligatures:none}.CodeMirror-wrap pre{word-wrap:break-word;white-space:pre-wrap;word-break:normal}.CodeMirror-linebackground{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0}.CodeMirror-linewidget{position:relative;z-index:2;overflow:auto}.CodeMirror-code{outline:0}.CodeMirror-gutter,.CodeMirror-gutters,.CodeMirror-linenumber,.CodeMirror-scroll,.CodeMirror-sizer{-moz-box-sizing:content-box;box-sizing:content-box}.CodeMirror-measure{position:absolute;width:100%;height:0;overflow:hidden;visibility:hidden}.CodeMirror-cursor{position:absolute;pointer-events:none}.CodeMirror-measure pre{position:static}div.CodeMirror-cursors{visibility:hidden;position:relative;z-index:3}.CodeMirror-focused div.CodeMirror-cursors,div.CodeMirror-dragcursors{visibility:visible}.CodeMirror-selected{background:#d9d9d9}.CodeMirror-focused .CodeMirror-selected,.CodeMirror-line::selection,.CodeMirror-line>span::selection,.CodeMirror-line>span>span::selection{background:#d7d4f0}.CodeMirror-crosshair{cursor:crosshair}.CodeMirror-line::-moz-selection,.CodeMirror-line>span::-moz-selection,.CodeMirror-line>span>span::-moz-selection{background:#d7d4f0}.cm-searching{background:#ffa;background:rgba(255,255,0,.4)}.cm-force-border{padding-right:.1px}@media print{.CodeMirror div.CodeMirror-cursors{visibility:hidden}}.cm-tab-wrap-hack:after{content:\'\'}span.CodeMirror-selectedtext{background:0 0}\n\t\t\t' + componentNameDash + ' .CodeMirror{\n\t\t\t\theight:100%;\n\t\t\t}\n\t\t\t' + componentNameDash + ':after {\n\t\t\t\tborder-top:1px solid rgba(255,255,255,.5);\n\t\t\t}\n\t\t\t' + componentNameDash + ' + ' + componentNameDash + ':after {\n\t\t\t\tdisplay: block;\n\t\t\t\tcontent:\'\';\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tborder-left:1px solid rgba(255,255,255,.5);\n\t\t\t\tz-index:10;\n\t\t\t\tmix-blend-mode:overlay;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t' + componentNameDash + ' .CodeMirror-lines {\n\t\t\t\tpadding: 40px 10px 10px 0;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__actions {\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:10px; right:10px;\n\t\t\t\tz-index:90;\n\t\t\t\tdisplay:none;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__actions button {\n\t\t\t\tbackground-color:transparent;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tbackground-size:12px;\n\t\t\t\tbackground-position:0 50%;\n\t\t\t\tpadding:0 10px 0 20px;\n\t\t\t\tmargin-left:10px;\n\t\t\t\tcolor: #37A0CE;\n\t\t\t\toutline:none;\n\t\t\t\tborder:none;\n\t\t\t\tcursor:pointer;\n\t\t\t\tfont-size:12px;\n\t\t\t\tfont-family:monospace;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__actions button:disabled {\n\t\t\t\topacity:.65;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__actions button.error {\n\t\t\t\tcolor: red;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__actions button.success {\n\t\t\t\tcolor: #d2fc0f;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__modes {\n\t\t\t\tmargin-right: 10px;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__name {\n\t\t\t\tbox-sizing:border-box;\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:10px; left:20px;\n\t\t\t\twidth:100%;\n\t\t\t\tz-index:10;\n\t\t\t\tdisplay:block;\n\t\t\t\tfont-size:16px;\n\t\t\t\tfont-family:monospace;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__copy {\n\t\t\t\tbackground-image:url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'#37A0CE\' d=\'M15.143 13.244l.837-2.244 2.698 5.641-5.678 2.502.805-2.23s-8.055-3.538-7.708-10.913c2.715 5.938 9.046 7.244 9.046 7.244zm8.857-7.244v18h-18v-6h-6v-18h18v6h6zm-2 2h-12.112c-.562-.578-1.08-1.243-1.521-2h7.633v-4h-14v14h4v-3.124c.6.961 1.287 1.823 2 2.576v6.548h14v-14z\'/></svg>");\n\t\t\t}\n\t\t\t.' + componentNameDash + '__run {\n\t\t\t\tbackground-image:url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'#37A0CE\' d=\'M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0-2C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zM9 17V7l9 5-9 5z\'/></svg>");\n\t\t\t}\n\t\t\t.' + componentNameDash + '__name.cm-s-default {\n\t\t\t\tbackground-color: #f7f7f7;\n\t\t\t\tborder-bottom: 1px solid #ddd;\n\t\t\t}\n\t\t\t' + componentNameDash + ':hover .' + componentNameDash + '__actions {\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t';
 			}
 
 			/**
@@ -8347,7 +12594,14 @@
 	     * @prop
 	     * @type 		{String}
 	     */
-					mode: 'htmlmixed',
+					mode: null,
+
+					/**
+	     * Specify the language used inside the demo (alias to mode)
+	     * @prop
+	     * @type 		{String}
+	     */
+					language: 'htmlmixed',
 
 					/**
 	     * Specify the id of the part
@@ -8403,7 +12657,36 @@
 	     * @prop
 	     * @type 	 	{Function}
 	     */
-					onUpdate: null
+					onUpdate: null,
+
+					/**
+	     * Compile the code before injecting it into the iframe
+	     * @prop
+	     * @type 		{Function}
+	     */
+					compile: null,
+
+					/**
+	     * Specify when to trigger the update
+	     * @prop
+	     * @type 		{String}
+	     * @values 		change|run
+	     */
+					updateOn: 'change',
+
+					/**
+	     * Set the title of the editor
+	     * @prop¨
+	     * @type 		{String}
+	     */
+					title: null,
+
+					/**
+	     * Set the accepted modes (comma separated modes)
+	     * @prop
+	     * @type 		{String}
+	     */
+					accept: null
 				};
 			}
 		}, {
@@ -8419,7 +12702,7 @@
 	exports.default = SInteractiveDemoPartComponent;
 
 /***/ },
-/* 100 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -9400,12 +13683,12 @@
 	var bidiOrdering = (function() {
 	  // Character types for codepoints 0 to 0xff
 	  var lowTypes = "bbbbbbbbbtstwsbbbbbbbbbbbbbbssstwNN%%%NNNNNN,N,N1111111111NNNNNNNLLLLLLLLLLLLLLLLLLLLLLLLLLNNNNNNLLLLLLLLLLLLLLLLLLLLLLLLLLNNNNbbbbbbsbbbbbbbbbbbbbbbbbbbbbbbbbb,N%%%%NNNNLNNNNN%%11NLNNN1LNNNNNLLLLLLLLLLLLLLLLLLLLLLLNLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLN"
-	  // Character types for codepoints 0x600 to 0x6ff
-	  var arabicTypes = "rrrrrrrrrrrr,rNNmmmmmmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmmmmmmmmrrrrrrrnnnnnnnnnn%nnrrrmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmmmmmmmmmmmmmNmmmm"
+	  // Character types for codepoints 0x600 to 0x6f9
+	  var arabicTypes = "nnnnnnNNr%%r,rNNmmmmmmmmmmmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmmmmmmmmmmmmmmmnnnnnnnnnn%nnrrrmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmnNmmmmmmrrmmNmmmmrr1111111111"
 	  function charType(code) {
 	    if (code <= 0xf7) { return lowTypes.charAt(code) }
 	    else if (0x590 <= code && code <= 0x5f4) { return "R" }
-	    else if (0x600 <= code && code <= 0x6ed) { return arabicTypes.charAt(code - 0x600) }
+	    else if (0x600 <= code && code <= 0x6f9) { return arabicTypes.charAt(code - 0x600) }
 	    else if (0x6ee <= code && code <= 0x8ac) { return "r" }
 	    else if (0x2000 <= code && code <= 0x200b) { return "w" }
 	    else if (code == 0x200c) { return "b" }
@@ -11711,7 +15994,7 @@
 	  }
 	}
 
-	function NativeScrollbars(place, scroll, cm) {
+	var NativeScrollbars = function(place, scroll, cm) {
 	  this.cm = cm
 	  var vert = this.vert = elt("div", [elt("div", null, null, "min-width: 1px")], "CodeMirror-vscrollbar")
 	  var horiz = this.horiz = elt("div", [elt("div", null, null, "height: 100%; min-height: 1px")], "CodeMirror-hscrollbar")
@@ -11727,91 +16010,92 @@
 	  this.checkedZeroWidth = false
 	  // Need to set a minimum width to see the scrollbar on IE7 (but must not set it on IE8).
 	  if (ie && ie_version < 8) { this.horiz.style.minHeight = this.vert.style.minWidth = "18px" }
-	}
+	};
 
-	NativeScrollbars.prototype = copyObj({
-	  update: function(measure) {
-	    var needsH = measure.scrollWidth > measure.clientWidth + 1
-	    var needsV = measure.scrollHeight > measure.clientHeight + 1
-	    var sWidth = measure.nativeBarWidth
+	NativeScrollbars.prototype.update = function (measure) {
+	  var needsH = measure.scrollWidth > measure.clientWidth + 1
+	  var needsV = measure.scrollHeight > measure.clientHeight + 1
+	  var sWidth = measure.nativeBarWidth
 
-	    if (needsV) {
-	      this.vert.style.display = "block"
-	      this.vert.style.bottom = needsH ? sWidth + "px" : "0"
-	      var totalHeight = measure.viewHeight - (needsH ? sWidth : 0)
-	      // A bug in IE8 can cause this value to be negative, so guard it.
-	      this.vert.firstChild.style.height =
-	        Math.max(0, measure.scrollHeight - measure.clientHeight + totalHeight) + "px"
-	    } else {
-	      this.vert.style.display = ""
-	      this.vert.firstChild.style.height = "0"
-	    }
-
-	    if (needsH) {
-	      this.horiz.style.display = "block"
-	      this.horiz.style.right = needsV ? sWidth + "px" : "0"
-	      this.horiz.style.left = measure.barLeft + "px"
-	      var totalWidth = measure.viewWidth - measure.barLeft - (needsV ? sWidth : 0)
-	      this.horiz.firstChild.style.width =
-	        (measure.scrollWidth - measure.clientWidth + totalWidth) + "px"
-	    } else {
-	      this.horiz.style.display = ""
-	      this.horiz.firstChild.style.width = "0"
-	    }
-
-	    if (!this.checkedZeroWidth && measure.clientHeight > 0) {
-	      if (sWidth == 0) { this.zeroWidthHack() }
-	      this.checkedZeroWidth = true
-	    }
-
-	    return {right: needsV ? sWidth : 0, bottom: needsH ? sWidth : 0}
-	  },
-	  setScrollLeft: function(pos) {
-	    if (this.horiz.scrollLeft != pos) { this.horiz.scrollLeft = pos }
-	    if (this.disableHoriz) { this.enableZeroWidthBar(this.horiz, this.disableHoriz) }
-	  },
-	  setScrollTop: function(pos) {
-	    if (this.vert.scrollTop != pos) { this.vert.scrollTop = pos }
-	    if (this.disableVert) { this.enableZeroWidthBar(this.vert, this.disableVert) }
-	  },
-	  zeroWidthHack: function() {
-	    var w = mac && !mac_geMountainLion ? "12px" : "18px"
-	    this.horiz.style.height = this.vert.style.width = w
-	    this.horiz.style.pointerEvents = this.vert.style.pointerEvents = "none"
-	    this.disableHoriz = new Delayed
-	    this.disableVert = new Delayed
-	  },
-	  enableZeroWidthBar: function(bar, delay) {
-	    bar.style.pointerEvents = "auto"
-	    function maybeDisable() {
-	      // To find out whether the scrollbar is still visible, we
-	      // check whether the element under the pixel in the bottom
-	      // left corner of the scrollbar box is the scrollbar box
-	      // itself (when the bar is still visible) or its filler child
-	      // (when the bar is hidden). If it is still visible, we keep
-	      // it enabled, if it's hidden, we disable pointer events.
-	      var box = bar.getBoundingClientRect()
-	      var elt = document.elementFromPoint(box.left + 1, box.bottom - 1)
-	      if (elt != bar) { bar.style.pointerEvents = "none" }
-	      else { delay.set(1000, maybeDisable) }
-	    }
-	    delay.set(1000, maybeDisable)
-	  },
-	  clear: function() {
-	    var parent = this.horiz.parentNode
-	    parent.removeChild(this.horiz)
-	    parent.removeChild(this.vert)
+	  if (needsV) {
+	    this.vert.style.display = "block"
+	    this.vert.style.bottom = needsH ? sWidth + "px" : "0"
+	    var totalHeight = measure.viewHeight - (needsH ? sWidth : 0)
+	    // A bug in IE8 can cause this value to be negative, so guard it.
+	    this.vert.firstChild.style.height =
+	      Math.max(0, measure.scrollHeight - measure.clientHeight + totalHeight) + "px"
+	  } else {
+	    this.vert.style.display = ""
+	    this.vert.firstChild.style.height = "0"
 	  }
-	}, NativeScrollbars.prototype)
 
-	function NullScrollbars() {}
+	  if (needsH) {
+	    this.horiz.style.display = "block"
+	    this.horiz.style.right = needsV ? sWidth + "px" : "0"
+	    this.horiz.style.left = measure.barLeft + "px"
+	    var totalWidth = measure.viewWidth - measure.barLeft - (needsV ? sWidth : 0)
+	    this.horiz.firstChild.style.width =
+	      (measure.scrollWidth - measure.clientWidth + totalWidth) + "px"
+	  } else {
+	    this.horiz.style.display = ""
+	    this.horiz.firstChild.style.width = "0"
+	  }
 
-	NullScrollbars.prototype = copyObj({
-	  update: function() { return {bottom: 0, right: 0} },
-	  setScrollLeft: function() {},
-	  setScrollTop: function() {},
-	  clear: function() {}
-	}, NullScrollbars.prototype)
+	  if (!this.checkedZeroWidth && measure.clientHeight > 0) {
+	    if (sWidth == 0) { this.zeroWidthHack() }
+	    this.checkedZeroWidth = true
+	  }
+
+	  return {right: needsV ? sWidth : 0, bottom: needsH ? sWidth : 0}
+	};
+
+	NativeScrollbars.prototype.setScrollLeft = function (pos) {
+	  if (this.horiz.scrollLeft != pos) { this.horiz.scrollLeft = pos }
+	  if (this.disableHoriz) { this.enableZeroWidthBar(this.horiz, this.disableHoriz) }
+	};
+
+	NativeScrollbars.prototype.setScrollTop = function (pos) {
+	  if (this.vert.scrollTop != pos) { this.vert.scrollTop = pos }
+	  if (this.disableVert) { this.enableZeroWidthBar(this.vert, this.disableVert) }
+	};
+
+	NativeScrollbars.prototype.zeroWidthHack = function () {
+	  var w = mac && !mac_geMountainLion ? "12px" : "18px"
+	  this.horiz.style.height = this.vert.style.width = w
+	  this.horiz.style.pointerEvents = this.vert.style.pointerEvents = "none"
+	  this.disableHoriz = new Delayed
+	  this.disableVert = new Delayed
+	};
+
+	NativeScrollbars.prototype.enableZeroWidthBar = function (bar, delay) {
+	  bar.style.pointerEvents = "auto"
+	  function maybeDisable() {
+	    // To find out whether the scrollbar is still visible, we
+	    // check whether the element under the pixel in the bottom
+	    // left corner of the scrollbar box is the scrollbar box
+	    // itself (when the bar is still visible) or its filler child
+	    // (when the bar is hidden). If it is still visible, we keep
+	    // it enabled, if it's hidden, we disable pointer events.
+	    var box = bar.getBoundingClientRect()
+	    var elt = document.elementFromPoint(box.left + 1, box.bottom - 1)
+	    if (elt != bar) { bar.style.pointerEvents = "none" }
+	    else { delay.set(1000, maybeDisable) }
+	  }
+	  delay.set(1000, maybeDisable)
+	};
+
+	NativeScrollbars.prototype.clear = function () {
+	  var parent = this.horiz.parentNode
+	  parent.removeChild(this.horiz)
+	  parent.removeChild(this.vert)
+	};
+
+	var NullScrollbars = function () {};
+
+	NullScrollbars.prototype.update = function () { return {bottom: 0, right: 0} };
+	NullScrollbars.prototype.setScrollLeft = function () {};
+	NullScrollbars.prototype.setScrollTop = function () {};
+	NullScrollbars.prototype.clear = function () {};
 
 	function updateScrollbars(cm, measure) {
 	  if (!measure) { measure = measureForScrollbars(cm) }
@@ -12390,7 +16674,7 @@
 
 	// DISPLAY DRAWING
 
-	function DisplayUpdate(cm, viewport, force) {
+	var DisplayUpdate = function(cm, viewport, force) {
 	  var display = cm.display
 
 	  this.viewport = viewport
@@ -12403,18 +16687,18 @@
 	  this.force = force
 	  this.dims = getDimensions(cm)
 	  this.events = []
-	}
+	};
 
-	DisplayUpdate.prototype.signal = function(emitter, type) {
+	DisplayUpdate.prototype.signal = function (emitter, type) {
 	  if (hasHandler(emitter, type))
 	    { this.events.push(arguments) }
-	}
-	DisplayUpdate.prototype.finish = function() {
-	  var this$1 = this;
+	};
+	DisplayUpdate.prototype.finish = function () {
+	    var this$1 = this;
 
 	  for (var i = 0; i < this.events.length; i++)
 	    { signal.apply(null, this$1.events[i]) }
-	}
+	};
 
 	function maybeClipScrollbars(cm) {
 	  var display = cm.display
@@ -15542,7 +19826,7 @@
 	    for (var i = newBreaks.length - 1; i >= 0; i--)
 	      { replaceRange(cm.doc, val, newBreaks[i], Pos(newBreaks[i].line, newBreaks[i].ch + val.length)) }
 	  })
-	  option("specialChars", /[\u0000-\u001f\u007f\u00ad\u200b-\u200f\u2028\u2029\ufeff]/g, function (cm, val, old) {
+	  option("specialChars", /[\u0000-\u001f\u007f\u00ad\u061c\u200b-\u200f\u2028\u2029\ufeff]/g, function (cm, val, old) {
 	    cm.state.specialChars = new RegExp(val.source + (val.test("\t") ? "" : "|\t"), "g")
 	    if (old != Init) { cm.refresh() }
 	  })
@@ -15632,7 +19916,7 @@
 	function guttersChanged(cm) {
 	  updateGutters(cm)
 	  regChange(cm)
-	  setTimeout(function () { return alignHorizontally(cm); }, 20)
+	  alignHorizontally(cm)
 	}
 
 	function dragDropChanged(cm, value, old) {
@@ -15687,7 +19971,6 @@
 	  themeChanged(this)
 	  if (options.lineWrapping)
 	    { this.display.wrapper.className += " CodeMirror-wrap" }
-	  if (options.autofocus && !mobile) { display.input.focus() }
 	  initScrollbars(this)
 
 	  this.state = {
@@ -15705,6 +19988,8 @@
 	    keySeq: null,  // Unfinished key sequence
 	    specialChars: null
 	  }
+
+	  if (options.autofocus && !mobile) { display.input.focus() }
 
 	  // Override magic textarea content restore that IE sometimes does
 	  // on our hidden textarea on reload
@@ -16061,6 +20346,7 @@
 	      options[option] = value
 	      if (optionHandlers.hasOwnProperty(option))
 	        { operation(this, optionHandlers[option])(this, value, old) }
+	      signal(this, "optionChange", this, option)
 	    },
 
 	    getOption: function(option) {return this.options[option]},
@@ -16568,331 +20854,333 @@
 
 	// CONTENTEDITABLE INPUT STYLE
 
-	function ContentEditableInput(cm) {
+	var ContentEditableInput = function(cm) {
 	  this.cm = cm
 	  this.lastAnchorNode = this.lastAnchorOffset = this.lastFocusNode = this.lastFocusOffset = null
 	  this.polling = new Delayed()
 	  this.composing = null
 	  this.gracePeriod = false
 	  this.readDOMTimeout = null
-	}
+	};
 
-	ContentEditableInput.prototype = copyObj({
-	  init: function(display) {
+	ContentEditableInput.prototype.init = function (display) {
 	    var this$1 = this;
 
-	    var input = this, cm = input.cm
-	    var div = input.div = display.lineDiv
-	    disableBrowserMagic(div, cm.options.spellcheck)
+	  var input = this, cm = input.cm
+	  var div = input.div = display.lineDiv
+	  disableBrowserMagic(div, cm.options.spellcheck)
 
-	    on(div, "paste", function (e) {
-	      if (signalDOMEvent(cm, e) || handlePaste(e, cm)) { return }
-	      // IE doesn't fire input events, so we schedule a read for the pasted content in this way
-	      if (ie_version <= 11) { setTimeout(operation(cm, function () {
-	        if (!input.pollContent()) { regChange(cm) }
-	      }), 20) }
-	    })
+	  on(div, "paste", function (e) {
+	    if (signalDOMEvent(cm, e) || handlePaste(e, cm)) { return }
+	    // IE doesn't fire input events, so we schedule a read for the pasted content in this way
+	    if (ie_version <= 11) { setTimeout(operation(cm, function () {
+	      if (!input.pollContent()) { regChange(cm) }
+	    }), 20) }
+	  })
 
-	    on(div, "compositionstart", function (e) {
-	      this$1.composing = {data: e.data}
-	    })
-	    on(div, "compositionupdate", function (e) {
-	      if (!this$1.composing) { this$1.composing = {data: e.data} }
-	    })
-	    on(div, "compositionend", function (e) {
-	      if (this$1.composing) {
-	        if (e.data != this$1.composing.data) { this$1.readFromDOMSoon() }
-	        this$1.composing = null
+	  on(div, "compositionstart", function (e) {
+	    this$1.composing = {data: e.data, done: false}
+	  })
+	  on(div, "compositionupdate", function (e) {
+	    if (!this$1.composing) { this$1.composing = {data: e.data, done: false} }
+	  })
+	  on(div, "compositionend", function (e) {
+	    if (this$1.composing) {
+	      if (e.data != this$1.composing.data) { this$1.readFromDOMSoon() }
+	      this$1.composing.done = true
+	    }
+	  })
+
+	  on(div, "touchstart", function () { return input.forceCompositionEnd(); })
+
+	  on(div, "input", function () {
+	    if (!this$1.composing) { this$1.readFromDOMSoon() }
+	  })
+
+	  function onCopyCut(e) {
+	    if (signalDOMEvent(cm, e)) { return }
+	    if (cm.somethingSelected()) {
+	      setLastCopied({lineWise: false, text: cm.getSelections()})
+	      if (e.type == "cut") { cm.replaceSelection("", null, "cut") }
+	    } else if (!cm.options.lineWiseCopyCut) {
+	      return
+	    } else {
+	      var ranges = copyableRanges(cm)
+	      setLastCopied({lineWise: true, text: ranges.text})
+	      if (e.type == "cut") {
+	        cm.operation(function () {
+	          cm.setSelections(ranges.ranges, 0, sel_dontScroll)
+	          cm.replaceSelection("", null, "cut")
+	        })
 	      }
-	    })
-
-	    on(div, "touchstart", function () { return input.forceCompositionEnd(); })
-
-	    on(div, "input", function () {
-	      if (!this$1.composing) { this$1.readFromDOMSoon() }
-	    })
-
-	    function onCopyCut(e) {
-	      if (signalDOMEvent(cm, e)) { return }
-	      if (cm.somethingSelected()) {
-	        setLastCopied({lineWise: false, text: cm.getSelections()})
-	        if (e.type == "cut") { cm.replaceSelection("", null, "cut") }
-	      } else if (!cm.options.lineWiseCopyCut) {
+	    }
+	    if (e.clipboardData) {
+	      e.clipboardData.clearData()
+	      var content = lastCopied.text.join("\n")
+	      // iOS exposes the clipboard API, but seems to discard content inserted into it
+	      e.clipboardData.setData("Text", content)
+	      if (e.clipboardData.getData("Text") == content) {
+	        e.preventDefault()
 	        return
-	      } else {
-	        var ranges = copyableRanges(cm)
-	        setLastCopied({lineWise: true, text: ranges.text})
-	        if (e.type == "cut") {
-	          cm.operation(function () {
-	            cm.setSelections(ranges.ranges, 0, sel_dontScroll)
-	            cm.replaceSelection("", null, "cut")
-	          })
-	        }
 	      }
-	      if (e.clipboardData) {
-	        e.clipboardData.clearData()
-	        var content = lastCopied.text.join("\n")
-	        // iOS exposes the clipboard API, but seems to discard content inserted into it
-	        e.clipboardData.setData("Text", content)
-	        if (e.clipboardData.getData("Text") == content) {
-	          e.preventDefault()
-	          return
-	        }
-	      }
-	      // Old-fashioned briefly-focus-a-textarea hack
-	      var kludge = hiddenTextarea(), te = kludge.firstChild
-	      cm.display.lineSpace.insertBefore(kludge, cm.display.lineSpace.firstChild)
-	      te.value = lastCopied.text.join("\n")
-	      var hadFocus = document.activeElement
-	      selectInput(te)
-	      setTimeout(function () {
-	        cm.display.lineSpace.removeChild(kludge)
-	        hadFocus.focus()
-	        if (hadFocus == div) { input.showPrimarySelection() }
-	      }, 50)
 	    }
-	    on(div, "copy", onCopyCut)
-	    on(div, "cut", onCopyCut)
-	  },
+	    // Old-fashioned briefly-focus-a-textarea hack
+	    var kludge = hiddenTextarea(), te = kludge.firstChild
+	    cm.display.lineSpace.insertBefore(kludge, cm.display.lineSpace.firstChild)
+	    te.value = lastCopied.text.join("\n")
+	    var hadFocus = document.activeElement
+	    selectInput(te)
+	    setTimeout(function () {
+	      cm.display.lineSpace.removeChild(kludge)
+	      hadFocus.focus()
+	      if (hadFocus == div) { input.showPrimarySelection() }
+	    }, 50)
+	  }
+	  on(div, "copy", onCopyCut)
+	  on(div, "cut", onCopyCut)
+	};
 
-	  prepareSelection: function() {
-	    var result = prepareSelection(this.cm, false)
-	    result.focus = this.cm.state.focused
-	    return result
-	  },
+	ContentEditableInput.prototype.prepareSelection = function () {
+	  var result = prepareSelection(this.cm, false)
+	  result.focus = this.cm.state.focused
+	  return result
+	};
 
-	  showSelection: function(info, takeFocus) {
-	    if (!info || !this.cm.display.view.length) { return }
-	    if (info.focus || takeFocus) { this.showPrimarySelection() }
-	    this.showMultipleSelections(info)
-	  },
+	ContentEditableInput.prototype.showSelection = function (info, takeFocus) {
+	  if (!info || !this.cm.display.view.length) { return }
+	  if (info.focus || takeFocus) { this.showPrimarySelection() }
+	  this.showMultipleSelections(info)
+	};
 
-	  showPrimarySelection: function() {
-	    var sel = window.getSelection(), prim = this.cm.doc.sel.primary()
-	    var curAnchor = domToPos(this.cm, sel.anchorNode, sel.anchorOffset)
-	    var curFocus = domToPos(this.cm, sel.focusNode, sel.focusOffset)
-	    if (curAnchor && !curAnchor.bad && curFocus && !curFocus.bad &&
-	        cmp(minPos(curAnchor, curFocus), prim.from()) == 0 &&
-	        cmp(maxPos(curAnchor, curFocus), prim.to()) == 0)
-	      { return }
+	ContentEditableInput.prototype.showPrimarySelection = function () {
+	  var sel = window.getSelection(), prim = this.cm.doc.sel.primary()
+	  var curAnchor = domToPos(this.cm, sel.anchorNode, sel.anchorOffset)
+	  var curFocus = domToPos(this.cm, sel.focusNode, sel.focusOffset)
+	  if (curAnchor && !curAnchor.bad && curFocus && !curFocus.bad &&
+	      cmp(minPos(curAnchor, curFocus), prim.from()) == 0 &&
+	      cmp(maxPos(curAnchor, curFocus), prim.to()) == 0)
+	    { return }
 
-	    var start = posToDOM(this.cm, prim.from())
-	    var end = posToDOM(this.cm, prim.to())
-	    if (!start && !end) { return }
+	  var start = posToDOM(this.cm, prim.from())
+	  var end = posToDOM(this.cm, prim.to())
+	  if (!start && !end) { return }
 
-	    var view = this.cm.display.view
-	    var old = sel.rangeCount && sel.getRangeAt(0)
-	    if (!start) {
-	      start = {node: view[0].measure.map[2], offset: 0}
-	    } else if (!end) { // FIXME dangerously hacky
-	      var measure = view[view.length - 1].measure
-	      var map = measure.maps ? measure.maps[measure.maps.length - 1] : measure.map
-	      end = {node: map[map.length - 1], offset: map[map.length - 2] - map[map.length - 3]}
-	    }
+	  var view = this.cm.display.view
+	  var old = sel.rangeCount && sel.getRangeAt(0)
+	  if (!start) {
+	    start = {node: view[0].measure.map[2], offset: 0}
+	  } else if (!end) { // FIXME dangerously hacky
+	    var measure = view[view.length - 1].measure
+	    var map = measure.maps ? measure.maps[measure.maps.length - 1] : measure.map
+	    end = {node: map[map.length - 1], offset: map[map.length - 2] - map[map.length - 3]}
+	  }
 
-	    var rng
-	    try { rng = range(start.node, start.offset, end.offset, end.node) }
-	    catch(e) {} // Our model of the DOM might be outdated, in which case the range we try to set can be impossible
-	    if (rng) {
-	      if (!gecko && this.cm.state.focused) {
-	        sel.collapse(start.node, start.offset)
-	        if (!rng.collapsed) {
-	          sel.removeAllRanges()
-	          sel.addRange(rng)
-	        }
-	      } else {
+	  var rng
+	  try { rng = range(start.node, start.offset, end.offset, end.node) }
+	  catch(e) {} // Our model of the DOM might be outdated, in which case the range we try to set can be impossible
+	  if (rng) {
+	    if (!gecko && this.cm.state.focused) {
+	      sel.collapse(start.node, start.offset)
+	      if (!rng.collapsed) {
 	        sel.removeAllRanges()
 	        sel.addRange(rng)
 	      }
-	      if (old && sel.anchorNode == null) { sel.addRange(old) }
-	      else if (gecko) { this.startGracePeriod() }
+	    } else {
+	      sel.removeAllRanges()
+	      sel.addRange(rng)
 	    }
-	    this.rememberSelection()
-	  },
+	    if (old && sel.anchorNode == null) { sel.addRange(old) }
+	    else if (gecko) { this.startGracePeriod() }
+	  }
+	  this.rememberSelection()
+	};
 
-	  startGracePeriod: function() {
+	ContentEditableInput.prototype.startGracePeriod = function () {
 	    var this$1 = this;
 
-	    clearTimeout(this.gracePeriod)
-	    this.gracePeriod = setTimeout(function () {
-	      this$1.gracePeriod = false
-	      if (this$1.selectionChanged())
-	        { this$1.cm.operation(function () { return this$1.cm.curOp.selectionChanged = true; }) }
-	    }, 20)
-	  },
+	  clearTimeout(this.gracePeriod)
+	  this.gracePeriod = setTimeout(function () {
+	    this$1.gracePeriod = false
+	    if (this$1.selectionChanged())
+	      { this$1.cm.operation(function () { return this$1.cm.curOp.selectionChanged = true; }) }
+	  }, 20)
+	};
 
-	  showMultipleSelections: function(info) {
-	    removeChildrenAndAdd(this.cm.display.cursorDiv, info.cursors)
-	    removeChildrenAndAdd(this.cm.display.selectionDiv, info.selection)
-	  },
+	ContentEditableInput.prototype.showMultipleSelections = function (info) {
+	  removeChildrenAndAdd(this.cm.display.cursorDiv, info.cursors)
+	  removeChildrenAndAdd(this.cm.display.selectionDiv, info.selection)
+	};
 
-	  rememberSelection: function() {
-	    var sel = window.getSelection()
-	    this.lastAnchorNode = sel.anchorNode; this.lastAnchorOffset = sel.anchorOffset
-	    this.lastFocusNode = sel.focusNode; this.lastFocusOffset = sel.focusOffset
-	  },
+	ContentEditableInput.prototype.rememberSelection = function () {
+	  var sel = window.getSelection()
+	  this.lastAnchorNode = sel.anchorNode; this.lastAnchorOffset = sel.anchorOffset
+	  this.lastFocusNode = sel.focusNode; this.lastFocusOffset = sel.focusOffset
+	};
 
-	  selectionInEditor: function() {
-	    var sel = window.getSelection()
-	    if (!sel.rangeCount) { return false }
-	    var node = sel.getRangeAt(0).commonAncestorContainer
-	    return contains(this.div, node)
-	  },
+	ContentEditableInput.prototype.selectionInEditor = function () {
+	  var sel = window.getSelection()
+	  if (!sel.rangeCount) { return false }
+	  var node = sel.getRangeAt(0).commonAncestorContainer
+	  return contains(this.div, node)
+	};
 
-	  focus: function() {
-	    if (this.cm.options.readOnly != "nocursor") {
-	      if (!this.selectionInEditor())
-	        { this.showSelection(this.prepareSelection(), true) }
-	      this.div.focus()
-	    }
-	  },
-	  blur: function() { this.div.blur() },
-	  getField: function() { return this.div },
-
-	  supportsTouch: function() { return true },
-
-	  receivedFocus: function() {
-	    var input = this
-	    if (this.selectionInEditor())
-	      { this.pollSelection() }
-	    else
-	      { runInOp(this.cm, function () { return input.cm.curOp.selectionChanged = true; }) }
-
-	    function poll() {
-	      if (input.cm.state.focused) {
-	        input.pollSelection()
-	        input.polling.set(input.cm.options.pollInterval, poll)
-	      }
-	    }
-	    this.polling.set(this.cm.options.pollInterval, poll)
-	  },
-
-	  selectionChanged: function() {
-	    var sel = window.getSelection()
-	    return sel.anchorNode != this.lastAnchorNode || sel.anchorOffset != this.lastAnchorOffset ||
-	      sel.focusNode != this.lastFocusNode || sel.focusOffset != this.lastFocusOffset
-	  },
-
-	  pollSelection: function() {
-	    if (!this.composing && this.readDOMTimeout == null && !this.gracePeriod && this.selectionChanged()) {
-	      var sel = window.getSelection(), cm = this.cm
-	      this.rememberSelection()
-	      var anchor = domToPos(cm, sel.anchorNode, sel.anchorOffset)
-	      var head = domToPos(cm, sel.focusNode, sel.focusOffset)
-	      if (anchor && head) { runInOp(cm, function () {
-	        setSelection(cm.doc, simpleSelection(anchor, head), sel_dontScroll)
-	        if (anchor.bad || head.bad) { cm.curOp.selectionChanged = true }
-	      }) }
-	    }
-	  },
-
-	  pollContent: function() {
-	    if (this.readDOMTimeout != null) {
-	      clearTimeout(this.readDOMTimeout)
-	      this.readDOMTimeout = null
-	    }
-
-	    var cm = this.cm, display = cm.display, sel = cm.doc.sel.primary()
-	    var from = sel.from(), to = sel.to()
-	    if (from.ch == 0 && from.line > cm.firstLine())
-	      { from = Pos(from.line - 1, getLine(cm.doc, from.line - 1).length) }
-	    if (to.ch == getLine(cm.doc, to.line).text.length && to.line < cm.lastLine())
-	      { to = Pos(to.line + 1, 0) }
-	    if (from.line < display.viewFrom || to.line > display.viewTo - 1) { return false }
-
-	    var fromIndex, fromLine, fromNode
-	    if (from.line == display.viewFrom || (fromIndex = findViewIndex(cm, from.line)) == 0) {
-	      fromLine = lineNo(display.view[0].line)
-	      fromNode = display.view[0].node
-	    } else {
-	      fromLine = lineNo(display.view[fromIndex].line)
-	      fromNode = display.view[fromIndex - 1].node.nextSibling
-	    }
-	    var toIndex = findViewIndex(cm, to.line)
-	    var toLine, toNode
-	    if (toIndex == display.view.length - 1) {
-	      toLine = display.viewTo - 1
-	      toNode = display.lineDiv.lastChild
-	    } else {
-	      toLine = lineNo(display.view[toIndex + 1].line) - 1
-	      toNode = display.view[toIndex + 1].node.previousSibling
-	    }
-
-	    if (!fromNode) { return false }
-	    var newText = cm.doc.splitLines(domTextBetween(cm, fromNode, toNode, fromLine, toLine))
-	    var oldText = getBetween(cm.doc, Pos(fromLine, 0), Pos(toLine, getLine(cm.doc, toLine).text.length))
-	    while (newText.length > 1 && oldText.length > 1) {
-	      if (lst(newText) == lst(oldText)) { newText.pop(); oldText.pop(); toLine-- }
-	      else if (newText[0] == oldText[0]) { newText.shift(); oldText.shift(); fromLine++ }
-	      else { break }
-	    }
-
-	    var cutFront = 0, cutEnd = 0
-	    var newTop = newText[0], oldTop = oldText[0], maxCutFront = Math.min(newTop.length, oldTop.length)
-	    while (cutFront < maxCutFront && newTop.charCodeAt(cutFront) == oldTop.charCodeAt(cutFront))
-	      { ++cutFront }
-	    var newBot = lst(newText), oldBot = lst(oldText)
-	    var maxCutEnd = Math.min(newBot.length - (newText.length == 1 ? cutFront : 0),
-	                             oldBot.length - (oldText.length == 1 ? cutFront : 0))
-	    while (cutEnd < maxCutEnd &&
-	           newBot.charCodeAt(newBot.length - cutEnd - 1) == oldBot.charCodeAt(oldBot.length - cutEnd - 1))
-	      { ++cutEnd }
-
-	    newText[newText.length - 1] = newBot.slice(0, newBot.length - cutEnd).replace(/^\u200b+/, "")
-	    newText[0] = newText[0].slice(cutFront).replace(/\u200b+$/, "")
-
-	    var chFrom = Pos(fromLine, cutFront)
-	    var chTo = Pos(toLine, oldText.length ? lst(oldText).length - cutEnd : 0)
-	    if (newText.length > 1 || newText[0] || cmp(chFrom, chTo)) {
-	      replaceRange(cm.doc, newText, chFrom, chTo, "+input")
-	      return true
-	    }
-	  },
-
-	  ensurePolled: function() {
-	    this.forceCompositionEnd()
-	  },
-	  reset: function() {
-	    this.forceCompositionEnd()
-	  },
-	  forceCompositionEnd: function() {
-	    if (!this.composing) { return }
-	    this.composing = null
-	    if (!this.pollContent()) { regChange(this.cm) }
-	    this.div.blur()
+	ContentEditableInput.prototype.focus = function () {
+	  if (this.cm.options.readOnly != "nocursor") {
+	    if (!this.selectionInEditor())
+	      { this.showSelection(this.prepareSelection(), true) }
 	    this.div.focus()
-	  },
-	  readFromDOMSoon: function() {
+	  }
+	};
+	ContentEditableInput.prototype.blur = function () { this.div.blur() };
+	ContentEditableInput.prototype.getField = function () { return this.div };
+
+	ContentEditableInput.prototype.supportsTouch = function () { return true };
+
+	ContentEditableInput.prototype.receivedFocus = function () {
+	  var input = this
+	  if (this.selectionInEditor())
+	    { this.pollSelection() }
+	  else
+	    { runInOp(this.cm, function () { return input.cm.curOp.selectionChanged = true; }) }
+
+	  function poll() {
+	    if (input.cm.state.focused) {
+	      input.pollSelection()
+	      input.polling.set(input.cm.options.pollInterval, poll)
+	    }
+	  }
+	  this.polling.set(this.cm.options.pollInterval, poll)
+	};
+
+	ContentEditableInput.prototype.selectionChanged = function () {
+	  var sel = window.getSelection()
+	  return sel.anchorNode != this.lastAnchorNode || sel.anchorOffset != this.lastAnchorOffset ||
+	    sel.focusNode != this.lastFocusNode || sel.focusOffset != this.lastFocusOffset
+	};
+
+	ContentEditableInput.prototype.pollSelection = function () {
+	  if (!this.composing && this.readDOMTimeout == null && !this.gracePeriod && this.selectionChanged()) {
+	    var sel = window.getSelection(), cm = this.cm
+	    this.rememberSelection()
+	    var anchor = domToPos(cm, sel.anchorNode, sel.anchorOffset)
+	    var head = domToPos(cm, sel.focusNode, sel.focusOffset)
+	    if (anchor && head) { runInOp(cm, function () {
+	      setSelection(cm.doc, simpleSelection(anchor, head), sel_dontScroll)
+	      if (anchor.bad || head.bad) { cm.curOp.selectionChanged = true }
+	    }) }
+	  }
+	};
+
+	ContentEditableInput.prototype.pollContent = function () {
+	  if (this.readDOMTimeout != null) {
+	    clearTimeout(this.readDOMTimeout)
+	    this.readDOMTimeout = null
+	  }
+
+	  var cm = this.cm, display = cm.display, sel = cm.doc.sel.primary()
+	  var from = sel.from(), to = sel.to()
+	  if (from.ch == 0 && from.line > cm.firstLine())
+	    { from = Pos(from.line - 1, getLine(cm.doc, from.line - 1).length) }
+	  if (to.ch == getLine(cm.doc, to.line).text.length && to.line < cm.lastLine())
+	    { to = Pos(to.line + 1, 0) }
+	  if (from.line < display.viewFrom || to.line > display.viewTo - 1) { return false }
+
+	  var fromIndex, fromLine, fromNode
+	  if (from.line == display.viewFrom || (fromIndex = findViewIndex(cm, from.line)) == 0) {
+	    fromLine = lineNo(display.view[0].line)
+	    fromNode = display.view[0].node
+	  } else {
+	    fromLine = lineNo(display.view[fromIndex].line)
+	    fromNode = display.view[fromIndex - 1].node.nextSibling
+	  }
+	  var toIndex = findViewIndex(cm, to.line)
+	  var toLine, toNode
+	  if (toIndex == display.view.length - 1) {
+	    toLine = display.viewTo - 1
+	    toNode = display.lineDiv.lastChild
+	  } else {
+	    toLine = lineNo(display.view[toIndex + 1].line) - 1
+	    toNode = display.view[toIndex + 1].node.previousSibling
+	  }
+
+	  if (!fromNode) { return false }
+	  var newText = cm.doc.splitLines(domTextBetween(cm, fromNode, toNode, fromLine, toLine))
+	  var oldText = getBetween(cm.doc, Pos(fromLine, 0), Pos(toLine, getLine(cm.doc, toLine).text.length))
+	  while (newText.length > 1 && oldText.length > 1) {
+	    if (lst(newText) == lst(oldText)) { newText.pop(); oldText.pop(); toLine-- }
+	    else if (newText[0] == oldText[0]) { newText.shift(); oldText.shift(); fromLine++ }
+	    else { break }
+	  }
+
+	  var cutFront = 0, cutEnd = 0
+	  var newTop = newText[0], oldTop = oldText[0], maxCutFront = Math.min(newTop.length, oldTop.length)
+	  while (cutFront < maxCutFront && newTop.charCodeAt(cutFront) == oldTop.charCodeAt(cutFront))
+	    { ++cutFront }
+	  var newBot = lst(newText), oldBot = lst(oldText)
+	  var maxCutEnd = Math.min(newBot.length - (newText.length == 1 ? cutFront : 0),
+	                           oldBot.length - (oldText.length == 1 ? cutFront : 0))
+	  while (cutEnd < maxCutEnd &&
+	         newBot.charCodeAt(newBot.length - cutEnd - 1) == oldBot.charCodeAt(oldBot.length - cutEnd - 1))
+	    { ++cutEnd }
+
+	  newText[newText.length - 1] = newBot.slice(0, newBot.length - cutEnd).replace(/^\u200b+/, "")
+	  newText[0] = newText[0].slice(cutFront).replace(/\u200b+$/, "")
+
+	  var chFrom = Pos(fromLine, cutFront)
+	  var chTo = Pos(toLine, oldText.length ? lst(oldText).length - cutEnd : 0)
+	  if (newText.length > 1 || newText[0] || cmp(chFrom, chTo)) {
+	    replaceRange(cm.doc, newText, chFrom, chTo, "+input")
+	    return true
+	  }
+	};
+
+	ContentEditableInput.prototype.ensurePolled = function () {
+	  this.forceCompositionEnd()
+	};
+	ContentEditableInput.prototype.reset = function () {
+	  this.forceCompositionEnd()
+	};
+	ContentEditableInput.prototype.forceCompositionEnd = function () {
+	  if (!this.composing) { return }
+	  clearTimeout(this.readDOMTimeout)
+	  this.composing = null
+	  if (!this.pollContent()) { regChange(this.cm) }
+	  this.div.blur()
+	  this.div.focus()
+	};
+	ContentEditableInput.prototype.readFromDOMSoon = function () {
 	    var this$1 = this;
 
-	    if (this.readDOMTimeout != null) { return }
-	    this.readDOMTimeout = setTimeout(function () {
-	      this$1.readDOMTimeout = null
-	      if (this$1.composing) { return }
-	      if (this$1.cm.isReadOnly() || !this$1.pollContent())
-	        { runInOp(this$1.cm, function () { return regChange(this$1.cm); }) }
-	    }, 80)
-	  },
+	  if (this.readDOMTimeout != null) { return }
+	  this.readDOMTimeout = setTimeout(function () {
+	    this$1.readDOMTimeout = null
+	    if (this$1.composing) {
+	      if (this$1.composing.done) { this$1.composing = null }
+	      else { return }
+	    }
+	    if (this$1.cm.isReadOnly() || !this$1.pollContent())
+	      { runInOp(this$1.cm, function () { return regChange(this$1.cm); }) }
+	  }, 80)
+	};
 
-	  setUneditable: function(node) {
-	    node.contentEditable = "false"
-	  },
+	ContentEditableInput.prototype.setUneditable = function (node) {
+	  node.contentEditable = "false"
+	};
 
-	  onKeyPress: function(e) {
-	    e.preventDefault()
-	    if (!this.cm.isReadOnly())
-	      { operation(this.cm, applyTextInput)(this.cm, String.fromCharCode(e.charCode == null ? e.keyCode : e.charCode), 0) }
-	  },
+	ContentEditableInput.prototype.onKeyPress = function (e) {
+	  e.preventDefault()
+	  if (!this.cm.isReadOnly())
+	    { operation(this.cm, applyTextInput)(this.cm, String.fromCharCode(e.charCode == null ? e.keyCode : e.charCode), 0) }
+	};
 
-	  readOnlyChanged: function(val) {
-	    this.div.contentEditable = String(val != "nocursor")
-	  },
+	ContentEditableInput.prototype.readOnlyChanged = function (val) {
+	  this.div.contentEditable = String(val != "nocursor")
+	};
 
-	  onContextMenu: nothing,
-	  resetPosition: nothing,
+	ContentEditableInput.prototype.onContextMenu = function () {};
+	ContentEditableInput.prototype.resetPosition = function () {};
 
-	  needsContentAttribute: true
-	  }, ContentEditableInput.prototype)
+	ContentEditableInput.prototype.needsContentAttribute = true
 
 	function posToDOM(cm, pos) {
 	  var view = findViewForLine(cm, pos.line)
@@ -17029,7 +21317,7 @@
 
 	// TEXTAREA INPUT STYLE
 
-	function TextareaInput(cm) {
+	var TextareaInput = function(cm) {
 	  this.cm = cm
 	  // See input.poll and input.reset
 	  this.prevInput = ""
@@ -17046,335 +21334,333 @@
 	  // Used to work around IE issue with selection being forgotten when focus moves away from textarea
 	  this.hasSelection = false
 	  this.composing = null
-	}
+	};
 
-	TextareaInput.prototype = copyObj({
-	  init: function(display) {
+	TextareaInput.prototype.init = function (display) {
 	    var this$1 = this;
 
-	    var input = this, cm = this.cm
+	  var input = this, cm = this.cm
 
-	    // Wraps and hides input textarea
-	    var div = this.wrapper = hiddenTextarea()
-	    // The semihidden textarea that is focused when the editor is
-	    // focused, and receives input.
-	    var te = this.textarea = div.firstChild
-	    display.wrapper.insertBefore(div, display.wrapper.firstChild)
+	  // Wraps and hides input textarea
+	  var div = this.wrapper = hiddenTextarea()
+	  // The semihidden textarea that is focused when the editor is
+	  // focused, and receives input.
+	  var te = this.textarea = div.firstChild
+	  display.wrapper.insertBefore(div, display.wrapper.firstChild)
 
-	    // Needed to hide big blue blinking cursor on Mobile Safari (doesn't seem to work in iOS 8 anymore)
-	    if (ios) { te.style.width = "0px" }
+	  // Needed to hide big blue blinking cursor on Mobile Safari (doesn't seem to work in iOS 8 anymore)
+	  if (ios) { te.style.width = "0px" }
 
-	    on(te, "input", function () {
-	      if (ie && ie_version >= 9 && this$1.hasSelection) { this$1.hasSelection = null }
-	      input.poll()
-	    })
+	  on(te, "input", function () {
+	    if (ie && ie_version >= 9 && this$1.hasSelection) { this$1.hasSelection = null }
+	    input.poll()
+	  })
 
-	    on(te, "paste", function (e) {
-	      if (signalDOMEvent(cm, e) || handlePaste(e, cm)) { return }
+	  on(te, "paste", function (e) {
+	    if (signalDOMEvent(cm, e) || handlePaste(e, cm)) { return }
 
-	      cm.state.pasteIncoming = true
-	      input.fastPoll()
-	    })
+	    cm.state.pasteIncoming = true
+	    input.fastPoll()
+	  })
 
-	    function prepareCopyCut(e) {
-	      if (signalDOMEvent(cm, e)) { return }
-	      if (cm.somethingSelected()) {
-	        setLastCopied({lineWise: false, text: cm.getSelections()})
-	        if (input.inaccurateSelection) {
-	          input.prevInput = ""
-	          input.inaccurateSelection = false
-	          te.value = lastCopied.text.join("\n")
-	          selectInput(te)
-	        }
-	      } else if (!cm.options.lineWiseCopyCut) {
-	        return
-	      } else {
-	        var ranges = copyableRanges(cm)
-	        setLastCopied({lineWise: true, text: ranges.text})
-	        if (e.type == "cut") {
-	          cm.setSelections(ranges.ranges, null, sel_dontScroll)
-	        } else {
-	          input.prevInput = ""
-	          te.value = ranges.text.join("\n")
-	          selectInput(te)
-	        }
-	      }
-	      if (e.type == "cut") { cm.state.cutIncoming = true }
-	    }
-	    on(te, "cut", prepareCopyCut)
-	    on(te, "copy", prepareCopyCut)
-
-	    on(display.scroller, "paste", function (e) {
-	      if (eventInWidget(display, e) || signalDOMEvent(cm, e)) { return }
-	      cm.state.pasteIncoming = true
-	      input.focus()
-	    })
-
-	    // Prevent normal selection in the editor (we handle our own)
-	    on(display.lineSpace, "selectstart", function (e) {
-	      if (!eventInWidget(display, e)) { e_preventDefault(e) }
-	    })
-
-	    on(te, "compositionstart", function () {
-	      var start = cm.getCursor("from")
-	      if (input.composing) { input.composing.range.clear() }
-	      input.composing = {
-	        start: start,
-	        range: cm.markText(start, cm.getCursor("to"), {className: "CodeMirror-composing"})
-	      }
-	    })
-	    on(te, "compositionend", function () {
-	      if (input.composing) {
-	        input.poll()
-	        input.composing.range.clear()
-	        input.composing = null
-	      }
-	    })
-	  },
-
-	  prepareSelection: function() {
-	    // Redraw the selection and/or cursor
-	    var cm = this.cm, display = cm.display, doc = cm.doc
-	    var result = prepareSelection(cm)
-
-	    // Move the hidden textarea near the cursor to prevent scrolling artifacts
-	    if (cm.options.moveInputWithCursor) {
-	      var headPos = cursorCoords(cm, doc.sel.primary().head, "div")
-	      var wrapOff = display.wrapper.getBoundingClientRect(), lineOff = display.lineDiv.getBoundingClientRect()
-	      result.teTop = Math.max(0, Math.min(display.wrapper.clientHeight - 10,
-	                                          headPos.top + lineOff.top - wrapOff.top))
-	      result.teLeft = Math.max(0, Math.min(display.wrapper.clientWidth - 10,
-	                                           headPos.left + lineOff.left - wrapOff.left))
-	    }
-
-	    return result
-	  },
-
-	  showSelection: function(drawn) {
-	    var cm = this.cm, display = cm.display
-	    removeChildrenAndAdd(display.cursorDiv, drawn.cursors)
-	    removeChildrenAndAdd(display.selectionDiv, drawn.selection)
-	    if (drawn.teTop != null) {
-	      this.wrapper.style.top = drawn.teTop + "px"
-	      this.wrapper.style.left = drawn.teLeft + "px"
-	    }
-	  },
-
-	  // Reset the input to correspond to the selection (or to be empty,
-	  // when not typing and nothing is selected)
-	  reset: function(typing) {
-	    if (this.contextMenuPending) { return }
-	    var minimal, selected, cm = this.cm, doc = cm.doc
+	  function prepareCopyCut(e) {
+	    if (signalDOMEvent(cm, e)) { return }
 	    if (cm.somethingSelected()) {
-	      this.prevInput = ""
-	      var range = doc.sel.primary()
-	      minimal = hasCopyEvent &&
-	        (range.to().line - range.from().line > 100 || (selected = cm.getSelection()).length > 1000)
-	      var content = minimal ? "-" : selected || cm.getSelection()
-	      this.textarea.value = content
-	      if (cm.state.focused) { selectInput(this.textarea) }
-	      if (ie && ie_version >= 9) { this.hasSelection = content }
-	    } else if (!typing) {
-	      this.prevInput = this.textarea.value = ""
-	      if (ie && ie_version >= 9) { this.hasSelection = null }
-	    }
-	    this.inaccurateSelection = minimal
-	  },
-
-	  getField: function() { return this.textarea },
-
-	  supportsTouch: function() { return false },
-
-	  focus: function() {
-	    if (this.cm.options.readOnly != "nocursor" && (!mobile || activeElt() != this.textarea)) {
-	      try { this.textarea.focus() }
-	      catch (e) {} // IE8 will throw if the textarea is display: none or not in DOM
-	    }
-	  },
-
-	  blur: function() { this.textarea.blur() },
-
-	  resetPosition: function() {
-	    this.wrapper.style.top = this.wrapper.style.left = 0
-	  },
-
-	  receivedFocus: function() { this.slowPoll() },
-
-	  // Poll for input changes, using the normal rate of polling. This
-	  // runs as long as the editor is focused.
-	  slowPoll: function() {
-	    var this$1 = this;
-
-	    if (this.pollingFast) { return }
-	    this.polling.set(this.cm.options.pollInterval, function () {
-	      this$1.poll()
-	      if (this$1.cm.state.focused) { this$1.slowPoll() }
-	    })
-	  },
-
-	  // When an event has just come in that is likely to add or change
-	  // something in the input textarea, we poll faster, to ensure that
-	  // the change appears on the screen quickly.
-	  fastPoll: function() {
-	    var missed = false, input = this
-	    input.pollingFast = true
-	    function p() {
-	      var changed = input.poll()
-	      if (!changed && !missed) {missed = true; input.polling.set(60, p)}
-	      else {input.pollingFast = false; input.slowPoll()}
-	    }
-	    input.polling.set(20, p)
-	  },
-
-	  // Read input from the textarea, and update the document to match.
-	  // When something is selected, it is present in the textarea, and
-	  // selected (unless it is huge, in which case a placeholder is
-	  // used). When nothing is selected, the cursor sits after previously
-	  // seen text (can be empty), which is stored in prevInput (we must
-	  // not reset the textarea when typing, because that breaks IME).
-	  poll: function() {
-	    var this$1 = this;
-
-	    var cm = this.cm, input = this.textarea, prevInput = this.prevInput
-	    // Since this is called a *lot*, try to bail out as cheaply as
-	    // possible when it is clear that nothing happened. hasSelection
-	    // will be the case when there is a lot of text in the textarea,
-	    // in which case reading its value would be expensive.
-	    if (this.contextMenuPending || !cm.state.focused ||
-	        (hasSelection(input) && !prevInput && !this.composing) ||
-	        cm.isReadOnly() || cm.options.disableInput || cm.state.keySeq)
-	      { return false }
-
-	    var text = input.value
-	    // If nothing changed, bail.
-	    if (text == prevInput && !cm.somethingSelected()) { return false }
-	    // Work around nonsensical selection resetting in IE9/10, and
-	    // inexplicable appearance of private area unicode characters on
-	    // some key combos in Mac (#2689).
-	    if (ie && ie_version >= 9 && this.hasSelection === text ||
-	        mac && /[\uf700-\uf7ff]/.test(text)) {
-	      cm.display.input.reset()
-	      return false
-	    }
-
-	    if (cm.doc.sel == cm.display.selForContextMenu) {
-	      var first = text.charCodeAt(0)
-	      if (first == 0x200b && !prevInput) { prevInput = "\u200b" }
-	      if (first == 0x21da) { this.reset(); return this.cm.execCommand("undo") }
-	    }
-	    // Find the part of the input that is actually new
-	    var same = 0, l = Math.min(prevInput.length, text.length)
-	    while (same < l && prevInput.charCodeAt(same) == text.charCodeAt(same)) { ++same }
-
-	    runInOp(cm, function () {
-	      applyTextInput(cm, text.slice(same), prevInput.length - same,
-	                     null, this$1.composing ? "*compose" : null)
-
-	      // Don't leave long text in the textarea, since it makes further polling slow
-	      if (text.length > 1000 || text.indexOf("\n") > -1) { input.value = this$1.prevInput = "" }
-	      else { this$1.prevInput = text }
-
-	      if (this$1.composing) {
-	        this$1.composing.range.clear()
-	        this$1.composing.range = cm.markText(this$1.composing.start, cm.getCursor("to"),
-	                                           {className: "CodeMirror-composing"})
+	      setLastCopied({lineWise: false, text: cm.getSelections()})
+	      if (input.inaccurateSelection) {
+	        input.prevInput = ""
+	        input.inaccurateSelection = false
+	        te.value = lastCopied.text.join("\n")
+	        selectInput(te)
 	      }
-	    })
-	    return true
-	  },
-
-	  ensurePolled: function() {
-	    if (this.pollingFast && this.poll()) { this.pollingFast = false }
-	  },
-
-	  onKeyPress: function() {
-	    if (ie && ie_version >= 9) { this.hasSelection = null }
-	    this.fastPoll()
-	  },
-
-	  onContextMenu: function(e) {
-	    var input = this, cm = input.cm, display = cm.display, te = input.textarea
-	    var pos = posFromMouse(cm, e), scrollPos = display.scroller.scrollTop
-	    if (!pos || presto) { return } // Opera is difficult.
-
-	    // Reset the current text selection only if the click is done outside of the selection
-	    // and 'resetSelectionOnContextMenu' option is true.
-	    var reset = cm.options.resetSelectionOnContextMenu
-	    if (reset && cm.doc.sel.contains(pos) == -1)
-	      { operation(cm, setSelection)(cm.doc, simpleSelection(pos), sel_dontScroll) }
-
-	    var oldCSS = te.style.cssText, oldWrapperCSS = input.wrapper.style.cssText
-	    input.wrapper.style.cssText = "position: absolute"
-	    var wrapperBox = input.wrapper.getBoundingClientRect()
-	    te.style.cssText = "position: absolute; width: 30px; height: 30px;\n      top: " + (e.clientY - wrapperBox.top - 5) + "px; left: " + (e.clientX - wrapperBox.left - 5) + "px;\n      z-index: 1000; background: " + (ie ? "rgba(255, 255, 255, .05)" : "transparent") + ";\n      outline: none; border-width: 0; outline: none; overflow: hidden; opacity: .05; filter: alpha(opacity=5);"
-	    var oldScrollY
-	    if (webkit) { oldScrollY = window.scrollY } // Work around Chrome issue (#2712)
-	    display.input.focus()
-	    if (webkit) { window.scrollTo(null, oldScrollY) }
-	    display.input.reset()
-	    // Adds "Select all" to context menu in FF
-	    if (!cm.somethingSelected()) { te.value = input.prevInput = " " }
-	    input.contextMenuPending = true
-	    display.selForContextMenu = cm.doc.sel
-	    clearTimeout(display.detectingSelectAll)
-
-	    // Select-all will be greyed out if there's nothing to select, so
-	    // this adds a zero-width space so that we can later check whether
-	    // it got selected.
-	    function prepareSelectAllHack() {
-	      if (te.selectionStart != null) {
-	        var selected = cm.somethingSelected()
-	        var extval = "\u200b" + (selected ? te.value : "")
-	        te.value = "\u21da" // Used to catch context-menu undo
-	        te.value = extval
-	        input.prevInput = selected ? "" : "\u200b"
-	        te.selectionStart = 1; te.selectionEnd = extval.length
-	        // Re-set this, in case some other handler touched the
-	        // selection in the meantime.
-	        display.selForContextMenu = cm.doc.sel
-	      }
-	    }
-	    function rehide() {
-	      input.contextMenuPending = false
-	      input.wrapper.style.cssText = oldWrapperCSS
-	      te.style.cssText = oldCSS
-	      if (ie && ie_version < 9) { display.scrollbars.setScrollTop(display.scroller.scrollTop = scrollPos) }
-
-	      // Try to detect the user choosing select-all
-	      if (te.selectionStart != null) {
-	        if (!ie || (ie && ie_version < 9)) { prepareSelectAllHack() }
-	        var i = 0, poll = function () {
-	          if (display.selForContextMenu == cm.doc.sel && te.selectionStart == 0 &&
-	              te.selectionEnd > 0 && input.prevInput == "\u200b")
-	            { operation(cm, selectAll)(cm) }
-	          else if (i++ < 10) { display.detectingSelectAll = setTimeout(poll, 500) }
-	          else { display.input.reset() }
-	        }
-	        display.detectingSelectAll = setTimeout(poll, 200)
-	      }
-	    }
-
-	    if (ie && ie_version >= 9) { prepareSelectAllHack() }
-	    if (captureRightClick) {
-	      e_stop(e)
-	      var mouseup = function () {
-	        off(window, "mouseup", mouseup)
-	        setTimeout(rehide, 20)
-	      }
-	      on(window, "mouseup", mouseup)
+	    } else if (!cm.options.lineWiseCopyCut) {
+	      return
 	    } else {
-	      setTimeout(rehide, 50)
+	      var ranges = copyableRanges(cm)
+	      setLastCopied({lineWise: true, text: ranges.text})
+	      if (e.type == "cut") {
+	        cm.setSelections(ranges.ranges, null, sel_dontScroll)
+	      } else {
+	        input.prevInput = ""
+	        te.value = ranges.text.join("\n")
+	        selectInput(te)
+	      }
 	    }
-	  },
+	    if (e.type == "cut") { cm.state.cutIncoming = true }
+	  }
+	  on(te, "cut", prepareCopyCut)
+	  on(te, "copy", prepareCopyCut)
 
-	  readOnlyChanged: function(val) {
-	    if (!val) { this.reset() }
-	  },
+	  on(display.scroller, "paste", function (e) {
+	    if (eventInWidget(display, e) || signalDOMEvent(cm, e)) { return }
+	    cm.state.pasteIncoming = true
+	    input.focus()
+	  })
 
-	  setUneditable: nothing,
+	  // Prevent normal selection in the editor (we handle our own)
+	  on(display.lineSpace, "selectstart", function (e) {
+	    if (!eventInWidget(display, e)) { e_preventDefault(e) }
+	  })
 
-	  needsContentAttribute: false
-	}, TextareaInput.prototype)
+	  on(te, "compositionstart", function () {
+	    var start = cm.getCursor("from")
+	    if (input.composing) { input.composing.range.clear() }
+	    input.composing = {
+	      start: start,
+	      range: cm.markText(start, cm.getCursor("to"), {className: "CodeMirror-composing"})
+	    }
+	  })
+	  on(te, "compositionend", function () {
+	    if (input.composing) {
+	      input.poll()
+	      input.composing.range.clear()
+	      input.composing = null
+	    }
+	  })
+	};
+
+	TextareaInput.prototype.prepareSelection = function () {
+	  // Redraw the selection and/or cursor
+	  var cm = this.cm, display = cm.display, doc = cm.doc
+	  var result = prepareSelection(cm)
+
+	  // Move the hidden textarea near the cursor to prevent scrolling artifacts
+	  if (cm.options.moveInputWithCursor) {
+	    var headPos = cursorCoords(cm, doc.sel.primary().head, "div")
+	    var wrapOff = display.wrapper.getBoundingClientRect(), lineOff = display.lineDiv.getBoundingClientRect()
+	    result.teTop = Math.max(0, Math.min(display.wrapper.clientHeight - 10,
+	                                        headPos.top + lineOff.top - wrapOff.top))
+	    result.teLeft = Math.max(0, Math.min(display.wrapper.clientWidth - 10,
+	                                         headPos.left + lineOff.left - wrapOff.left))
+	  }
+
+	  return result
+	};
+
+	TextareaInput.prototype.showSelection = function (drawn) {
+	  var cm = this.cm, display = cm.display
+	  removeChildrenAndAdd(display.cursorDiv, drawn.cursors)
+	  removeChildrenAndAdd(display.selectionDiv, drawn.selection)
+	  if (drawn.teTop != null) {
+	    this.wrapper.style.top = drawn.teTop + "px"
+	    this.wrapper.style.left = drawn.teLeft + "px"
+	  }
+	};
+
+	// Reset the input to correspond to the selection (or to be empty,
+	// when not typing and nothing is selected)
+	TextareaInput.prototype.reset = function (typing) {
+	  if (this.contextMenuPending) { return }
+	  var minimal, selected, cm = this.cm, doc = cm.doc
+	  if (cm.somethingSelected()) {
+	    this.prevInput = ""
+	    var range = doc.sel.primary()
+	    minimal = hasCopyEvent &&
+	      (range.to().line - range.from().line > 100 || (selected = cm.getSelection()).length > 1000)
+	    var content = minimal ? "-" : selected || cm.getSelection()
+	    this.textarea.value = content
+	    if (cm.state.focused) { selectInput(this.textarea) }
+	    if (ie && ie_version >= 9) { this.hasSelection = content }
+	  } else if (!typing) {
+	    this.prevInput = this.textarea.value = ""
+	    if (ie && ie_version >= 9) { this.hasSelection = null }
+	  }
+	  this.inaccurateSelection = minimal
+	};
+
+	TextareaInput.prototype.getField = function () { return this.textarea };
+
+	TextareaInput.prototype.supportsTouch = function () { return false };
+
+	TextareaInput.prototype.focus = function () {
+	  if (this.cm.options.readOnly != "nocursor" && (!mobile || activeElt() != this.textarea)) {
+	    try { this.textarea.focus() }
+	    catch (e) {} // IE8 will throw if the textarea is display: none or not in DOM
+	  }
+	};
+
+	TextareaInput.prototype.blur = function () { this.textarea.blur() };
+
+	TextareaInput.prototype.resetPosition = function () {
+	  this.wrapper.style.top = this.wrapper.style.left = 0
+	};
+
+	TextareaInput.prototype.receivedFocus = function () { this.slowPoll() };
+
+	// Poll for input changes, using the normal rate of polling. This
+	// runs as long as the editor is focused.
+	TextareaInput.prototype.slowPoll = function () {
+	    var this$1 = this;
+
+	  if (this.pollingFast) { return }
+	  this.polling.set(this.cm.options.pollInterval, function () {
+	    this$1.poll()
+	    if (this$1.cm.state.focused) { this$1.slowPoll() }
+	  })
+	};
+
+	// When an event has just come in that is likely to add or change
+	// something in the input textarea, we poll faster, to ensure that
+	// the change appears on the screen quickly.
+	TextareaInput.prototype.fastPoll = function () {
+	  var missed = false, input = this
+	  input.pollingFast = true
+	  function p() {
+	    var changed = input.poll()
+	    if (!changed && !missed) {missed = true; input.polling.set(60, p)}
+	    else {input.pollingFast = false; input.slowPoll()}
+	  }
+	  input.polling.set(20, p)
+	};
+
+	// Read input from the textarea, and update the document to match.
+	// When something is selected, it is present in the textarea, and
+	// selected (unless it is huge, in which case a placeholder is
+	// used). When nothing is selected, the cursor sits after previously
+	// seen text (can be empty), which is stored in prevInput (we must
+	// not reset the textarea when typing, because that breaks IME).
+	TextareaInput.prototype.poll = function () {
+	    var this$1 = this;
+
+	  var cm = this.cm, input = this.textarea, prevInput = this.prevInput
+	  // Since this is called a *lot*, try to bail out as cheaply as
+	  // possible when it is clear that nothing happened. hasSelection
+	  // will be the case when there is a lot of text in the textarea,
+	  // in which case reading its value would be expensive.
+	  if (this.contextMenuPending || !cm.state.focused ||
+	      (hasSelection(input) && !prevInput && !this.composing) ||
+	      cm.isReadOnly() || cm.options.disableInput || cm.state.keySeq)
+	    { return false }
+
+	  var text = input.value
+	  // If nothing changed, bail.
+	  if (text == prevInput && !cm.somethingSelected()) { return false }
+	  // Work around nonsensical selection resetting in IE9/10, and
+	  // inexplicable appearance of private area unicode characters on
+	  // some key combos in Mac (#2689).
+	  if (ie && ie_version >= 9 && this.hasSelection === text ||
+	      mac && /[\uf700-\uf7ff]/.test(text)) {
+	    cm.display.input.reset()
+	    return false
+	  }
+
+	  if (cm.doc.sel == cm.display.selForContextMenu) {
+	    var first = text.charCodeAt(0)
+	    if (first == 0x200b && !prevInput) { prevInput = "\u200b" }
+	    if (first == 0x21da) { this.reset(); return this.cm.execCommand("undo") }
+	  }
+	  // Find the part of the input that is actually new
+	  var same = 0, l = Math.min(prevInput.length, text.length)
+	  while (same < l && prevInput.charCodeAt(same) == text.charCodeAt(same)) { ++same }
+
+	  runInOp(cm, function () {
+	    applyTextInput(cm, text.slice(same), prevInput.length - same,
+	                   null, this$1.composing ? "*compose" : null)
+
+	    // Don't leave long text in the textarea, since it makes further polling slow
+	    if (text.length > 1000 || text.indexOf("\n") > -1) { input.value = this$1.prevInput = "" }
+	    else { this$1.prevInput = text }
+
+	    if (this$1.composing) {
+	      this$1.composing.range.clear()
+	      this$1.composing.range = cm.markText(this$1.composing.start, cm.getCursor("to"),
+	                                         {className: "CodeMirror-composing"})
+	    }
+	  })
+	  return true
+	};
+
+	TextareaInput.prototype.ensurePolled = function () {
+	  if (this.pollingFast && this.poll()) { this.pollingFast = false }
+	};
+
+	TextareaInput.prototype.onKeyPress = function () {
+	  if (ie && ie_version >= 9) { this.hasSelection = null }
+	  this.fastPoll()
+	};
+
+	TextareaInput.prototype.onContextMenu = function (e) {
+	  var input = this, cm = input.cm, display = cm.display, te = input.textarea
+	  var pos = posFromMouse(cm, e), scrollPos = display.scroller.scrollTop
+	  if (!pos || presto) { return } // Opera is difficult.
+
+	  // Reset the current text selection only if the click is done outside of the selection
+	  // and 'resetSelectionOnContextMenu' option is true.
+	  var reset = cm.options.resetSelectionOnContextMenu
+	  if (reset && cm.doc.sel.contains(pos) == -1)
+	    { operation(cm, setSelection)(cm.doc, simpleSelection(pos), sel_dontScroll) }
+
+	  var oldCSS = te.style.cssText, oldWrapperCSS = input.wrapper.style.cssText
+	  input.wrapper.style.cssText = "position: absolute"
+	  var wrapperBox = input.wrapper.getBoundingClientRect()
+	  te.style.cssText = "position: absolute; width: 30px; height: 30px;\n      top: " + (e.clientY - wrapperBox.top - 5) + "px; left: " + (e.clientX - wrapperBox.left - 5) + "px;\n      z-index: 1000; background: " + (ie ? "rgba(255, 255, 255, .05)" : "transparent") + ";\n      outline: none; border-width: 0; outline: none; overflow: hidden; opacity: .05; filter: alpha(opacity=5);"
+	  var oldScrollY
+	  if (webkit) { oldScrollY = window.scrollY } // Work around Chrome issue (#2712)
+	  display.input.focus()
+	  if (webkit) { window.scrollTo(null, oldScrollY) }
+	  display.input.reset()
+	  // Adds "Select all" to context menu in FF
+	  if (!cm.somethingSelected()) { te.value = input.prevInput = " " }
+	  input.contextMenuPending = true
+	  display.selForContextMenu = cm.doc.sel
+	  clearTimeout(display.detectingSelectAll)
+
+	  // Select-all will be greyed out if there's nothing to select, so
+	  // this adds a zero-width space so that we can later check whether
+	  // it got selected.
+	  function prepareSelectAllHack() {
+	    if (te.selectionStart != null) {
+	      var selected = cm.somethingSelected()
+	      var extval = "\u200b" + (selected ? te.value : "")
+	      te.value = "\u21da" // Used to catch context-menu undo
+	      te.value = extval
+	      input.prevInput = selected ? "" : "\u200b"
+	      te.selectionStart = 1; te.selectionEnd = extval.length
+	      // Re-set this, in case some other handler touched the
+	      // selection in the meantime.
+	      display.selForContextMenu = cm.doc.sel
+	    }
+	  }
+	  function rehide() {
+	    input.contextMenuPending = false
+	    input.wrapper.style.cssText = oldWrapperCSS
+	    te.style.cssText = oldCSS
+	    if (ie && ie_version < 9) { display.scrollbars.setScrollTop(display.scroller.scrollTop = scrollPos) }
+
+	    // Try to detect the user choosing select-all
+	    if (te.selectionStart != null) {
+	      if (!ie || (ie && ie_version < 9)) { prepareSelectAllHack() }
+	      var i = 0, poll = function () {
+	        if (display.selForContextMenu == cm.doc.sel && te.selectionStart == 0 &&
+	            te.selectionEnd > 0 && input.prevInput == "\u200b")
+	          { operation(cm, selectAll)(cm) }
+	        else if (i++ < 10) { display.detectingSelectAll = setTimeout(poll, 500) }
+	        else { display.input.reset() }
+	      }
+	      display.detectingSelectAll = setTimeout(poll, 200)
+	    }
+	  }
+
+	  if (ie && ie_version >= 9) { prepareSelectAllHack() }
+	  if (captureRightClick) {
+	    e_stop(e)
+	    var mouseup = function () {
+	      off(window, "mouseup", mouseup)
+	      setTimeout(rehide, 20)
+	    }
+	    on(window, "mouseup", mouseup)
+	  } else {
+	    setTimeout(rehide, 50)
+	  }
+	};
+
+	TextareaInput.prototype.readOnlyChanged = function (val) {
+	  if (!val) { this.reset() }
+	};
+
+	TextareaInput.prototype.setUneditable = function () {};
+
+	TextareaInput.prototype.needsContentAttribute = false
 
 	function fromTextArea(textarea, options) {
 	  options = options ? copyObj(options) : {}
@@ -17525,19 +21811,19 @@
 
 	addLegacyProps(CodeMirror)
 
-	CodeMirror.version = "5.21.0"
+	CodeMirror.version = "5.22.0"
 
 	return CodeMirror;
 
 	})));
 
 /***/ },
-/* 101 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(102), __webpack_require__(104), __webpack_require__(105)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(183), __webpack_require__(185), __webpack_require__(186)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports !== "undefined") {
 	        factory(module, require('./clipboard-action'), require('tiny-emitter'), require('good-listener'));
 	    } else {
@@ -17722,12 +22008,12 @@
 	});
 
 /***/ },
-/* 102 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(103)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(184)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports !== "undefined") {
 	        factory(module, require('select'));
 	    } else {
@@ -17956,7 +22242,7 @@
 	});
 
 /***/ },
-/* 103 */
+/* 184 */
 /***/ function(module, exports) {
 
 	function select(element) {
@@ -17995,7 +22281,7 @@
 
 
 /***/ },
-/* 104 */
+/* 185 */
 /***/ function(module, exports) {
 
 	function E () {
@@ -18067,11 +22353,11 @@
 
 
 /***/ },
-/* 105 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var is = __webpack_require__(106);
-	var delegate = __webpack_require__(107);
+	var is = __webpack_require__(187);
+	var delegate = __webpack_require__(188);
 
 	/**
 	 * Validates all params and calls the right
@@ -18168,7 +22454,7 @@
 
 
 /***/ },
-/* 106 */
+/* 187 */
 /***/ function(module, exports) {
 
 	/**
@@ -18223,10 +22509,10 @@
 
 
 /***/ },
-/* 107 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var closest = __webpack_require__(108);
+	var closest = __webpack_require__(189);
 
 	/**
 	 * Delegates event to a selector.
@@ -18273,7 +22559,7 @@
 
 
 /***/ },
-/* 108 */
+/* 189 */
 /***/ function(module, exports) {
 
 	var DOCUMENT_NODE_TYPE = 9;
@@ -18309,7 +22595,7 @@
 
 
 /***/ },
-/* 109 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -18317,7 +22603,7 @@
 
 	(function(mod) {
 	  if (true) // CommonJS
-	    mod(__webpack_require__(100), __webpack_require__(110), __webpack_require__(111), __webpack_require__(112));
+	    mod(__webpack_require__(181), __webpack_require__(191), __webpack_require__(192), __webpack_require__(193));
 	  else if (typeof define == "function" && define.amd) // AMD
 	    define(["../../lib/codemirror", "../xml/xml", "../javascript/javascript", "../css/css"], mod);
 	  else // Plain browser env
@@ -18467,7 +22753,7 @@
 
 
 /***/ },
-/* 110 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -18475,7 +22761,7 @@
 
 	(function(mod) {
 	  if (true) // CommonJS
-	    mod(__webpack_require__(100));
+	    mod(__webpack_require__(181));
 	  else if (typeof define == "function" && define.amd) // AMD
 	    define(["../../lib/codemirror"], mod);
 	  else // Plain browser env
@@ -18867,7 +23153,7 @@
 
 
 /***/ },
-/* 111 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -18875,7 +23161,7 @@
 
 	(function(mod) {
 	  if (true) // CommonJS
-	    mod(__webpack_require__(100));
+	    mod(__webpack_require__(181));
 	  else if (typeof define == "function" && define.amd) // AMD
 	    define(["../../lib/codemirror"], mod);
 	  else // Plain browser env
@@ -18884,7 +23170,7 @@
 	"use strict";
 
 	function expressionAllowed(stream, state, backUp) {
-	  return /^(?:operator|sof|keyword c|case|new|[\[{}\(,;:]|=>)$/.test(state.lastType) ||
+	  return /^(?:operator|sof|keyword c|case|new|export|default|[\[{}\(,;:]|=>)$/.test(state.lastType) ||
 	    (state.lastType == "quasi" && /\{\s*$/.test(stream.string.slice(0, stream.pos - (backUp || 0))))
 	}
 
@@ -19018,7 +23304,8 @@
 	      stream.skipToEnd();
 	      return ret("error", "error");
 	    } else if (isOperatorChar.test(ch)) {
-	      stream.eatWhile(isOperatorChar);
+	      if (ch != ">" || !state.lexical || state.lexical.type != ">")
+	        stream.eatWhile(isOperatorChar);
 	      return ret("operator", "operator", stream.current());
 	    } else if (wordRE.test(ch)) {
 	      stream.eatWhile(wordRE);
@@ -19411,6 +23698,7 @@
 	  }
 	  function typeexpr(type) {
 	    if (type == "variable") {cx.marked = "variable-3"; return cont(afterType);}
+	    if (type == "string" || type == "number" || type == "atom") return cont(afterType);
 	    if (type == "{") return cont(commasep(typeprop, "}"))
 	    if (type == "(") return cont(commasep(typearg, ")"), maybeReturnType)
 	  }
@@ -19430,7 +23718,8 @@
 	    else if (type == ":") return cont(typeexpr)
 	  }
 	  function afterType(type, value) {
-	    if (value == "<") return cont(commasep(typeexpr, ">"), afterType)
+	    if (value == "<") return cont(pushlex(">"), commasep(typeexpr, ">"), poplex, afterType)
+	    if (value == "|" || type == ".") return cont(typeexpr)
 	    if (type == "[") return cont(expect("]"), afterType)
 	  }
 	  function vardef() {
@@ -19527,20 +23816,28 @@
 	    if (type == ":") return cont(typeexpr, maybeAssign)
 	    return pass(functiondef)
 	  }
-	  function afterExport(_type, value) {
+	  function afterExport(type, value) {
 	    if (value == "*") { cx.marked = "keyword"; return cont(maybeFrom, expect(";")); }
 	    if (value == "default") { cx.marked = "keyword"; return cont(expression, expect(";")); }
+	    if (type == "{") return cont(commasep(exportField, "}"), maybeFrom, expect(";"));
 	    return pass(statement);
+	  }
+	  function exportField(type, value) {
+	    if (value == "as") { cx.marked = "keyword"; return cont(expect("variable")); }
+	    if (type == "variable") return pass(expressionNoComma, exportField);
 	  }
 	  function afterImport(type) {
 	    if (type == "string") return cont();
-	    return pass(importSpec, maybeFrom);
+	    return pass(importSpec, maybeMoreImports, maybeFrom);
 	  }
 	  function importSpec(type, value) {
 	    if (type == "{") return contCommasep(importSpec, "}");
 	    if (type == "variable") register(value);
 	    if (value == "*") cx.marked = "keyword";
 	    return cont(maybeAs);
+	  }
+	  function maybeMoreImports(type) {
+	    if (type == ",") return cont(importSpec, maybeMoreImports)
 	  }
 	  function maybeAs(_type, value) {
 	    if (value == "as") { cx.marked = "keyword"; return cont(importSpec); }
@@ -19657,7 +23954,7 @@
 
 
 /***/ },
-/* 112 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -19665,7 +23962,7 @@
 
 	(function(mod) {
 	  if (true) // CommonJS
-	    mod(__webpack_require__(100));
+	    mod(__webpack_require__(181));
 	  else if (typeof define == "function" && define.amd) // AMD
 	    define(["../../lib/codemirror"], mod);
 	  else // Plain browser env
@@ -20186,7 +24483,7 @@
 	    "transition-property", "transition-timing-function", "unicode-bidi",
 	    "user-select", "vertical-align", "visibility", "voice-balance", "voice-duration",
 	    "voice-family", "voice-pitch", "voice-range", "voice-rate", "voice-stress",
-	    "voice-volume", "volume", "white-space", "widows", "width", "word-break",
+	    "voice-volume", "volume", "white-space", "widows", "width", "will-change", "word-break",
 	    "word-spacing", "word-wrap", "z-index",
 	    // SVG-specific
 	    "clip-path", "clip-rule", "mask", "enable-background", "filter", "flood-color",
@@ -20260,7 +24557,7 @@
 	    "cell", "center", "checkbox", "circle", "cjk-decimal", "cjk-earthly-branch",
 	    "cjk-heavenly-stem", "cjk-ideographic", "clear", "clip", "close-quote",
 	    "col-resize", "collapse", "color", "color-burn", "color-dodge", "column", "column-reverse",
-	    "compact", "condensed", "contain", "content",
+	    "compact", "condensed", "contain", "content", "contents",
 	    "content-box", "context-menu", "continuous", "copy", "counter", "counters", "cover", "crop",
 	    "cross", "crosshair", "currentcolor", "cursive", "cyclic", "darken", "dashed", "decimal",
 	    "decimal-leading-zero", "default", "default-button", "dense", "destination-atop",
@@ -20303,7 +24600,7 @@
 	    "mix", "mongolian", "monospace", "move", "multiple", "multiply", "myanmar", "n-resize",
 	    "narrower", "ne-resize", "nesw-resize", "no-close-quote", "no-drop",
 	    "no-open-quote", "no-repeat", "none", "normal", "not-allowed", "nowrap",
-	    "ns-resize", "numbers", "numeric", "nw-resize", "nwse-resize", "oblique", "octal", "open-quote",
+	    "ns-resize", "numbers", "numeric", "nw-resize", "nwse-resize", "oblique", "octal", "opacity", "open-quote",
 	    "optimizeLegibility", "optimizeSpeed", "oriya", "oromo", "outset",
 	    "outside", "outside-shape", "overlay", "overline", "padding", "padding-box",
 	    "painted", "page", "paused", "persian", "perspective", "plus-darker", "plus-lighter",
@@ -20315,7 +24612,7 @@
 	    "rgb", "rgba", "ridge", "right", "rotate", "rotate3d", "rotateX", "rotateY",
 	    "rotateZ", "round", "row", "row-resize", "row-reverse", "rtl", "run-in", "running",
 	    "s-resize", "sans-serif", "saturation", "scale", "scale3d", "scaleX", "scaleY", "scaleZ", "screen",
-	    "scroll", "scrollbar", "se-resize", "searchfield",
+	    "scroll", "scrollbar", "scroll-position", "se-resize", "searchfield",
 	    "searchfield-cancel-button", "searchfield-decoration",
 	    "searchfield-results-button", "searchfield-results-decoration",
 	    "semi-condensed", "semi-expanded", "separate", "serif", "show", "sidama",
@@ -20333,9 +24630,9 @@
 	    "thick", "thin", "threeddarkshadow", "threedface", "threedhighlight",
 	    "threedlightshadow", "threedshadow", "tibetan", "tigre", "tigrinya-er",
 	    "tigrinya-er-abegede", "tigrinya-et", "tigrinya-et-abegede", "to", "top",
-	    "trad-chinese-formal", "trad-chinese-informal",
+	    "trad-chinese-formal", "trad-chinese-informal", "transform",
 	    "translate", "translate3d", "translateX", "translateY", "translateZ",
-	    "transparent", "ultra-condensed", "ultra-expanded", "underline", "up",
+	    "transparent", "ultra-condensed", "ultra-expanded", "underline", "unset", "up",
 	    "upper-alpha", "upper-armenian", "upper-greek", "upper-hexadecimal",
 	    "upper-latin", "upper-norwegian", "upper-roman", "uppercase", "urdu", "url",
 	    "var", "vertical", "vertical-text", "visible", "visibleFill", "visiblePainted",
@@ -20488,10 +24785,10 @@
 
 
 /***/ },
-/* 113 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _codemirror = __webpack_require__(100);
+	var _codemirror = __webpack_require__(181);
 
 	var _codemirror2 = _interopRequireDefault(_codemirror);
 
@@ -20549,14 +24846,14 @@
 	});
 
 /***/ },
-/* 114 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _SReadMoreComponent = __webpack_require__(115);
+	var _SReadMoreComponent = __webpack_require__(196);
 
 	var _SReadMoreComponent2 = _interopRequireDefault(_SReadMoreComponent);
 
@@ -20565,7 +24862,7 @@
 	exports.default = _SReadMoreComponent2.default.define('s-read-more', _SReadMoreComponent2.default);
 
 /***/ },
-/* 115 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20578,15 +24875,15 @@
 
 	var _SWebComponent3 = _interopRequireDefault(_SWebComponent2);
 
-	var _realHeight = __webpack_require__(116);
+	var _realHeight = __webpack_require__(197);
 
 	var _realHeight2 = _interopRequireDefault(_realHeight);
 
-	var _getStyleProperty = __webpack_require__(117);
+	var _getStyleProperty = __webpack_require__(198);
 
 	var _getStyleProperty2 = _interopRequireDefault(_getStyleProperty);
 
-	var _style = __webpack_require__(118);
+	var _style = __webpack_require__(199);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -20854,7 +25151,7 @@
 	exports.default = SReadMoreComponent;
 
 /***/ },
-/* 116 */
+/* 197 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20881,7 +25178,7 @@
 	}
 
 /***/ },
-/* 117 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20936,7 +25233,7 @@
 	}
 
 /***/ },
-/* 118 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20947,15 +25244,15 @@
 
 	exports.default = style;
 
-	var _uncamelize = __webpack_require__(119);
+	var _uncamelize = __webpack_require__(200);
 
 	var _uncamelize2 = _interopRequireDefault(_uncamelize);
 
-	var _styleString2Object = __webpack_require__(120);
+	var _styleString2Object = __webpack_require__(201);
 
 	var _styleString2Object2 = _interopRequireDefault(_styleString2Object);
 
-	var _styleObject2String = __webpack_require__(121);
+	var _styleObject2String = __webpack_require__(202);
 
 	var _styleObject2String2 = _interopRequireDefault(_styleObject2String);
 
@@ -21017,7 +25314,7 @@
 	}
 
 /***/ },
-/* 119 */
+/* 200 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21041,7 +25338,7 @@
 	}
 
 /***/ },
-/* 120 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21093,7 +25390,7 @@
 	}
 
 /***/ },
-/* 121 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21101,7 +25398,7 @@
 	exports.__esModule = true;
 	exports.default = styleObject2String;
 
-	var _uncamelize = __webpack_require__(119);
+	var _uncamelize = __webpack_require__(200);
 
 	var _uncamelize2 = _interopRequireDefault(_uncamelize);
 

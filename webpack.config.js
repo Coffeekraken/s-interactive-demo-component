@@ -9,7 +9,7 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.js$/,
-			exclude: /(bower_components|node_modules)/,
+			exclude: /(bower_components|node_modules|compile-server)/,
 			loader: 'babel-loader'
 		}]
 	}
