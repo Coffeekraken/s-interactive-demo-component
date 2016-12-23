@@ -9,9 +9,9 @@
     "dist.build.js": "babel src -d dist",
     "dist.watch": "concurrently --kill-others \"npm run dist.watch.js\"",
     "dist.watch.js": "nodemon -w src -e js -x \"npm run dist\"",
-	"demo": "npm run demo.build && open ./demo/index.html && npm run demo.server",
-	"demo.server": "/data/web/coffeekraken/compile-server/run",
-	"demo.build": "npm run demo.build.css && npm run demo.build.js",
+    "demo": "concurrently \"npm run demo.server\" \"npm run demo.build && open ./demo/index.html\"",
+    "demo.server": "/data/web/coffeekraken/compile-server/run",
+    "demo.build": "npm run demo.build.css && npm run demo.build.js",
     "demo.build.css": "node-sass demo/src/sass/style.scss demo/dist/css/style.css",
     "demo.build.js": "npm run dist.build.js && webpack",
     "demo.watch": "concurrently --kill-others \"npm run demo.watch.css\" \"npm run demo.watch.js\"",
@@ -34,8 +34,8 @@
   "dependencies": {
     "clipboard": "^1.5.16",
     "codemirror": "^5.21.0",
+    "coffeekraken-s-codemirror-component": "git+https://git@github.com/Coffeekraken/s-codemirror-component.git#release/0.0.1",
     "coffeekraken-sugar": "git+https://git@github.com/Coffeekraken/sugar.git#release/0.0.1",
-	"coffeekraken-s-codemirror-component": "git+https://git@github.com/Coffeekraken/s-codemirror-component.git#release/0.0.1",
     "raw-loader": "^0.5.1"
   },
   "devDependencies": {

@@ -5,5 +5,3 @@ body {
 
 s-interactive-demo {
   height: 100vh; }
-  s-interactive-demo > * {
-    height: 50vh; }
