@@ -1,5 +1,5 @@
 {
-  "name": "interactive-demo",
+  "name": "coffeekraken-s-interactive-demo",
   "version": "0.0.1",
   "description": "Provide a simple, powerful and nice way to display interactive html demo",
   "main": "dist/index.js",
