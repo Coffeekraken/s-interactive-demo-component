@@ -32,12 +32,13 @@
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "license": "MIT",
   "dependencies": {
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "clipboard": "^1.5.16",
     "codemirror": "^5.21.0",
     "coffeekraken-s-codemirror-component": "git+https://git@github.com/Coffeekraken/s-codemirror-component.git#release/0.0.1",
     "coffeekraken-sugar": "git+https://git@github.com/Coffeekraken/sugar.git#release/0.0.1",
-    "raw-loader": "^0.5.1",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2"
+    "lodash": "^4.17.3",
+    "raw-loader": "^0.5.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

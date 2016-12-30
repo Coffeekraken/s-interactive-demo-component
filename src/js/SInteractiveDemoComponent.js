@@ -1,6 +1,7 @@
 import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
 import __throttle from 'coffeekraken-sugar/js/utils/functions/throttle'
 import __prependChild from 'coffeekraken-sugar/js/dom/prependChild'
+import _find from 'lodash/find';
 
 export default class SInteractiveDemoComponent extends SWebComponent {
 
@@ -23,23 +24,45 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				width:100%;
 				flex-flow: row wrap;
 				position:relative;
+				color:#777;
+				border:1px solid rgba(0,0,0,.05);
 			}
-			${componentNameDash} > *:after {
-				content:"";
-				display:block;
-				position:absolute;
-				top:0; left:0;
-				width:100%; height:100%;
-				border:1px solid rgba(0,0,0,.1);
-				z-index:99;
-				pointer-events:none;
-			}
+			// ${componentNameDash} > *[id]:after {
+			// 	content:"";
+			// 	display:block;
+			// 	position:absolute;
+			// 	top:0; left:0;
+			// 	width:100%; height:100%;
+			// 	border:1px solid rgba(0,0,0,.1);
+			// 	z-index:99;
+			// 	pointer-events:none;
+			// }
 			${componentNameDash}:not([layout="vertical"]) > * + *:after {
 				border-left:none;
 			}
+			.${componentNameDash}__header {
+				user-selection:none;
+				flex:1 1 100% !important;
+				width:100%;
+				position:relative;
+				background:rgba(0,0,0,.05);
+			}
+			.${componentNameDash}__display-toggle {
+				padding:10px 15px 10px 30px;
+				background-image:url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='#777' d='M24 10.935v2.13l-8 3.948v-2.23L21.64 12 16 9.21V6.987l8 3.948zM8 14.783L2.36 12 8 9.21V6.987l-8 3.948v2.13l8 3.948v-2.23zM15.047 4H12.97L8.957 20h2.073l4.017-16z'/></svg>");
+				background-size:12px 12px;
+				background-position:10px 10px;
+				background-repeat:no-repeat;
+				display:inline-block;
+				font-size:12px;
+				cursor:pointer;
+				opacity:.45;
+			}
+			.${componentNameDash}__display-toggle.active {
+				opacity:1;
+			}
 			.${componentNameDash}__preview {
 				box-sizing : border-box;
-				flex:1 1 100%;
 				flex:1 0;
 				position:relative;
 			}
@@ -121,7 +144,14 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			 * @prop
 			 * @type 		{String}
 			 */
-			layout : 'horizontal'
+			layout : 'horizontal',
+
+			/**
+			 * Hide some editors by default
+			 * @prop
+			 * @type 		{Array}
+			 */
+			hide : []
 		};
 	}
 
@@ -141,6 +171,8 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		super.componentWillMount();
 		this._updateTimeout = null;
 		this._compilationsCount = 0;
+		this._refs = {};
+		this._iframeRefs = {};
 	}
 
 	/**
@@ -152,58 +184,79 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		// get the content
 		const content = this.innerHTML;
 
-		// find some some parts
-		const parts = [].filter.call(this.children, (child) => {
+		// find the editors
+		this._refs.editors = [].filter.call(this.children, (child) => {
 			return child.id && child.nodeName !== 'IFRAME';
 		});
 
 		// inject the html needed
-		this._previewElm = document.createElement('div');
-		this._previewElm.className = `${this._componentNameDash}__preview`;
+		this._refs.preview = document.createElement('div');
+		this._refs.preview.className = `${this._componentNameDash}__preview`;
 
 		// loading
-		this._previewLoaderElm = document.createElement('div');
-		this._previewLoaderElm.className = `${this._componentNameDash}__preview-loader`;
+		this._refs.previewLoader = document.createElement('div');
+		this._refs.previewLoader.className = `${this._componentNameDash}__preview-loader`;
+
+		// header
+		this._refs.header = document.createElement('div');
+		this._refs.header.className = `${this._componentNameDash}__header`;
 
 		// iframe
-		this._iframeElm = document.createElement('iframe');
-		this._iframeElm.width = '100%';
-		this._iframeElm.setAttribute('frameborder', 'no');
+		this._refs.iframe = document.createElement('iframe');
+		this._refs.iframe.width = '100%';
+		this._refs.iframe.setAttribute('frameborder', 'no');
 
 		// append elements
-		this._previewElm.appendChild(this._iframeElm);
-		this._previewElm.appendChild(this._previewLoaderElm);
-		this.appendChild(this._previewElm);
-		// __prependChild(this._previewElm, this);
+		this._refs.preview.appendChild(this._refs.iframe);
+		this._refs.preview.appendChild(this._refs.previewLoader);
+		__prependChild(this._refs.header, this);
+		this.appendChild(this._refs.preview);
 
 		// get the document of the iframe reference
-		this._iframeDocument = this._iframeElm.contentDocument || this._iframeElm.contentWindow.document;
+		this._iframeRefs.document = this._refs.iframe.contentDocument || this._refs.iframe.contentWindow.document;
 
 		// wrapper
-		this._wrapperElm = this._iframeDocument.createElement('div');
-		this._wrapperElm.setAttribute('id', 'wrapper');
+		this._iframeRefs.wrapper = this._iframeRefs.document.createElement('div');
+		this._iframeRefs.wrapper.setAttribute('id', 'wrapper');
 
 		// firefox bugfix
-		this._iframeDocument.open();
-		this._iframeDocument.close();
+		this._iframeRefs.document.open();
+		this._iframeRefs.document.close();
 
 		// get the iframe body reference
-		this._iframeBody = this._iframeDocument.body;
+		this._iframeRefs.body = this._iframeRefs.document.body;
 
 		// create the preview div
-		[].forEach.call(parts, (part) => {
-			const partElm = this._iframeDocument.createElement('div');
-			partElm.id = part.id;
-			this._wrapperElm.appendChild(partElm);
+		[].forEach.call(this._refs.editors, (part) => {
+			const innerIframePartElm = this._iframeRefs.document.createElement('div');
+			innerIframePartElm.id = part.id;
+			this._iframeRefs.wrapper.appendChild(innerIframePartElm);
+			// create toggle for this part
+			const toggleElm = document.createElement('div');
+			toggleElm.className = `${this._componentNameDash}__display-toggle`;
+			toggleElm._toggleId = part.id;
+			toggleElm.innerHTML = part.id;
+			// check if need to be displayed or not
+			if (this.props.hide.indexOf(part.id) === -1) {
+				toggleElm.classList.add('active');
+			} else {
+				// hide the editor
+				part.style.display = 'none';
+			}
+			// append to header
+			this._refs.header.appendChild(toggleElm);
+			// listen for click
+			toggleElm.addEventListener('click', this._onDisplayToggleClick.bind(this));
 		});
 
 		// append wrapper
-		this._iframeBody.appendChild(this._wrapperElm);
+		this._iframeRefs.body.appendChild(this._iframeRefs.wrapper);
 
 		// inject resources
 		this._injectResourcesInsidePreview();
 
-		this._iframeDocument.addEventListener('componentDidMount', this._onComponentDidMountInsideIframe.bind(this));
+		// listen when component has mounted inside iframe
+		this._iframeRefs.document.addEventListener('componentDidMount', this._onComponentDidMountInsideIframe.bind(this));
 
 		// listen for compilations
 		this.addEventListener('compileStart', this._onCompileStart.bind(this));
@@ -238,12 +291,12 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			// inject the code
 			codeElm.innerHTML = rawCode;
 			// empty the container before appending the new one
-			this._iframeBody.querySelector(`#${e.target.id}`).innerHTML = '';
+			this._iframeRefs.body.querySelector(`#${e.target.id}`).innerHTML = '';
 			// append the new code into container
-			this._iframeBody.querySelector(`#${e.target.id}`).appendChild(codeElm);
+			this._iframeRefs.body.querySelector(`#${e.target.id}`).appendChild(codeElm);
 			// update html if needed
 			if (updateHtml) {
-				const htmlElms = this._iframeBody.querySelectorAll('[html]');
+				const htmlElms = this._iframeRefs.body.querySelectorAll('[html]');
 				[].forEach.call(htmlElms, (elm) => {
 					if ( ! elm._originalCode) return;
 					elm.innerHTML = '';
@@ -256,10 +309,32 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	}
 
 	/**
+	 * On toggle display clicked
+	 * @param 		{MouseEvent} 		e 		The mouse event
+	 */
+	_onDisplayToggleClick(e) {
+		// check if is active or not
+		const isActive = e.target.classList.contains('active');
+		// get the editor
+		const editorElm = _find(this._refs.editors, (editor) => {
+			return editor.id === e.target._toggleId;
+		});
+		console.log('editor', editorElm);
+		if (isActive) {
+			e.target.classList.remove('active');
+			editorElm.style.display = 'none';
+		} else {
+			e.target.classList.add('active');
+			editorElm.style.display = 'block';
+			editorElm.refresh && editorElm.refresh();
+		}
+	}
+
+	/**
 	 * On component did mount inside iframe
 	 */
 	_onComponentDidMountInsideIframe() {
-		this._iframeDocument.removeEventListener('componentDidMount', this._onComponentDidMountInsideIframe);
+		this._iframeRefs.document.removeEventListener('componentDidMount', this._onComponentDidMountInsideIframe);
 		if (this.props.resizePreview) this._updatePreviewHeight();
 	}
 
@@ -300,7 +375,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	 * Inject scripts and styles inside preview
 	 */
 	_injectResourcesInsidePreview() {
-		const stl = this._iframeDocument.createElement('style');
+		const stl = this._iframeRefs.document.createElement('style');
 		stl.innerHTML = `
 			body {
 				margin:0;
@@ -310,25 +385,25 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				padding: 20px;
 			}
 		`;
-		this._iframeBody.appendChild(stl);
+		this._iframeRefs.body.appendChild(stl);
 
 		if (this.props.scripts) {
 			// make sure it's an array
 			const scripts = [].concat(this.props.scripts);
 			scripts.forEach((script) => {
-				const scriptTag = this._iframeDocument.createElement('script');
+				const scriptTag = this._iframeRefs.document.createElement('script');
 				scriptTag.src = script;
-				this._iframeBody.appendChild(scriptTag);
+				this._iframeRefs.body.appendChild(scriptTag);
 			});
 		}
 		if (this.props.styles) {
 			// make sure it's an array
 			const styles = [].concat(this.props.styles);
 			styles.forEach((style) => {
-				const styleTag = this._iframeDocument.createElement('link');
+				const styleTag = this._iframeRefs.document.createElement('link');
 				styleTag.href = style;
 				styleTag.rel = 'stylesheet';
-				this._iframeBody.appendChild(styleTag);
+				this._iframeRefs.body.appendChild(styleTag);
 			});
 		}
 	}
@@ -338,8 +413,8 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	 */
 	_updatePreviewHeight() {
 		setTimeout(() => {
-			this._iframeElm.removeAttribute('height');
-			this._iframeElm.height = this._wrapperElm.scrollHeight + 15 + 'px';
+			this._refs.iframe.removeAttribute('height');
+			this._refs.iframe.height = this._iframeRefs.wrapper.scrollHeight + 15 + 'px';
 		}, 50);
 	}
 }
