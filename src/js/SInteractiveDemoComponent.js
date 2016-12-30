@@ -34,19 +34,20 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				z-index:99;
 				pointer-events:none;
 			}
-			${componentNameDash} > * + *:after {
+			${componentNameDash}:not([layout="vertical"]) > * + *:after {
 				border-left:none;
-			}
-			${componentNameDash} iframe {
-				// position:absolute;
-				// top:0; left:0;
-				// width:100%; height:100%;
 			}
 			.${componentNameDash}__preview {
 				box-sizing : border-box;
 				flex:1 1 100%;
 				flex:1 0;
 				position:relative;
+			}
+			${componentNameDash}[layout="vertical"] {
+				flex-flow: column wrap;
+			}
+			${componentNameDash}[layout="vertical"] .${componentNameDash}__preview {
+				order:-1;
 			}
 			.${componentNameDash}__preview-loader {
 				position:absolute;
@@ -106,8 +107,30 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			 * @prop
 			 * @type 		{String}
 			 */
-			styles : null
+			styles : null,
+
+			/**
+			 * Automatically resize the preview
+			 * @prop
+			 * @type 		{Boolean}
+			 */
+			resizePreview : true,
+
+			/**
+			 * Specify the layout wanted between vertical and horizontal
+			 * @prop
+			 * @type 		{String}
+			 */
+			layout : 'horizontal'
 		};
+	}
+
+	/**
+	 * Physical props
+	 * @definition 		SWebcomponent.physicalProps
+	 */
+	static get physicalProps() {
+		return ['layout'];
 	}
 
 	/**
@@ -228,7 +251,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				});
 			}
 			// update preview size
-			this._updatePreviewHeight();
+			if (this.props.resizePreview) this._updatePreviewHeight();
 		});
 	}
 
@@ -237,7 +260,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	 */
 	_onComponentDidMountInsideIframe() {
 		this._iframeDocument.removeEventListener('componentDidMount', this._onComponentDidMountInsideIframe);
-		this._updatePreviewHeight();
+		if (this.props.resizePreview) this._updatePreviewHeight();
 	}
 
 	/**
@@ -270,7 +293,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	 */
 	_onWindowResize() {
 		// update code and preview size
-		this._updatePreviewHeight();
+		if (this.props.resizePreview) this._updatePreviewHeight();
 	}
 
 	/**
@@ -316,7 +339,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	_updatePreviewHeight() {
 		setTimeout(() => {
 			this._iframeElm.removeAttribute('height');
-			this._iframeElm.height = this._wrapperElm.scrollHeight + 2 + 'px';
+			this._iframeElm.height = this._wrapperElm.scrollHeight + 15 + 'px';
 		}, 50);
 	}
 }

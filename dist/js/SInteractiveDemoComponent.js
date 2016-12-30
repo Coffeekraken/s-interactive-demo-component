@@ -162,7 +162,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 					});
 				}
 				// update preview size
-				_this2._updatePreviewHeight();
+				if (_this2.props.resizePreview) _this2._updatePreviewHeight();
 			});
 		}
 
@@ -174,7 +174,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 		key: '_onComponentDidMountInsideIframe',
 		value: function _onComponentDidMountInsideIframe() {
 			this._iframeDocument.removeEventListener('componentDidMount', this._onComponentDidMountInsideIframe);
-			this._updatePreviewHeight();
+			if (this.props.resizePreview) this._updatePreviewHeight();
 		}
 
 		/**
@@ -216,7 +216,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 		key: '_onWindowResize',
 		value: function _onWindowResize() {
 			// update code and preview size
-			this._updatePreviewHeight();
+			if (this.props.resizePreview) this._updatePreviewHeight();
 		}
 
 		/**
@@ -264,7 +264,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 
 			setTimeout(function () {
 				_this4._iframeElm.removeAttribute('height');
-				_this4._iframeElm.height = _this4._wrapperElm.scrollHeight + 2 + 'px';
+				_this4._iframeElm.height = _this4._wrapperElm.scrollHeight + 15 + 'px';
 			}, 50);
 		}
 	}], [{
@@ -276,7 +276,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
    * @definition 		SWebComponent.css
    */
 		value: function css(componentName, componentNameDash) {
-			return '\n\t\t\t@keyframes ' + componentNameDash + '-preview-loader {\n\t\t\t\tfrom {\n\t\t\t\t\ttransform:rotate(0deg);\n\t\t\t\t}\n\t\t\t\tto {\n\t\t\t\t\ttransform:rotate(360deg);\n\t\t\t\t}\n\t\t\t}\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay: flex;\n\t\t\t\twidth:100%;\n\t\t\t\tflex-flow: row wrap;\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > *:after {\n\t\t\t\tcontent:"";\n\t\t\t\tdisplay:block;\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tborder:1px solid rgba(0,0,0,.1);\n\t\t\t\tz-index:99;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > * + *:after {\n\t\t\t\tborder-left:none;\n\t\t\t}\n\t\t\t' + componentNameDash + ' iframe {\n\t\t\t\t// position:absolute;\n\t\t\t\t// top:0; left:0;\n\t\t\t\t// width:100%; height:100%;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview {\n\t\t\t\tbox-sizing : border-box;\n\t\t\t\tflex:1 1 100%;\n\t\t\t\tflex:1 0;\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader {\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tbackground-color:rgba(38,50,56,.5);\n\t\t\t\topacity: 0;\n\t\t\t\ttransition:opacity .1s ease-in-out;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader:after {\n\t\t\t\tcontent:"";\n\t\t\t\tdisplay:block;\n\t\t\t\tposition:absolute;\n\t\t\t\twidth:20px; height:20px;\n\t\t\t\ttop:50%; left:50%;\n\t\t\t\tmargin-top:-10px;\n\t\t\t\tmargin-left:-10px;\n\t\t\t\ttransform-origin:10px 10px;\n\t\t\t\tbackground-image:url("data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'white\' d=\'M13 0c3.7.3 7 2.3 9 5l-2 1c-1.5-2-4-3.7-7-4V0zM2 12c0-1.5.3-3 1-4L1 7c-.6 1.3-1 3-1 5 0 1.8.4 3.6 1.2 5L3 16c-.7-1-1-2.5-1-4zm20 0c0 1.5-.3 3-1 4l1.8 1c.8-1.4 1.2-3.2 1.2-5s-.4-3.6-1.2-5L21 8c.7 1 1 2.5 1 4zm-2 6c-1.5 2-4 3.7-7 4v2c3.7-.3 7-2.3 9-5l-2-1zM4 6c1.5-2 4-3.7 7-4V0C7.3.3 4 2.3 2 5l2 1zm7 16c-3-.3-5.5-2-7-4l-2 1c2 2.7 5.3 4.7 9 5v-2z\'/></svg>");\n\t\t\t\tbackground-position:50% 50%;\n\t\t\t\tbackground-size:20px;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tanimation:' + componentNameDash + '-preview-loader 1s linear infinite;\n\t\t\t\tfilter:drop-shadow(rgba(0,0,0,.3) 0 0 1px);\n\t\t\t}\n\t\t\t.' + componentNameDash + '--compiling .' + componentNameDash + '__preview-loader {\n\t\t\t\topacity: 1;\n\t\t\t\tpointer-events:all;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > *:not(.' + componentNameDash + '__preview) {\n\t\t\t\tflex:1 0;\n\t\t\t}\n\t\t\t@media all and (max-width:600px) {\n\t\t\t\t' + componentNameDash + ' {\n\t\t\t\t\tflex-flow: column wrap;\n\t\t\t\t}\n\t\t\t}\n\t\t';
+			return '\n\t\t\t@keyframes ' + componentNameDash + '-preview-loader {\n\t\t\t\tfrom {\n\t\t\t\t\ttransform:rotate(0deg);\n\t\t\t\t}\n\t\t\t\tto {\n\t\t\t\t\ttransform:rotate(360deg);\n\t\t\t\t}\n\t\t\t}\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay: flex;\n\t\t\t\twidth:100%;\n\t\t\t\tflex-flow: row wrap;\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > *:after {\n\t\t\t\tcontent:"";\n\t\t\t\tdisplay:block;\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tborder:1px solid rgba(0,0,0,.1);\n\t\t\t\tz-index:99;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t' + componentNameDash + ':not([layout="vertical"]) > * + *:after {\n\t\t\t\tborder-left:none;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview {\n\t\t\t\tbox-sizing : border-box;\n\t\t\t\tflex:1 1 100%;\n\t\t\t\tflex:1 0;\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="vertical"] {\n\t\t\t\tflex-flow: column wrap;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="vertical"] .' + componentNameDash + '__preview {\n\t\t\t\torder:-1;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader {\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tbackground-color:rgba(38,50,56,.5);\n\t\t\t\topacity: 0;\n\t\t\t\ttransition:opacity .1s ease-in-out;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader:after {\n\t\t\t\tcontent:"";\n\t\t\t\tdisplay:block;\n\t\t\t\tposition:absolute;\n\t\t\t\twidth:20px; height:20px;\n\t\t\t\ttop:50%; left:50%;\n\t\t\t\tmargin-top:-10px;\n\t\t\t\tmargin-left:-10px;\n\t\t\t\ttransform-origin:10px 10px;\n\t\t\t\tbackground-image:url("data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'white\' d=\'M13 0c3.7.3 7 2.3 9 5l-2 1c-1.5-2-4-3.7-7-4V0zM2 12c0-1.5.3-3 1-4L1 7c-.6 1.3-1 3-1 5 0 1.8.4 3.6 1.2 5L3 16c-.7-1-1-2.5-1-4zm20 0c0 1.5-.3 3-1 4l1.8 1c.8-1.4 1.2-3.2 1.2-5s-.4-3.6-1.2-5L21 8c.7 1 1 2.5 1 4zm-2 6c-1.5 2-4 3.7-7 4v2c3.7-.3 7-2.3 9-5l-2-1zM4 6c1.5-2 4-3.7 7-4V0C7.3.3 4 2.3 2 5l2 1zm7 16c-3-.3-5.5-2-7-4l-2 1c2 2.7 5.3 4.7 9 5v-2z\'/></svg>");\n\t\t\t\tbackground-position:50% 50%;\n\t\t\t\tbackground-size:20px;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tanimation:' + componentNameDash + '-preview-loader 1s linear infinite;\n\t\t\t\tfilter:drop-shadow(rgba(0,0,0,.3) 0 0 1px);\n\t\t\t}\n\t\t\t.' + componentNameDash + '--compiling .' + componentNameDash + '__preview-loader {\n\t\t\t\topacity: 1;\n\t\t\t\tpointer-events:all;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > *:not(.' + componentNameDash + '__preview) {\n\t\t\t\tflex:1 0;\n\t\t\t}\n\t\t\t@media all and (max-width:600px) {\n\t\t\t\t' + componentNameDash + ' {\n\t\t\t\t\tflex-flow: column wrap;\n\t\t\t\t}\n\t\t\t}\n\t\t';
 		}
 
 		/**
@@ -300,8 +300,33 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
      * @prop
      * @type 		{String}
      */
-				styles: null
+				styles: null,
+
+				/**
+     * Automatically resize the preview
+     * @prop
+     * @type 		{Boolean}
+     */
+				resizePreview: true,
+
+				/**
+     * Specify the layout wanted between vertical and horizontal
+     * @prop
+     * @type 		{String}
+     */
+				layout: 'horizontal'
 			};
+		}
+
+		/**
+   * Physical props
+   * @definition 		SWebcomponent.physicalProps
+   */
+
+	}, {
+		key: 'physicalProps',
+		get: function get() {
+			return ['layout'];
 		}
 	}]);
 
