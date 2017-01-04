@@ -66,6 +66,8 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 
 			_get(SInteractiveDemoComponent.prototype.__proto__ || Object.getPrototypeOf(SInteractiveDemoComponent.prototype), 'componentMount', this).call(this);
 
+			console.log('mount');
+
 			// get the content
 			var content = this.innerHTML;
 

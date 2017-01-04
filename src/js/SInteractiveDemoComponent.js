@@ -181,6 +181,8 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	componentMount() {
 		super.componentMount();
 
+		console.log('mount');
+
 		// get the content
 		const content = this.innerHTML;
 
