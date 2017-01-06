@@ -181,8 +181,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	componentMount() {
 		super.componentMount();
 
-		console.log('mount');
-
 		// get the content
 		const content = this.innerHTML;
 
@@ -228,6 +226,9 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		// get the iframe body reference
 		this._iframeRefs.body = this._iframeRefs.document.body;
 
+		// inject resources
+		this._injectResourcesInsidePreview();
+
 		// create the preview div
 		[].forEach.call(this._refs.editors, (part) => {
 			const innerIframePartElm = this._iframeRefs.document.createElement('div');
@@ -254,12 +255,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		// append wrapper
 		this._iframeRefs.body.appendChild(this._iframeRefs.wrapper);
 
-		// inject resources
-		this._injectResourcesInsidePreview();
-
-		// listen when component has mounted inside iframe
-		this._iframeRefs.document.addEventListener('componentDidMount', this._onComponentDidMountInsideIframe.bind(this));
-
 		// listen for compilations
 		this.addEventListener('compileStart', this._onCompileStart.bind(this));
 		this.addEventListener('compileEnd', this._onCompileEnd.bind(this));
@@ -276,16 +271,16 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			// handle how to inject code
 			switch(e.detail.language) {
 				case 'css':
-					codeElm = document.createElement('style');
+					codeElm = this._iframeRefs.document.createElement('style');
 					updateHtml = true;
 				break;
 				case 'js':
 				case 'javascript':
-					codeElm = document.createElement('script');
+					codeElm = this._iframeRefs.document.createElement('script');
 					updateHtml = true;
 				break;
 				default:
-					codeElm = document.createElement('div');
+					codeElm = this._iframeRefs.document.createElement('div');
 					codeElm.setAttribute('html',true);
 					codeElm._originalCode = rawCode;
 				break;
@@ -306,7 +301,12 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				});
 			}
 			// update preview size
-			if (this.props.resizePreview) this._updatePreviewHeight();
+			if (this.props.resizePreview) {
+				this._updatePreviewHeight();
+				setTimeout(() => {
+					this._updatePreviewHeight();
+				},500);
+			}
 		});
 	}
 
@@ -321,7 +321,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		const editorElm = _find(this._refs.editors, (editor) => {
 			return editor.id === e.target._toggleId;
 		});
-		console.log('editor', editorElm);
 		if (isActive) {
 			e.target.classList.remove('active');
 			editorElm.style.display = 'none';
@@ -330,14 +329,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			editorElm.style.display = 'block';
 			editorElm.refresh && editorElm.refresh();
 		}
-	}
-
-	/**
-	 * On component did mount inside iframe
-	 */
-	_onComponentDidMountInsideIframe() {
-		this._iframeRefs.document.removeEventListener('componentDidMount', this._onComponentDidMountInsideIframe);
-		if (this.props.resizePreview) this._updatePreviewHeight();
 	}
 
 	/**

@@ -66,8 +66,6 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 
 			_get(SInteractiveDemoComponent.prototype.__proto__ || Object.getPrototypeOf(SInteractiveDemoComponent.prototype), 'componentMount', this).call(this);
 
-			console.log('mount');
-
 			// get the content
 			var content = this.innerHTML;
 
@@ -113,6 +111,9 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 			// get the iframe body reference
 			this._iframeRefs.body = this._iframeRefs.document.body;
 
+			// inject resources
+			this._injectResourcesInsidePreview();
+
 			// create the preview div
 			[].forEach.call(this._refs.editors, function (part) {
 				var innerIframePartElm = _this2._iframeRefs.document.createElement('div');
@@ -139,12 +140,6 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 			// append wrapper
 			this._iframeRefs.body.appendChild(this._iframeRefs.wrapper);
 
-			// inject resources
-			this._injectResourcesInsidePreview();
-
-			// listen when component has mounted inside iframe
-			this._iframeRefs.document.addEventListener('componentDidMount', this._onComponentDidMountInsideIframe.bind(this));
-
 			// listen for compilations
 			this.addEventListener('compileStart', this._onCompileStart.bind(this));
 			this.addEventListener('compileEnd', this._onCompileEnd.bind(this));
@@ -161,16 +156,16 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 				// handle how to inject code
 				switch (e.detail.language) {
 					case 'css':
-						codeElm = document.createElement('style');
+						codeElm = _this2._iframeRefs.document.createElement('style');
 						updateHtml = true;
 						break;
 					case 'js':
 					case 'javascript':
-						codeElm = document.createElement('script');
+						codeElm = _this2._iframeRefs.document.createElement('script');
 						updateHtml = true;
 						break;
 					default:
-						codeElm = document.createElement('div');
+						codeElm = _this2._iframeRefs.document.createElement('div');
 						codeElm.setAttribute('html', true);
 						codeElm._originalCode = rawCode;
 						break;
@@ -191,7 +186,12 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 					});
 				}
 				// update preview size
-				if (_this2.props.resizePreview) _this2._updatePreviewHeight();
+				if (_this2.props.resizePreview) {
+					_this2._updatePreviewHeight();
+					setTimeout(function () {
+						_this2._updatePreviewHeight();
+					}, 500);
+				}
 			});
 		}
 
@@ -209,7 +209,6 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 			var editorElm = (0, _find3.default)(this._refs.editors, function (editor) {
 				return editor.id === e.target._toggleId;
 			});
-			console.log('editor', editorElm);
 			if (isActive) {
 				e.target.classList.remove('active');
 				editorElm.style.display = 'none';
@@ -218,17 +217,6 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 				editorElm.style.display = 'block';
 				editorElm.refresh && editorElm.refresh();
 			}
-		}
-
-		/**
-   * On component did mount inside iframe
-   */
-
-	}, {
-		key: '_onComponentDidMountInsideIframe',
-		value: function _onComponentDidMountInsideIframe() {
-			this._iframeRefs.document.removeEventListener('componentDidMount', this._onComponentDidMountInsideIframe);
-			if (this.props.resizePreview) this._updatePreviewHeight();
 		}
 
 		/**
