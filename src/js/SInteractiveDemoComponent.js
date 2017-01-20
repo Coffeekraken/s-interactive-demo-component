@@ -3,11 +3,29 @@ import __throttle from 'coffeekraken-sugar/js/utils/functions/throttle'
 import __prependChild from 'coffeekraken-sugar/js/dom/prependChild'
 import _find from 'lodash/find';
 
+/**
+ * @class 	SInteractiveDemoComponent 	SWebComponent
+ * Provide a nice webcomponent to display interactive html/css/js demo (codepen like).
+ * @example 	html
+ * <s-interactive-demo>
+ * 	<s-codemirror id="html" language="html">
+ *  	<h1>My Cool demo</h1>
+ *  </s-codemirror>
+ * 	<s-codemirror id="css" language="css">
+ *  	h1 {
+ *  		color : red
+ *  	}
+ *  </s-codemirror>
+ * </s-interactive-demo>
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+ */
+
 export default class SInteractiveDemoComponent extends SWebComponent {
 
 	/**
 	 * Base css
 	 * @definition 		SWebComponent.css
+	 * @protected
 	 */
 	static css(componentName, componentNameDash) {
 		return `
@@ -115,20 +133,21 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	/**
 	 * Default props
 	 * @definition 		SWebcomponent.defaultProps
+	 * @protected
 	 */
 	static get defaultProps() {
 		return {
 			/**
 			 * Script to load inside the demo
 			 * @prop
-			 * @type 		{String}
+			 * @type 		{String|Array}
 			 */
 			scripts : null,
 
 			/**
 			 * Styles to load inside the demo
 			 * @prop
-			 * @type 		{String}
+			 * @type 		{String|Array}
 			 */
 			styles : null,
 
@@ -147,7 +166,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			layout : 'horizontal',
 
 			/**
-			 * Hide some editors by default
+			 * Array of editors ids to hide by default
 			 * @prop
 			 * @type 		{Array}
 			 */
@@ -158,6 +177,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	/**
 	 * Physical props
 	 * @definition 		SWebcomponent.physicalProps
+	 * @protected
 	 */
 	static get physicalProps() {
 		return ['layout'];
@@ -166,6 +186,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	/**
 	 * Component will mount
 	 * @definition 		SWebcomponent.componentWillMount
+	 * @protected
 	 */
 	componentWillMount() {
 		super.componentWillMount();
@@ -177,6 +198,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 
 	/**
 	 * Component mount
+	 * @protected
 	 */
 	componentMount() {
 		super.componentMount();
@@ -313,7 +335,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	/**
 	 * On toggle display clicked
 	 * @param 		{MouseEvent} 		e 		The mouse event
-	 */
+ 	 */
 	_onDisplayToggleClick(e) {
 		// check if is active or not
 		const isActive = e.target.classList.contains('active');
