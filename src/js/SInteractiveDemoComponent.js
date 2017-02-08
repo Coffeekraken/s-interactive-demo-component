@@ -81,13 +81,14 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			}
 			${componentNameDash}[layout="top"] .${componentNameDash}__preview {
 				flex:1 1 100%;
+				order:-1;
 			}
 			${componentNameDash}[layout="bottom"] .${componentNameDash}__preview {
 				flex:1 1 100%;
 				order: 2;
 			}
 			${componentNameDash}[layout="bottom"] .${componentNameDash}__header {
-				order: 1;
+				order : 1;
 			}
 			.${componentNameDash}__preview-loader {
 				position:absolute;
