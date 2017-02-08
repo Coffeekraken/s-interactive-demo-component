@@ -43,25 +43,14 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				flex-flow: row wrap;
 				position:relative;
 				color:#777;
-				border:1px solid rgba(0,0,0,.05);
 			}
-			// ${componentNameDash} > *[id]:after {
-			// 	content:"";
-			// 	display:block;
-			// 	position:absolute;
-			// 	top:0; left:0;
-			// 	width:100%; height:100%;
-			// 	border:1px solid rgba(0,0,0,.1);
-			// 	z-index:99;
-			// 	pointer-events:none;
+			// ${componentNameDash}:not([layout="vertical"]) > * + *:after {
+			// 	border-left:none;
 			// }
-			${componentNameDash}:not([layout="vertical"]) > * + *:after {
-				border-left:none;
-			}
 			.${componentNameDash}__header {
 				user-selection:none;
 				flex:1 1 100% !important;
-				width:100%;
+				width:100%; height:32px;
 				position:relative;
 				background:rgba(0,0,0,.05);
 			}
@@ -89,6 +78,16 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			}
 			${componentNameDash}[layout="vertical"] .${componentNameDash}__preview {
 				order:-1;
+			}
+			${componentNameDash}[layout="top"] .${componentNameDash}__preview {
+				flex:1 1 100%;
+			}
+			${componentNameDash}[layout="bottom"] .${componentNameDash}__preview {
+				flex:1 1 100%;
+				order: 2;
+			}
+			${componentNameDash}[layout="bottom"] .${componentNameDash}__header {
+				order: 1;
 			}
 			.${componentNameDash}__preview-loader {
 				position:absolute;
