@@ -47,12 +47,22 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			// ${componentNameDash}:not([layout="vertical"]) > * + *:after {
 			// 	border-left:none;
 			// }
+			.${componentNameDash}__preview-container {
+				display: flex;
+				flex-flow: column nowrap;
+				background: white;
+			}
 			.${componentNameDash}__header {
 				user-selection:none;
-				flex:1 1 100% !important;
+				flex:0 0 auto !important;
 				width:100%; height:32px;
 				position:relative;
 				background:rgba(0,0,0,.05);
+			}
+			.${componentNameDash}__preview {
+				box-sizing : border-box;
+				flex:1 0 auto;
+				position:relative;
 			}
 			.${componentNameDash}__display-toggle {
 				padding:10px 15px 10px 30px;
@@ -68,27 +78,26 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			.${componentNameDash}__display-toggle.active {
 				opacity:1;
 			}
-			.${componentNameDash}__preview {
-				box-sizing : border-box;
-				flex:1 0;
-				position:relative;
-			}
+
 			${componentNameDash}[layout="vertical"] {
 				flex-flow: column wrap;
 			}
+			${componentNameDash}[layout="vertical"] .${componentNameDash}__preview-container {
+				order:-1;
+			}
 			${componentNameDash}[layout="vertical"] .${componentNameDash}__preview {
+				order: -1;
+			}
+			${componentNameDash}[layout="top"] .${componentNameDash}__preview-container {
+				flex:1 1 100%;
 				order:-1;
 			}
 			${componentNameDash}[layout="top"] .${componentNameDash}__preview {
-				flex:1 1 100%;
-				order:-1;
+				order: -1;
 			}
-			${componentNameDash}[layout="bottom"] .${componentNameDash}__preview {
+			${componentNameDash}[layout="bottom"] .${componentNameDash}__preview-container {
 				flex:1 1 100%;
 				order: 2;
-			}
-			${componentNameDash}[layout="bottom"] .${componentNameDash}__header {
-				order : 1;
 			}
 			.${componentNameDash}__preview-loader {
 				position:absolute;
@@ -119,7 +128,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				opacity: 1;
 				pointer-events:all;
 			}
-			${componentNameDash} > *:not(.${componentNameDash}__preview) {
+			${componentNameDash} > *:not(.${componentNameDash}__preview-container) {
 				flex:1 0;
 			}
 			@media all and (max-width:600px) {
@@ -170,7 +179,14 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			 * @prop
 			 * @type 		{Array}
 			 */
-			hide : []
+			hide : [],
+
+			/**
+			 * Display toggles
+			 * @prop
+			 * @type 		{Boolean}
+			 */
+			displayToggles : true
 		};
 	}
 
@@ -211,6 +227,10 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			return child.id && child.nodeName !== 'IFRAME';
 		});
 
+		this._refs.previewContainer = this.querySelector(`[${this._componentNameDash}-preview]`) || document.createElement('div');
+		this._refs.previewContainer.className = `${this._componentNameDash}__preview-container`;
+		console.log('previre', this._refs.previewContainer);
+
 		// inject the html needed
 		this._refs.preview = document.createElement('div');
 		this._refs.preview.className = `${this._componentNameDash}__preview`;
@@ -224,6 +244,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		this._refs.header.className = `${this._componentNameDash}__header`;
 
 		// iframe
+		// this._refs.iframe = this.querySelector(`iframe[${this._componentNameDash}-preview]`) || document.createElement('iframe');
 		this._refs.iframe = document.createElement('iframe');
 		this._refs.iframe.width = '100%';
 		this._refs.iframe.setAttribute('frameborder', 'no');
@@ -231,8 +252,13 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		// append elements
 		this._refs.preview.appendChild(this._refs.iframe);
 		this._refs.preview.appendChild(this._refs.previewLoader);
-		__prependChild(this._refs.header, this);
-		this.appendChild(this._refs.preview);
+		if (this.props.displayToggles) {
+			this._refs.previewContainer.appendChild(this._refs.header);
+		}
+		this._refs.previewContainer.appendChild(this._refs.preview);
+		if ( ! this._refs.previewContainer.parentNode) {
+			this.appendChild(this._refs.previewContainer);
+		}
 
 		// get the document of the iframe reference
 		this._iframeRefs.document = this._refs.iframe.contentDocument || this._refs.iframe.contentWindow.document;
@@ -252,26 +278,8 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		this._injectResourcesInsidePreview();
 
 		// create the preview div
-		[].forEach.call(this._refs.editors, (part) => {
-			const innerIframePartElm = this._iframeRefs.document.createElement('div');
-			innerIframePartElm.id = part.id;
-			this._iframeRefs.wrapper.appendChild(innerIframePartElm);
-			// create toggle for this part
-			const toggleElm = document.createElement('div');
-			toggleElm.className = `${this._componentNameDash}__display-toggle`;
-			toggleElm._toggleId = part.id;
-			toggleElm.innerHTML = part.id;
-			// check if need to be displayed or not
-			if (this.props.hide.indexOf(part.id) === -1) {
-				toggleElm.classList.add('active');
-			} else {
-				// hide the editor
-				part.style.display = 'none';
-			}
-			// append to header
-			this._refs.header.appendChild(toggleElm);
-			// listen for click
-			toggleElm.addEventListener('click', this._onDisplayToggleClick.bind(this));
+		[].forEach.call(this._refs.editors, (editorElm) => {
+			this._registerEditor(editorElm);
 		});
 
 		// append wrapper
@@ -287,6 +295,11 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 
 		// listen for update from parts
 		this.addEventListener('update', (e) => {
+
+			// register new editor
+			this._registerEditor(e.target);
+
+			// handle update
 			const rawCode = e.detail.data;
 			let codeElm;
 			let updateHtml = false;
@@ -333,10 +346,47 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	}
 
 	/**
+	 * Register an editor
+	 */
+	_registerEditor(editorElm) {
+
+		// set registered status
+		if (this._refs.editors.indexOf(editorElm) === -1) {
+			this._refs.editors.push(editorElm);
+		}
+
+		if (this._iframeRefs.wrapper.querySelector(`#${editorElm.id}`)) return;
+
+		const innerIframePartElm = this._iframeRefs.document.createElement('div');
+		innerIframePartElm.id = editorElm.id;
+		this._iframeRefs.wrapper.appendChild(innerIframePartElm);
+
+		if (this.props.displayToggles) {
+			// create toggle for this editorElm
+			const toggleElm = document.createElement('div');
+			toggleElm.className = `${this._componentNameDash}__display-toggle`;
+			toggleElm._toggleId = editorElm.id;
+			toggleElm.innerHTML = editorElm.id;
+			// check if need to be displayed or not
+			if (this.props.hide.indexOf(editorElm.id) === -1) {
+				toggleElm.classList.add('active');
+			} else {
+				// hide the editor
+				part.style.display = 'none';
+			}
+			// append to header
+			this._refs.header.appendChild(toggleElm);
+			// listen for click
+			toggleElm.addEventListener('click', this._onDisplayToggleClick.bind(this));
+		}
+	}
+
+	/**
 	 * On toggle display clicked
 	 * @param 		{MouseEvent} 		e 		The mouse event
  	 */
 	_onDisplayToggleClick(e) {
+		console.log(this._refs.editors);
 		// check if is active or not
 		const isActive = e.target.classList.contains('active');
 		// get the editor

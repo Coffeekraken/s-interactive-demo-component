@@ -93,6 +93,10 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 				return child.id && child.nodeName !== 'IFRAME';
 			});
 
+			this._refs.previewContainer = this.querySelector('[' + this._componentNameDash + '-preview]') || document.createElement('div');
+			this._refs.previewContainer.className = this._componentNameDash + '__preview-container';
+			console.log('previre', this._refs.previewContainer);
+
 			// inject the html needed
 			this._refs.preview = document.createElement('div');
 			this._refs.preview.className = this._componentNameDash + '__preview';
@@ -106,6 +110,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 			this._refs.header.className = this._componentNameDash + '__header';
 
 			// iframe
+			// this._refs.iframe = this.querySelector(`iframe[${this._componentNameDash}-preview]`) || document.createElement('iframe');
 			this._refs.iframe = document.createElement('iframe');
 			this._refs.iframe.width = '100%';
 			this._refs.iframe.setAttribute('frameborder', 'no');
@@ -113,8 +118,13 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 			// append elements
 			this._refs.preview.appendChild(this._refs.iframe);
 			this._refs.preview.appendChild(this._refs.previewLoader);
-			(0, _prependChild2.default)(this._refs.header, this);
-			this.appendChild(this._refs.preview);
+			if (this.props.displayToggles) {
+				this._refs.previewContainer.appendChild(this._refs.header);
+			}
+			this._refs.previewContainer.appendChild(this._refs.preview);
+			if (!this._refs.previewContainer.parentNode) {
+				this.appendChild(this._refs.previewContainer);
+			}
 
 			// get the document of the iframe reference
 			this._iframeRefs.document = this._refs.iframe.contentDocument || this._refs.iframe.contentWindow.document;
@@ -134,26 +144,8 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 			this._injectResourcesInsidePreview();
 
 			// create the preview div
-			[].forEach.call(this._refs.editors, function (part) {
-				var innerIframePartElm = _this2._iframeRefs.document.createElement('div');
-				innerIframePartElm.id = part.id;
-				_this2._iframeRefs.wrapper.appendChild(innerIframePartElm);
-				// create toggle for this part
-				var toggleElm = document.createElement('div');
-				toggleElm.className = _this2._componentNameDash + '__display-toggle';
-				toggleElm._toggleId = part.id;
-				toggleElm.innerHTML = part.id;
-				// check if need to be displayed or not
-				if (_this2.props.hide.indexOf(part.id) === -1) {
-					toggleElm.classList.add('active');
-				} else {
-					// hide the editor
-					part.style.display = 'none';
-				}
-				// append to header
-				_this2._refs.header.appendChild(toggleElm);
-				// listen for click
-				toggleElm.addEventListener('click', _this2._onDisplayToggleClick.bind(_this2));
+			[].forEach.call(this._refs.editors, function (editorElm) {
+				_this2._registerEditor(editorElm);
 			});
 
 			// append wrapper
@@ -169,6 +161,11 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 
 			// listen for update from parts
 			this.addEventListener('update', function (e) {
+
+				// register new editor
+				_this2._registerEditor(e.target);
+
+				// handle update
 				var rawCode = e.detail.data;
 				var codeElm = void 0;
 				var updateHtml = false;
@@ -215,6 +212,45 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 		}
 
 		/**
+   * Register an editor
+   */
+
+	}, {
+		key: '_registerEditor',
+		value: function _registerEditor(editorElm) {
+
+			// set registered status
+			if (this._refs.editors.indexOf(editorElm) === -1) {
+				this._refs.editors.push(editorElm);
+			}
+
+			if (this._iframeRefs.wrapper.querySelector('#' + editorElm.id)) return;
+
+			var innerIframePartElm = this._iframeRefs.document.createElement('div');
+			innerIframePartElm.id = editorElm.id;
+			this._iframeRefs.wrapper.appendChild(innerIframePartElm);
+
+			if (this.props.displayToggles) {
+				// create toggle for this editorElm
+				var toggleElm = document.createElement('div');
+				toggleElm.className = this._componentNameDash + '__display-toggle';
+				toggleElm._toggleId = editorElm.id;
+				toggleElm.innerHTML = editorElm.id;
+				// check if need to be displayed or not
+				if (this.props.hide.indexOf(editorElm.id) === -1) {
+					toggleElm.classList.add('active');
+				} else {
+					// hide the editor
+					part.style.display = 'none';
+				}
+				// append to header
+				this._refs.header.appendChild(toggleElm);
+				// listen for click
+				toggleElm.addEventListener('click', this._onDisplayToggleClick.bind(this));
+			}
+		}
+
+		/**
    * On toggle display clicked
    * @param 		{MouseEvent} 		e 		The mouse event
   	 */
@@ -222,6 +258,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 	}, {
 		key: '_onDisplayToggleClick',
 		value: function _onDisplayToggleClick(e) {
+			console.log(this._refs.editors);
 			// check if is active or not
 			var isActive = e.target.classList.contains('active');
 			// get the editor
@@ -338,7 +375,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
    * @protected
    */
 		value: function css(componentName, componentNameDash) {
-			return '\n\t\t\t@keyframes ' + componentNameDash + '-preview-loader {\n\t\t\t\tfrom {\n\t\t\t\t\ttransform:rotate(0deg);\n\t\t\t\t}\n\t\t\t\tto {\n\t\t\t\t\ttransform:rotate(360deg);\n\t\t\t\t}\n\t\t\t}\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay: flex;\n\t\t\t\twidth:100%;\n\t\t\t\tflex-flow: row wrap;\n\t\t\t\tposition:relative;\n\t\t\t\tcolor:#777;\n\t\t\t}\n\t\t\t// ' + componentNameDash + ':not([layout="vertical"]) > * + *:after {\n\t\t\t// \tborder-left:none;\n\t\t\t// }\n\t\t\t.' + componentNameDash + '__header {\n\t\t\t\tuser-selection:none;\n\t\t\t\tflex:1 1 100% !important;\n\t\t\t\twidth:100%; height:32px;\n\t\t\t\tposition:relative;\n\t\t\t\tbackground:rgba(0,0,0,.05);\n\t\t\t}\n\t\t\t.' + componentNameDash + '__display-toggle {\n\t\t\t\tpadding:10px 15px 10px 30px;\n\t\t\t\tbackground-image:url("data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'#777\' d=\'M24 10.935v2.13l-8 3.948v-2.23L21.64 12 16 9.21V6.987l8 3.948zM8 14.783L2.36 12 8 9.21V6.987l-8 3.948v2.13l8 3.948v-2.23zM15.047 4H12.97L8.957 20h2.073l4.017-16z\'/></svg>");\n\t\t\t\tbackground-size:12px 12px;\n\t\t\t\tbackground-position:10px 10px;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tdisplay:inline-block;\n\t\t\t\tfont-size:12px;\n\t\t\t\tcursor:pointer;\n\t\t\t\topacity:.45;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__display-toggle.active {\n\t\t\t\topacity:1;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview {\n\t\t\t\tbox-sizing : border-box;\n\t\t\t\tflex:1 0;\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="vertical"] {\n\t\t\t\tflex-flow: column wrap;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="vertical"] .' + componentNameDash + '__preview {\n\t\t\t\torder:-1;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="top"] .' + componentNameDash + '__preview {\n\t\t\t\tflex:1 1 100%;\n\t\t\t\torder:-1;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="bottom"] .' + componentNameDash + '__preview {\n\t\t\t\tflex:1 1 100%;\n\t\t\t\torder: 2;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="bottom"] .' + componentNameDash + '__header {\n\t\t\t\torder : 1;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader {\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tbackground-color:rgba(38,50,56,.5);\n\t\t\t\topacity: 0;\n\t\t\t\ttransition:opacity .1s ease-in-out;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader:after {\n\t\t\t\tcontent:"";\n\t\t\t\tdisplay:block;\n\t\t\t\tposition:absolute;\n\t\t\t\twidth:20px; height:20px;\n\t\t\t\ttop:50%; left:50%;\n\t\t\t\tmargin-top:-10px;\n\t\t\t\tmargin-left:-10px;\n\t\t\t\ttransform-origin:10px 10px;\n\t\t\t\tbackground-image:url("data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'white\' d=\'M13 0c3.7.3 7 2.3 9 5l-2 1c-1.5-2-4-3.7-7-4V0zM2 12c0-1.5.3-3 1-4L1 7c-.6 1.3-1 3-1 5 0 1.8.4 3.6 1.2 5L3 16c-.7-1-1-2.5-1-4zm20 0c0 1.5-.3 3-1 4l1.8 1c.8-1.4 1.2-3.2 1.2-5s-.4-3.6-1.2-5L21 8c.7 1 1 2.5 1 4zm-2 6c-1.5 2-4 3.7-7 4v2c3.7-.3 7-2.3 9-5l-2-1zM4 6c1.5-2 4-3.7 7-4V0C7.3.3 4 2.3 2 5l2 1zm7 16c-3-.3-5.5-2-7-4l-2 1c2 2.7 5.3 4.7 9 5v-2z\'/></svg>");\n\t\t\t\tbackground-position:50% 50%;\n\t\t\t\tbackground-size:20px;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tanimation:' + componentNameDash + '-preview-loader 1s linear infinite;\n\t\t\t\tfilter:drop-shadow(rgba(0,0,0,.3) 0 0 1px);\n\t\t\t}\n\t\t\t.' + componentNameDash + '--compiling .' + componentNameDash + '__preview-loader {\n\t\t\t\topacity: 1;\n\t\t\t\tpointer-events:all;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > *:not(.' + componentNameDash + '__preview) {\n\t\t\t\tflex:1 0;\n\t\t\t}\n\t\t\t@media all and (max-width:600px) {\n\t\t\t\t' + componentNameDash + ' {\n\t\t\t\t\tflex-flow: column wrap;\n\t\t\t\t}\n\t\t\t}\n\t\t';
+			return '\n\t\t\t@keyframes ' + componentNameDash + '-preview-loader {\n\t\t\t\tfrom {\n\t\t\t\t\ttransform:rotate(0deg);\n\t\t\t\t}\n\t\t\t\tto {\n\t\t\t\t\ttransform:rotate(360deg);\n\t\t\t\t}\n\t\t\t}\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay: flex;\n\t\t\t\twidth:100%;\n\t\t\t\tflex-flow: row wrap;\n\t\t\t\tposition:relative;\n\t\t\t\tcolor:#777;\n\t\t\t}\n\t\t\t// ' + componentNameDash + ':not([layout="vertical"]) > * + *:after {\n\t\t\t// \tborder-left:none;\n\t\t\t// }\n\t\t\t.' + componentNameDash + '__preview-container {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-flow: column nowrap;\n\t\t\t\tbackground: white;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__header {\n\t\t\t\tuser-selection:none;\n\t\t\t\tflex:0 0 auto !important;\n\t\t\t\twidth:100%; height:32px;\n\t\t\t\tposition:relative;\n\t\t\t\tbackground:rgba(0,0,0,.05);\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview {\n\t\t\t\tbox-sizing : border-box;\n\t\t\t\tflex:1 0 auto;\n\t\t\t\tposition:relative;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__display-toggle {\n\t\t\t\tpadding:10px 15px 10px 30px;\n\t\t\t\tbackground-image:url("data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'#777\' d=\'M24 10.935v2.13l-8 3.948v-2.23L21.64 12 16 9.21V6.987l8 3.948zM8 14.783L2.36 12 8 9.21V6.987l-8 3.948v2.13l8 3.948v-2.23zM15.047 4H12.97L8.957 20h2.073l4.017-16z\'/></svg>");\n\t\t\t\tbackground-size:12px 12px;\n\t\t\t\tbackground-position:10px 10px;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tdisplay:inline-block;\n\t\t\t\tfont-size:12px;\n\t\t\t\tcursor:pointer;\n\t\t\t\topacity:.45;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__display-toggle.active {\n\t\t\t\topacity:1;\n\t\t\t}\n\n\t\t\t' + componentNameDash + '[layout="vertical"] {\n\t\t\t\tflex-flow: column wrap;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="vertical"] .' + componentNameDash + '__preview-container {\n\t\t\t\torder:-1;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="vertical"] .' + componentNameDash + '__preview {\n\t\t\t\torder: -1;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="top"] .' + componentNameDash + '__preview-container {\n\t\t\t\tflex:1 1 100%;\n\t\t\t\torder:-1;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="top"] .' + componentNameDash + '__preview {\n\t\t\t\torder: -1;\n\t\t\t}\n\t\t\t' + componentNameDash + '[layout="bottom"] .' + componentNameDash + '__preview-container {\n\t\t\t\tflex:1 1 100%;\n\t\t\t\torder: 2;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader {\n\t\t\t\tposition:absolute;\n\t\t\t\ttop:0; left:0;\n\t\t\t\twidth:100%; height:100%;\n\t\t\t\tbackground-color:rgba(38,50,56,.5);\n\t\t\t\topacity: 0;\n\t\t\t\ttransition:opacity .1s ease-in-out;\n\t\t\t\tpointer-events:none;\n\t\t\t}\n\t\t\t.' + componentNameDash + '__preview-loader:after {\n\t\t\t\tcontent:"";\n\t\t\t\tdisplay:block;\n\t\t\t\tposition:absolute;\n\t\t\t\twidth:20px; height:20px;\n\t\t\t\ttop:50%; left:50%;\n\t\t\t\tmargin-top:-10px;\n\t\t\t\tmargin-left:-10px;\n\t\t\t\ttransform-origin:10px 10px;\n\t\t\t\tbackground-image:url("data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'><path fill=\'white\' d=\'M13 0c3.7.3 7 2.3 9 5l-2 1c-1.5-2-4-3.7-7-4V0zM2 12c0-1.5.3-3 1-4L1 7c-.6 1.3-1 3-1 5 0 1.8.4 3.6 1.2 5L3 16c-.7-1-1-2.5-1-4zm20 0c0 1.5-.3 3-1 4l1.8 1c.8-1.4 1.2-3.2 1.2-5s-.4-3.6-1.2-5L21 8c.7 1 1 2.5 1 4zm-2 6c-1.5 2-4 3.7-7 4v2c3.7-.3 7-2.3 9-5l-2-1zM4 6c1.5-2 4-3.7 7-4V0C7.3.3 4 2.3 2 5l2 1zm7 16c-3-.3-5.5-2-7-4l-2 1c2 2.7 5.3 4.7 9 5v-2z\'/></svg>");\n\t\t\t\tbackground-position:50% 50%;\n\t\t\t\tbackground-size:20px;\n\t\t\t\tbackground-repeat:no-repeat;\n\t\t\t\tanimation:' + componentNameDash + '-preview-loader 1s linear infinite;\n\t\t\t\tfilter:drop-shadow(rgba(0,0,0,.3) 0 0 1px);\n\t\t\t}\n\t\t\t.' + componentNameDash + '--compiling .' + componentNameDash + '__preview-loader {\n\t\t\t\topacity: 1;\n\t\t\t\tpointer-events:all;\n\t\t\t}\n\t\t\t' + componentNameDash + ' > *:not(.' + componentNameDash + '__preview-container) {\n\t\t\t\tflex:1 0;\n\t\t\t}\n\t\t\t@media all and (max-width:600px) {\n\t\t\t\t' + componentNameDash + ' {\n\t\t\t\t\tflex-flow: column wrap;\n\t\t\t\t}\n\t\t\t}\n\t\t';
 		}
 
 		/**
@@ -384,7 +421,14 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
      * @prop
      * @type 		{Array}
      */
-				hide: []
+				hide: [],
+
+				/**
+     * Display toggles
+     * @prop
+     * @type 		{Boolean}
+     */
+				displayToggles: true
 			};
 		}
 
