@@ -63,6 +63,11 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				box-sizing : border-box;
 				flex:1 0 auto;
 				position:relative;
+				flex-flow: column nowrap;
+				display: flex;
+			}
+			.${componentNameDash}__preview iframe {
+				flex: 1 1 auto;
 			}
 			.${componentNameDash}__display-toggle {
 				padding:10px 15px 10px 30px;
@@ -210,6 +215,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		this._compilationsCount = 0;
 		this._refs = {};
 		this._iframeRefs = {};
+		this._editors = {};
 	}
 
 	/**
@@ -229,7 +235,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 
 		this._refs.previewContainer = this.querySelector(`[${this._componentNameDash}-preview]`) || document.createElement('div');
 		this._refs.previewContainer.className = `${this._componentNameDash}__preview-container`;
-		console.log('previre', this._refs.previewContainer);
 
 		// inject the html needed
 		this._refs.preview = document.createElement('div');
@@ -244,7 +249,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		this._refs.header.className = `${this._componentNameDash}__header`;
 
 		// iframe
-		// this._refs.iframe = this.querySelector(`iframe[${this._componentNameDash}-preview]`) || document.createElement('iframe');
 		this._refs.iframe = document.createElement('iframe');
 		this._refs.iframe.width = '100%';
 		this._refs.iframe.setAttribute('frameborder', 'no');
@@ -260,6 +264,82 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			this.appendChild(this._refs.previewContainer);
 		}
 
+		// listen for compilations
+		this.addEventListener('compileStart', this._onCompileStart.bind(this));
+		this.addEventListener('compileEnd', this._onCompileEnd.bind(this));
+		this.addEventListener('compileError', this._onCompileEnd.bind(this));
+
+		// listen for window resize
+		window.addEventListener('resize', __throttle(this._onWindowResize.bind(this), 200));
+
+		// listen for update from parts
+		let updateTimeout = null;
+		this.addEventListener('update', (e) => {
+
+			// store the codes
+			this._editors[e.target.id] = {
+				id : e.target.id,
+				elm : e.target,
+				code : e.detail.data,
+				language : e.detail.language
+			};
+
+			// create the editor toggle
+			this._createEditorToggle(this._editors[e.target.id]);
+
+			clearTimeout(updateTimeout);
+			updateTimeout = setTimeout(() => {
+				// update only if no more compilation is going one
+				if ( this._compilationsCount <= 0) {
+					// update the preview from the editor update
+					this._refreshPreview();
+				}
+			});
+		});
+	}
+
+	/**
+	 * Create editor toggles
+	 */
+	_createEditorToggle(editorObj) {
+		if (this.props.displayToggles) {
+			if ( ! this._refs.header.querySelector(`[toggle-id="${editorObj.id}"]`)) {
+				// create toggle for this editorElm
+				const toggleElm = document.createElement('div');
+				toggleElm.className = `${this._componentNameDash}__display-toggle`;
+				toggleElm.setAttribute('toggle-id', editorObj.id);
+				toggleElm._toggleId = editorObj.id;
+				toggleElm.innerHTML = editorObj.id;
+				// check if need to be displayed or not
+				if (this.props.hide.indexOf(editorObj.id) === -1) {
+					toggleElm.classList.add('active');
+				} else {
+					// hide the editor
+					part.style.display = 'none';
+				}
+				// append to header
+				this._refs.header.appendChild(toggleElm);
+				// listen for click
+				toggleElm.addEventListener('click', this._onDisplayToggleClick.bind(this));
+			}
+		}
+	}
+
+	/**
+	 * Inject editor data
+	 */
+	_refreshPreview() {
+
+		// replace the old iframe with a brand new one
+		// this allow to have a fresh new context to work in
+		// and avoid some issues
+		const newIframe = document.createElement('iframe');
+		newIframe.width = '100%';
+		newIframe.setAttribute('frameborder', 'no');
+		this._refs.iframe.parentNode.insertBefore(newIframe, this._refs.iframe);
+		this._refs.iframe.parentNode.removeChild(this._refs.iframe);
+		this._refs.iframe = newIframe;
+
 		// get the document of the iframe reference
 		this._iframeRefs.document = this._refs.iframe.contentDocument || this._refs.iframe.contentWindow.document;
 
@@ -274,110 +354,52 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		// get the iframe body reference
 		this._iframeRefs.body = this._iframeRefs.document.body;
 
-		// inject resources
-		this._injectResourcesInsidePreview();
-
-		// create the preview div
-		[].forEach.call(this._refs.editors, (editorElm) => {
-			this._registerEditor(editorElm);
-		});
-
 		// append wrapper
 		this._iframeRefs.body.appendChild(this._iframeRefs.wrapper);
 
-		// listen for compilations
-		this.addEventListener('compileStart', this._onCompileStart.bind(this));
-		this.addEventListener('compileEnd', this._onCompileEnd.bind(this));
-		this.addEventListener('compileError', this._onCompileEnd.bind(this));
+		// inject resources
+		this._injectResourcesInsidePreview();
 
-		// listen for window resize
-		window.addEventListener('resize', __throttle(this._onWindowResize.bind(this), 200));
+		// loop on each editors
+		Object.keys(this._editors).forEach((editorId) => {
+			const editorObj = this._editors[editorId];
 
-		// listen for update from parts
-		this.addEventListener('update', (e) => {
+			// check if has already the editor wrapper into the iframe
+			if ( ! this._iframeRefs.wrapper.querySelector(`#${editorId}`)) {
+				const innerIframePartElm = this._iframeRefs.document.createElement('div');
+				innerIframePartElm.id = editorObj.id;
+				this._iframeRefs.wrapper.appendChild(innerIframePartElm);
+			}
 
-			// register new editor
-			this._registerEditor(e.target);
-
-			// handle update
-			const rawCode = e.detail.data;
+			// update the content
 			let codeElm;
 			let updateHtml = false;
 			// handle how to inject code
-			switch(e.detail.language) {
+			switch(editorObj.language) {
 				case 'css':
 					codeElm = this._iframeRefs.document.createElement('style');
-					updateHtml = true;
 				break;
 				case 'js':
 				case 'javascript':
 					codeElm = this._iframeRefs.document.createElement('script');
-					updateHtml = true;
 				break;
 				default:
 					codeElm = this._iframeRefs.document.createElement('div');
 					codeElm.setAttribute('html',true);
-					codeElm._originalCode = rawCode;
 				break;
 			}
 			// inject the code
-			codeElm.innerHTML = rawCode;
-			// empty the container before appending the new one
-			this._iframeRefs.body.querySelector(`#${e.target.id}`).innerHTML = '';
+			codeElm.innerHTML = editorObj.code;
 			// append the new code into container
-			this._iframeRefs.body.querySelector(`#${e.target.id}`).appendChild(codeElm);
-			// update html if needed
-			if (updateHtml) {
-				const htmlElms = this._iframeRefs.body.querySelectorAll('[html]');
-				[].forEach.call(htmlElms, (elm) => {
-					if ( ! elm._originalCode) return;
-					elm.innerHTML = '';
-					elm.innerHTML = elm._originalCode
-				});
-			}
-			// update preview size
-			if (this.props.resizePreview) {
-				this._updatePreviewHeight();
-				setTimeout(() => {
-					this._updatePreviewHeight();
-				},500);
-			}
+			this._iframeRefs.body.querySelector(`#${editorId}`).appendChild(codeElm);
 		});
-	}
 
-	/**
-	 * Register an editor
-	 */
-	_registerEditor(editorElm) {
-
-		// set registered status
-		if (this._refs.editors.indexOf(editorElm) === -1) {
-			this._refs.editors.push(editorElm);
-		}
-
-		if (this._iframeRefs.wrapper.querySelector(`#${editorElm.id}`)) return;
-
-		const innerIframePartElm = this._iframeRefs.document.createElement('div');
-		innerIframePartElm.id = editorElm.id;
-		this._iframeRefs.wrapper.appendChild(innerIframePartElm);
-
-		if (this.props.displayToggles) {
-			// create toggle for this editorElm
-			const toggleElm = document.createElement('div');
-			toggleElm.className = `${this._componentNameDash}__display-toggle`;
-			toggleElm._toggleId = editorElm.id;
-			toggleElm.innerHTML = editorElm.id;
-			// check if need to be displayed or not
-			if (this.props.hide.indexOf(editorElm.id) === -1) {
-				toggleElm.classList.add('active');
-			} else {
-				// hide the editor
-				part.style.display = 'none';
-			}
-			// append to header
-			this._refs.header.appendChild(toggleElm);
-			// listen for click
-			toggleElm.addEventListener('click', this._onDisplayToggleClick.bind(this));
+		// update preview size
+		if (this.props.resizePreview) {
+			this._updatePreviewHeight();
+			setTimeout(() => {
+				this._updatePreviewHeight();
+			},500);
 		}
 	}
 
@@ -386,20 +408,21 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	 * @param 		{MouseEvent} 		e 		The mouse event
  	 */
 	_onDisplayToggleClick(e) {
-		console.log(this._refs.editors);
 		// check if is active or not
 		const isActive = e.target.classList.contains('active');
 		// get the editor
-		const editorElm = _find(this._refs.editors, (editor) => {
+		const editorObj = _find(this._editors, (editor) => {
 			return editor.id === e.target._toggleId;
 		});
 		if (isActive) {
+			editorObj.active = false;
 			e.target.classList.remove('active');
-			editorElm.style.display = 'none';
+			editorObj.elm.style.display = 'none';
 		} else {
+			editorObj.active = true;
 			e.target.classList.add('active');
-			editorElm.style.display = 'block';
-			editorElm.refresh && editorElm.refresh();
+			editorObj.elm.style.display = 'block';
+			editorObj.elm.refresh && editorObj.elm.refresh();
 		}
 	}
 
