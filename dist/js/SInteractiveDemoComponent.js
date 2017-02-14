@@ -179,7 +179,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 						toggleElm.classList.add('active');
 					} else {
 						// hide the editor
-						part.style.display = 'none';
+						editorObj.elm.style.display = 'none';
 					}
 					// append to header
 					this._refs.header.appendChild(toggleElm);
