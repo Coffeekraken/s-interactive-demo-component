@@ -202,7 +202,12 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 			// this allow to have a fresh new context to work in
 			// and avoid some issues
 			var newIframe = document.createElement('iframe');
+			var isFirstIframe = true;
 			newIframe.width = '100%';
+			if (this._refs.iframe && this._refs.iframe.hasAttribute('height')) {
+				newIframe.height = this._refs.iframe.getAttribute('height');
+				isFirstIframe = false;
+			}
 			newIframe.setAttribute('frameborder', 'no');
 			this._refs.iframe.parentNode.insertBefore(newIframe, this._refs.iframe);
 			this._refs.iframe.parentNode.removeChild(this._refs.iframe);
@@ -264,7 +269,9 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 
 			// update preview size
 			if (this.props.resizePreview) {
-				this._updatePreviewHeight();
+				if (isFirstIframe) {
+					this._updatePreviewHeight();
+				}
 				setTimeout(function () {
 					_this3._updatePreviewHeight();
 				}, 500);

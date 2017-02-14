@@ -334,7 +334,12 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 		// this allow to have a fresh new context to work in
 		// and avoid some issues
 		const newIframe = document.createElement('iframe');
+		let isFirstIframe = true;
 		newIframe.width = '100%';
+		if (this._refs.iframe && this._refs.iframe.hasAttribute('height')) {
+			newIframe.height = this._refs.iframe.getAttribute('height');
+			isFirstIframe = false;
+		}
 		newIframe.setAttribute('frameborder', 'no');
 		this._refs.iframe.parentNode.insertBefore(newIframe, this._refs.iframe);
 		this._refs.iframe.parentNode.removeChild(this._refs.iframe);
@@ -396,7 +401,9 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 
 		// update preview size
 		if (this.props.resizePreview) {
-			this._updatePreviewHeight();
+			if (isFirstIframe) {
+				this._updatePreviewHeight();
+			}
 			setTimeout(() => {
 				this._updatePreviewHeight();
 			},500);
