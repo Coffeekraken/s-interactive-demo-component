@@ -296,6 +296,14 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				}
 			});
 		});
+
+		// update editors display
+		if (this.props.hide.length) {
+			this.props.hide.forEach((editorId) => {
+				const edt = this.querySelector(`#${editorId}`);
+				if (edt) edt.style.display = 'none';
+			});
+		}
 	}
 
 	/**

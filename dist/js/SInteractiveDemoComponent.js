@@ -157,6 +157,14 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 					}
 				});
 			});
+
+			// update editors display
+			if (this.props.hide.length) {
+				this.props.hide.forEach(function (editorId) {
+					var edt = _this2.querySelector('#' + editorId);
+					if (edt) edt.style.display = 'none';
+				});
+			}
 		}
 
 		/**
