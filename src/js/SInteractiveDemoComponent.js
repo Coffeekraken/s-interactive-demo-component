@@ -27,7 +27,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	 * @definition 		SWebComponent.css
 	 * @protected
 	 */
-	static css(componentName, componentNameDash) {
+	static defaultCss(componentName, componentNameDash) {
 		return `
 			@keyframes ${componentNameDash}-preview-loader {
 				from {
