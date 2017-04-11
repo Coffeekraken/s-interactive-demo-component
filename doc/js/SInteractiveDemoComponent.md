@@ -1,13 +1,16 @@
-# SInteractiveDemoComponent  extends SWebComponent
+# SInteractiveDemoComponent
+
+Extends **SWebComponent**
+
 Provide a nice webcomponent to display interactive html/css/js demo (codepen like).
 
-#### Example
+### Example
 ```html
 	<s-interactive-demo>
-	<s-codemirror id="html" language="html">
+	<s-codemirror language="html">
  	<h1>My Cool demo</h1>
  </s-codemirror>
-	<s-codemirror id="css" language="css">
+	<s-codemirror language="css">
  	h1 {
  		color : red
  	}
@@ -56,6 +59,8 @@ Specify the layout wanted between vertical and horizontal
 
 Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String) }**
 
+Values : **top,right,bottom,left,vertical,horizontal**
+
 Default : **horizontal**
 
 
@@ -66,3 +71,10 @@ Array of editors ids to hide by default
 Type : **{ [Array](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array) }**
 
 Default : **[]**
+
+
+### displayToggles
+
+Display toggles
+
+Type : **{ [Boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean) }**

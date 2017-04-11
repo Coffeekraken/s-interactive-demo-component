@@ -4,14 +4,16 @@ import __prependChild from 'coffeekraken-sugar/js/dom/prependChild'
 import _find from 'lodash/find';
 
 /**
- * @class 	SInteractiveDemoComponent 	SWebComponent
+ * @name 		SInteractiveDemoComponent
+ * @extends 	SWebComponent
  * Provide a nice webcomponent to display interactive html/css/js demo (codepen like).
+ * @styleguide 		Objects / Interactive Demo
  * @example 	html
  * <s-interactive-demo>
- * 	<s-codemirror id="html" language="html">
+ * 	<s-codemirror language="html">
  *  	<h1>My Cool demo</h1>
  *  </s-codemirror>
- * 	<s-codemirror id="css" language="css">
+ * 	<s-codemirror language="css">
  *  	h1 {
  *  		color : red
  *  	}
@@ -176,6 +178,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			 * Specify the layout wanted between vertical and horizontal
 			 * @prop
 			 * @type 		{String}
+			 * @values 		top | right | bottom | left | vertical | horizontal
 			 */
 			layout : 'horizontal',
 
