@@ -31,14 +31,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
- * @class 	SInteractiveDemoComponent 	SWebComponent
+ * @name 		SInteractiveDemoComponent
+ * @extends 	SWebComponent
  * Provide a nice webcomponent to display interactive html/css/js demo (codepen like).
+ * @styleguide 		Objects / Interactive Demo
  * @example 	html
  * <s-interactive-demo>
- * 	<s-codemirror id="html" language="html">
+ * 	<s-codemirror language="html">
  *  	<h1>My Cool demo</h1>
  *  </s-codemirror>
- * 	<s-codemirror id="css" language="css">
+ * 	<s-codemirror language="css">
  *  	h1 {
  *  		color : red
  *  	}
@@ -451,6 +453,7 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
      * Specify the layout wanted between vertical and horizontal
      * @prop
      * @type 		{String}
+     * @values 		top | right | bottom | left | vertical | horizontal
      */
 				layout: 'horizontal',
 
