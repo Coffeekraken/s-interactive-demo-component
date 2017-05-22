@@ -237,9 +237,14 @@ var SInteractiveDemoComponent = function (_SWebComponent) {
 
 			// get the iframe body reference
 			this._iframeRefs.body = this._iframeRefs.document.body;
+			this._iframeRefs.html = this._iframeRefs.document.querySelector('html');
 
 			// append wrapper
 			this._iframeRefs.body.appendChild(this._iframeRefs.wrapper);
+
+			// set classes
+			this._iframeRefs.body.classList.add('' + this._componentNameDash);
+			this._iframeRefs.html.classList.add('' + this._componentNameDash);
 
 			// inject resources
 			this._injectResourcesInsidePreview();
