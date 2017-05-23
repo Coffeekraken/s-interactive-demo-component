@@ -7,7 +7,6 @@ import _find from 'lodash/find';
  * @name 		SInteractiveDemoComponent
  * @extends 	SWebComponent
  * Provide a nice webcomponent to display interactive html/css/js demo (codepen like).
- * @styleguide 		Objects / Interactive Demo
  * @example 	html
  * <s-interactive-demo>
  * 	<s-codemirror language="html">
