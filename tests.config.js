@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"karma" : {
 		"files": [
 			"tests/*.js"
