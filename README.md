@@ -5,13 +5,13 @@
 		<img src="https://img.shields.io/travis/Coffeekraken/s-interactive-demo-component.svg?style=flat-square" />
 	</a>
 	<a href="https://www.npmjs.com/package/coffeekraken-s-interactive-demo-component">
-		<img src="https://img.shields.io/npm/v/coffeekraken-s-datepicker.svg?style=flat-square" />
+		<img src="https://img.shields.io/npm/v/coffeekraken-s-interactive-demo-component.svg?style=flat-square" />
 	</a>
 	<a href="https://github.com/coffeekraken/s-interactive-demo-component/blob/master/LICENSE.txt">
-		<img src="https://img.shields.io/npm/l/coffeekraken-s-datepicker.svg?style=flat-square" />
+		<img src="https://img.shields.io/npm/l/coffeekraken-s-interactive-demo-component.svg?style=flat-square" />
 	</a>
 	<!-- <a href="https://github.com/coffeekraken/s-interactive-demo-component">
-		<img src="https://img.shields.io/npm/dt/coffeekraken-s-datepicker.svg?style=flat-square" />
+		<img src="https://img.shields.io/npm/dt/coffeekraken-s-interactive-demo-component.svg?style=flat-square" />
 	</a>
 	<a href="https://github.com/coffeekraken/s-interactive-demo-component">
 		<img src="https://img.shields.io/github/forks/coffeekraken/s-interactive-demo-component.svg?style=social&label=Fork&style=flat-square" />
@@ -43,7 +43,7 @@ Provide a simple, powerful and nice way to display interactive html/css/js demo
 2. [Install](#readme-install)
 3. [Get Started](#readme-get-started)
 4. [Javascript API](doc/js)
-5. [Sugar Web Components Documentation](https://github.com/Coffeekraken/sugar/blob/master/doc/webcomponent.md)
+5. [Sugar Web Components Documentation](https://github.com/Coffeekraken/sugar/blob/master/doc/js/webcomponents.md)
 6. [Browsers support](#readme-browsers-support)
 7. [Contribute](#readme-contribute)
 8. [Who are Coffeekraken?](#readme-who-are-coffeekraken)
