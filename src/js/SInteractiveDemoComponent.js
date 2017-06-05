@@ -7,7 +7,6 @@ import _find from 'lodash/find';
  * @name 		SInteractiveDemoComponent
  * @extends 	SWebComponent
  * Provide a nice webcomponent to display interactive html/css/js demo (codepen like).
- * @styleguide 		Objects / Interactive Demo
  * @example 	html
  * <s-interactive-demo>
  * 	<s-codemirror language="html">
@@ -370,9 +369,14 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 
 		// get the iframe body reference
 		this._iframeRefs.body = this._iframeRefs.document.body;
+		this._iframeRefs.html = this._iframeRefs.document.querySelector('html');
 
 		// append wrapper
 		this._iframeRefs.body.appendChild(this._iframeRefs.wrapper);
+
+		// set classes
+		this._iframeRefs.body.classList.add(`${this._componentNameDash}`);
+		this._iframeRefs.html.classList.add(`${this._componentNameDash}`);
 
 		// inject resources
 		this._injectResourcesInsidePreview();
