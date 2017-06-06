@@ -1,6 +1,6 @@
 {
   "name": "coffeekraken-s-interactive-demo-component",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Provide a simple, powerful and nice way to display interactive html demo",
   "main": "dist/index.js",
   "homepage": "http://coffeekraken.io",
@@ -41,7 +41,7 @@
   }],
   "license": "MIT",
   "dependencies": {
-    "coffeekraken-sugar": "^0.0.2",
+    "coffeekraken-sugar": "^1.0.0",
     "clipboard": "^1.5.16",
     "lodash": "^4.17.3"
   },
