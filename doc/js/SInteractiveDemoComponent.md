@@ -53,17 +53,6 @@ Type : **{ [Boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Refere
 Default : **true**
 
 
-### layout
-
-Specify the layout wanted between vertical and horizontal
-
-Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String) }**
-
-Values : **top,right,bottom,left,vertical,horizontal**
-
-Default : **horizontal**
-
-
 ### hide
 
 Array of editors ids to hide by default

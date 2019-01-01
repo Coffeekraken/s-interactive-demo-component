@@ -1,9 +1,12 @@
+const path = require('path')
+
 module.exports = {
+	mode: 'development',
 	entry: {
-//		'demo/dist/js/demo.js' : './demo/src/js/demo.js'
+		'demo/dist/js/demo.js' : './demo/src/js/demo.js'
 	},
 	output: {
-		path: '.',
+		path: path.resolve('.'),
 		filename: '[name]',
 	},
 	module: {
