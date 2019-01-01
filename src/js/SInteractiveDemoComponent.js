@@ -45,9 +45,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 				position:relative;
 				color:#777;
 			}
-			// ${componentNameDash}:not([layout="vertical"]) > * + *:after {
-			// 	border-left:none;
-			// }
 			.${componentNameDash}__preview-container {
 				display: flex;
 				flex-flow: column nowrap;
@@ -83,27 +80,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			}
 			.${componentNameDash}__display-toggle.active {
 				opacity:1;
-			}
-
-			${componentNameDash}[layout="vertical"] {
-				flex-flow: column wrap;
-			}
-			${componentNameDash}[layout="vertical"] .${componentNameDash}__preview-container {
-				order:-1;
-			}
-			${componentNameDash}[layout="vertical"] .${componentNameDash}__preview {
-				order: -1;
-			}
-			${componentNameDash}[layout="top"] .${componentNameDash}__preview-container {
-				flex:1 1 100%;
-				order:-1;
-			}
-			${componentNameDash}[layout="top"] .${componentNameDash}__preview {
-				order: -1;
-			}
-			${componentNameDash}[layout="bottom"] .${componentNameDash}__preview-container {
-				flex:1 1 100%;
-				order: 2;
 			}
 			.${componentNameDash}__preview-loader {
 				position:absolute;
@@ -174,14 +150,6 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 			resizePreview : true,
 
 			/**
-			 * Specify the layout wanted between vertical and horizontal
-			 * @prop
-			 * @type 		{String}
-			 * @values 		top | right | bottom | left | vertical | horizontal
-			 */
-			layout : 'horizontal',
-
-			/**
 			 * Array of editors ids to hide by default
 			 * @prop
 			 * @type 		{Array}
@@ -203,7 +171,7 @@ export default class SInteractiveDemoComponent extends SWebComponent {
 	 * @protected
 	 */
 	static get physicalProps() {
-		return ['layout'];
+		return [];
 	}
 
 	/**
